@@ -1,0 +1,10 @@
+option java_package = "org.artempopov.ServerFirst.proto";
+option java_outer_classname = "ResponseProto";
+
+message Response {
+    optional ErrorType error = 1;
+}
+
+enum ErrorType {
+    UNREGISTERED = 0;
+}

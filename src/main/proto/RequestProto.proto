@@ -1,0 +1,60 @@
+option java_package = "org.artempopov.ServerFirst.proto";
+option java_outer_classname = "RequestProto";
+
+message Request {
+    required RequestType type = 1;
+    optional MoveRequest move_request = 2;
+    optional ChangeColorRequest change_color_request = 3;
+    optional ChangeShapeRequest change_shape_request = 4;
+    optional RegistrationRequest registrationRequest = 5;
+    required int32 request_packet_version = 6;
+    optional int64 client_id = 7;
+}
+
+enum RequestType {
+    REGISTRATION = 0;
+    UNREGISTRATION = 1;
+    MOVE = 2;
+    CHANGE_COLOR = 3;
+    CHANGE_SHAPE = 4;
+}
+
+message MoveRequest {
+    required MoveDirection direction = 1;
+}
+
+enum MoveDirection {
+    UP = 0;
+    RIGHT = 1;
+    DOWN = 2;
+    LEFT = 4;
+}
+
+message ChangeColorRequest {
+    required Color color = 1;
+}
+
+enum Color {
+    RED = 0;
+    GREEN = 1;
+    BLUE = 2;
+    BLACK = 3;
+    ORANGE = 4;
+    VIOLET = 5;
+}
+
+message ChangeShapeRequest {
+    required Shape shape = 1;
+}
+
+enum Shape {
+    CIRCLE = 0;
+    SQUARE = 1;
+    TRIANGLE = 2;
+}
+
+message RegistrationRequest {
+    required Color color = 1;
+    required Shape shape = 2;
+}
+
