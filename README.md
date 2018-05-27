@@ -1,2 +1,3 @@
 # AlphaServer
-Multiplayer game server in java
+Multiplayer game server in kotlin
+
