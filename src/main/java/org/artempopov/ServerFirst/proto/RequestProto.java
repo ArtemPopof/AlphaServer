@@ -6,7 +6,13 @@ package org.artempopov.ServerFirst.proto;
 public final class RequestProto {
   private RequestProto() {}
   public static void registerAllExtensions(
+      com.google.protobuf.ExtensionRegistryLite registry) {
+  }
+
+  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registerAllExtensions(
+        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
    * Protobuf enum {@code RequestType}
@@ -16,23 +22,23 @@ public final class RequestProto {
     /**
      * <code>REGISTRATION = 0;</code>
      */
-    REGISTRATION(0, 0),
+    REGISTRATION(0),
     /**
      * <code>UNREGISTRATION = 1;</code>
      */
-    UNREGISTRATION(1, 1),
+    UNREGISTRATION(1),
     /**
      * <code>MOVE = 2;</code>
      */
-    MOVE(2, 2),
+    MOVE(2),
     /**
      * <code>CHANGE_COLOR = 3;</code>
      */
-    CHANGE_COLOR(3, 3),
+    CHANGE_COLOR(3),
     /**
      * <code>CHANGE_SHAPE = 4;</code>
      */
-    CHANGE_SHAPE(4, 4),
+    CHANGE_SHAPE(4),
     ;
 
     /**
@@ -57,9 +63,19 @@ public final class RequestProto {
     public static final int CHANGE_SHAPE_VALUE = 4;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() {
+      return value;
+    }
 
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
     public static RequestType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static RequestType forNumber(int value) {
       switch (value) {
         case 0: return REGISTRATION;
         case 1: return UNREGISTRATION;
@@ -74,17 +90,17 @@ public final class RequestProto {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<RequestType>
-        internalValueMap =
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        RequestType> internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<RequestType>() {
             public RequestType findValueByNumber(int number) {
-              return RequestType.valueOf(number);
+              return RequestType.forNumber(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
+      return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -106,11 +122,9 @@ public final class RequestProto {
       return VALUES[desc.getIndex()];
     }
 
-    private final int index;
     private final int value;
 
-    private RequestType(int index, int value) {
-      this.index = index;
+    private RequestType(int value) {
       this.value = value;
     }
 
@@ -125,19 +139,19 @@ public final class RequestProto {
     /**
      * <code>UP = 0;</code>
      */
-    UP(0, 0),
+    UP(0),
     /**
      * <code>RIGHT = 1;</code>
      */
-    RIGHT(1, 1),
+    RIGHT(1),
     /**
      * <code>DOWN = 2;</code>
      */
-    DOWN(2, 2),
+    DOWN(2),
     /**
      * <code>LEFT = 4;</code>
      */
-    LEFT(3, 4),
+    LEFT(4),
     ;
 
     /**
@@ -158,9 +172,19 @@ public final class RequestProto {
     public static final int LEFT_VALUE = 4;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() {
+      return value;
+    }
 
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
     public static MoveDirection valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static MoveDirection forNumber(int value) {
       switch (value) {
         case 0: return UP;
         case 1: return RIGHT;
@@ -174,17 +198,17 @@ public final class RequestProto {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<MoveDirection>
-        internalValueMap =
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        MoveDirection> internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<MoveDirection>() {
             public MoveDirection findValueByNumber(int number) {
-              return MoveDirection.valueOf(number);
+              return MoveDirection.forNumber(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
+      return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -206,11 +230,9 @@ public final class RequestProto {
       return VALUES[desc.getIndex()];
     }
 
-    private final int index;
     private final int value;
 
-    private MoveDirection(int index, int value) {
-      this.index = index;
+    private MoveDirection(int value) {
       this.value = value;
     }
 
@@ -225,27 +247,27 @@ public final class RequestProto {
     /**
      * <code>RED = 0;</code>
      */
-    RED(0, 0),
+    RED(0),
     /**
      * <code>GREEN = 1;</code>
      */
-    GREEN(1, 1),
+    GREEN(1),
     /**
      * <code>BLUE = 2;</code>
      */
-    BLUE(2, 2),
+    BLUE(2),
     /**
      * <code>BLACK = 3;</code>
      */
-    BLACK(3, 3),
+    BLACK(3),
     /**
      * <code>ORANGE = 4;</code>
      */
-    ORANGE(4, 4),
+    ORANGE(4),
     /**
      * <code>VIOLET = 5;</code>
      */
-    VIOLET(5, 5),
+    VIOLET(5),
     ;
 
     /**
@@ -274,9 +296,19 @@ public final class RequestProto {
     public static final int VIOLET_VALUE = 5;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() {
+      return value;
+    }
 
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
     public static Color valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Color forNumber(int value) {
       switch (value) {
         case 0: return RED;
         case 1: return GREEN;
@@ -292,17 +324,17 @@ public final class RequestProto {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<Color>
-        internalValueMap =
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Color> internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<Color>() {
             public Color findValueByNumber(int number) {
-              return Color.valueOf(number);
+              return Color.forNumber(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
+      return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -324,11 +356,9 @@ public final class RequestProto {
       return VALUES[desc.getIndex()];
     }
 
-    private final int index;
     private final int value;
 
-    private Color(int index, int value) {
-      this.index = index;
+    private Color(int value) {
       this.value = value;
     }
 
@@ -343,15 +373,15 @@ public final class RequestProto {
     /**
      * <code>CIRCLE = 0;</code>
      */
-    CIRCLE(0, 0),
+    CIRCLE(0),
     /**
      * <code>SQUARE = 1;</code>
      */
-    SQUARE(1, 1),
+    SQUARE(1),
     /**
      * <code>TRIANGLE = 2;</code>
      */
-    TRIANGLE(2, 2),
+    TRIANGLE(2),
     ;
 
     /**
@@ -368,9 +398,19 @@ public final class RequestProto {
     public static final int TRIANGLE_VALUE = 2;
 
 
-    public final int getNumber() { return value; }
+    public final int getNumber() {
+      return value;
+    }
 
+    /**
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
     public static Shape valueOf(int value) {
+      return forNumber(value);
+    }
+
+    public static Shape forNumber(int value) {
       switch (value) {
         case 0: return CIRCLE;
         case 1: return SQUARE;
@@ -383,17 +423,17 @@ public final class RequestProto {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static com.google.protobuf.Internal.EnumLiteMap<Shape>
-        internalValueMap =
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Shape> internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<Shape>() {
             public Shape findValueByNumber(int number) {
-              return Shape.valueOf(number);
+              return Shape.forNumber(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(index);
+      return getDescriptor().getValues().get(ordinal());
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -415,21 +455,19 @@ public final class RequestProto {
       return VALUES[desc.getIndex()];
     }
 
-    private final int index;
     private final int value;
 
-    private Shape(int index, int value) {
-      this.index = index;
+    private Shape(int value) {
       this.value = value;
     }
 
     // @@protoc_insertion_point(enum_scope:Shape)
   }
 
-  public interface RequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Request)
+      com.google.protobuf.MessageOrBuilder {
 
-    // required .RequestType type = 1;
     /**
      * <code>required .RequestType type = 1;</code>
      */
@@ -439,7 +477,6 @@ public final class RequestProto {
      */
     org.artempopov.ServerFirst.proto.RequestProto.RequestType getType();
 
-    // optional .MoveRequest move_request = 2;
     /**
      * <code>optional .MoveRequest move_request = 2;</code>
      */
@@ -453,7 +490,6 @@ public final class RequestProto {
      */
     org.artempopov.ServerFirst.proto.RequestProto.MoveRequestOrBuilder getMoveRequestOrBuilder();
 
-    // optional .ChangeColorRequest change_color_request = 3;
     /**
      * <code>optional .ChangeColorRequest change_color_request = 3;</code>
      */
@@ -467,7 +503,6 @@ public final class RequestProto {
      */
     org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequestOrBuilder getChangeColorRequestOrBuilder();
 
-    // optional .ChangeShapeRequest change_shape_request = 4;
     /**
      * <code>optional .ChangeShapeRequest change_shape_request = 4;</code>
      */
@@ -481,7 +516,6 @@ public final class RequestProto {
      */
     org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequestOrBuilder getChangeShapeRequestOrBuilder();
 
-    // optional .RegistrationRequest registrationRequest = 5;
     /**
      * <code>optional .RegistrationRequest registrationRequest = 5;</code>
      */
@@ -495,7 +529,6 @@ public final class RequestProto {
      */
     org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequestOrBuilder getRegistrationRequestOrBuilder();
 
-    // required int32 request_packet_version = 6;
     /**
      * <code>required int32 request_packet_version = 6;</code>
      */
@@ -505,7 +538,6 @@ public final class RequestProto {
      */
     int getRequestPacketVersion();
 
-    // optional int64 client_id = 7;
     /**
      * <code>optional int64 client_id = 7;</code>
      */
@@ -518,36 +550,34 @@ public final class RequestProto {
   /**
    * Protobuf type {@code Request}
    */
-  public static final class Request extends
-      com.google.protobuf.GeneratedMessage
-      implements RequestOrBuilder {
+  public  static final class Request extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:Request)
+      RequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use Request.newBuilder() to construct.
-    private Request(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private Request(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private Request(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final Request defaultInstance;
-    public static Request getDefaultInstance() {
-      return defaultInstance;
+    private Request() {
+      type_ = 0;
+      requestPacketVersion_ = 0;
+      clientId_ = 0L;
     }
 
-    public Request getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private Request(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -560,8 +590,8 @@ public final class RequestProto {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -573,7 +603,7 @@ public final class RequestProto {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                type_ = value;
+                type_ = rawValue;
               }
               break;
             }
@@ -645,7 +675,7 @@ public final class RequestProto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -656,32 +686,16 @@ public final class RequestProto {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_Request_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_Request_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.artempopov.ServerFirst.proto.RequestProto.Request.class, org.artempopov.ServerFirst.proto.RequestProto.Request.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<Request> PARSER =
-        new com.google.protobuf.AbstractParser<Request>() {
-      public Request parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Request(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Request> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
-    // required .RequestType type = 1;
     public static final int TYPE_FIELD_NUMBER = 1;
-    private org.artempopov.ServerFirst.proto.RequestProto.RequestType type_;
+    private int type_;
     /**
      * <code>required .RequestType type = 1;</code>
      */
@@ -692,10 +706,10 @@ public final class RequestProto {
      * <code>required .RequestType type = 1;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.RequestType getType() {
-      return type_;
+      org.artempopov.ServerFirst.proto.RequestProto.RequestType result = org.artempopov.ServerFirst.proto.RequestProto.RequestType.valueOf(type_);
+      return result == null ? org.artempopov.ServerFirst.proto.RequestProto.RequestType.REGISTRATION : result;
     }
 
-    // optional .MoveRequest move_request = 2;
     public static final int MOVE_REQUEST_FIELD_NUMBER = 2;
     private org.artempopov.ServerFirst.proto.RequestProto.MoveRequest moveRequest_;
     /**
@@ -708,16 +722,15 @@ public final class RequestProto {
      * <code>optional .MoveRequest move_request = 2;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.MoveRequest getMoveRequest() {
-      return moveRequest_;
+      return moveRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance() : moveRequest_;
     }
     /**
      * <code>optional .MoveRequest move_request = 2;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.MoveRequestOrBuilder getMoveRequestOrBuilder() {
-      return moveRequest_;
+      return moveRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance() : moveRequest_;
     }
 
-    // optional .ChangeColorRequest change_color_request = 3;
     public static final int CHANGE_COLOR_REQUEST_FIELD_NUMBER = 3;
     private org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest changeColorRequest_;
     /**
@@ -730,16 +743,15 @@ public final class RequestProto {
      * <code>optional .ChangeColorRequest change_color_request = 3;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest getChangeColorRequest() {
-      return changeColorRequest_;
+      return changeColorRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance() : changeColorRequest_;
     }
     /**
      * <code>optional .ChangeColorRequest change_color_request = 3;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequestOrBuilder getChangeColorRequestOrBuilder() {
-      return changeColorRequest_;
+      return changeColorRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance() : changeColorRequest_;
     }
 
-    // optional .ChangeShapeRequest change_shape_request = 4;
     public static final int CHANGE_SHAPE_REQUEST_FIELD_NUMBER = 4;
     private org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest changeShapeRequest_;
     /**
@@ -752,16 +764,15 @@ public final class RequestProto {
      * <code>optional .ChangeShapeRequest change_shape_request = 4;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest getChangeShapeRequest() {
-      return changeShapeRequest_;
+      return changeShapeRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance() : changeShapeRequest_;
     }
     /**
      * <code>optional .ChangeShapeRequest change_shape_request = 4;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequestOrBuilder getChangeShapeRequestOrBuilder() {
-      return changeShapeRequest_;
+      return changeShapeRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance() : changeShapeRequest_;
     }
 
-    // optional .RegistrationRequest registrationRequest = 5;
     public static final int REGISTRATIONREQUEST_FIELD_NUMBER = 5;
     private org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest registrationRequest_;
     /**
@@ -774,16 +785,15 @@ public final class RequestProto {
      * <code>optional .RegistrationRequest registrationRequest = 5;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest getRegistrationRequest() {
-      return registrationRequest_;
+      return registrationRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance() : registrationRequest_;
     }
     /**
      * <code>optional .RegistrationRequest registrationRequest = 5;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequestOrBuilder getRegistrationRequestOrBuilder() {
-      return registrationRequest_;
+      return registrationRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance() : registrationRequest_;
     }
 
-    // required int32 request_packet_version = 6;
     public static final int REQUEST_PACKET_VERSION_FIELD_NUMBER = 6;
     private int requestPacketVersion_;
     /**
@@ -799,7 +809,6 @@ public final class RequestProto {
       return requestPacketVersion_;
     }
 
-    // optional int64 client_id = 7;
     public static final int CLIENT_ID_FIELD_NUMBER = 7;
     private long clientId_;
     /**
@@ -815,19 +824,11 @@ public final class RequestProto {
       return clientId_;
     }
 
-    private void initFields() {
-      type_ = org.artempopov.ServerFirst.proto.RequestProto.RequestType.REGISTRATION;
-      moveRequest_ = org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance();
-      changeColorRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance();
-      changeShapeRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance();
-      registrationRequest_ = org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance();
-      requestPacketVersion_ = 0;
-      clientId_ = 0L;
-    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (!hasType()) {
         memoizedIsInitialized = 0;
@@ -867,21 +868,20 @@ public final class RequestProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, type_.getNumber());
+        output.writeEnum(1, type_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeMessage(2, moveRequest_);
+        output.writeMessage(2, getMoveRequest());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeMessage(3, changeColorRequest_);
+        output.writeMessage(3, getChangeColorRequest());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeMessage(4, changeShapeRequest_);
+        output.writeMessage(4, getChangeShapeRequest());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeMessage(5, registrationRequest_);
+        output.writeMessage(5, getRegistrationRequest());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         output.writeInt32(6, requestPacketVersion_);
@@ -889,34 +889,33 @@ public final class RequestProto {
       if (((bitField0_ & 0x00000040) == 0x00000040)) {
         output.writeInt64(7, clientId_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, type_.getNumber());
+          .computeEnumSize(1, type_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, moveRequest_);
+          .computeMessageSize(2, getMoveRequest());
       }
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, changeColorRequest_);
+          .computeMessageSize(3, getChangeColorRequest());
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, changeShapeRequest_);
+          .computeMessageSize(4, getChangeShapeRequest());
       }
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, registrationRequest_);
+          .computeMessageSize(5, getRegistrationRequest());
       }
       if (((bitField0_ & 0x00000020) == 0x00000020)) {
         size += com.google.protobuf.CodedOutputStream
@@ -926,18 +925,112 @@ public final class RequestProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(7, clientId_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.artempopov.ServerFirst.proto.RequestProto.Request)) {
+        return super.equals(obj);
+      }
+      org.artempopov.ServerFirst.proto.RequestProto.Request other = (org.artempopov.ServerFirst.proto.RequestProto.Request) obj;
+
+      boolean result = true;
+      result = result && (hasType() == other.hasType());
+      if (hasType()) {
+        result = result && type_ == other.type_;
+      }
+      result = result && (hasMoveRequest() == other.hasMoveRequest());
+      if (hasMoveRequest()) {
+        result = result && getMoveRequest()
+            .equals(other.getMoveRequest());
+      }
+      result = result && (hasChangeColorRequest() == other.hasChangeColorRequest());
+      if (hasChangeColorRequest()) {
+        result = result && getChangeColorRequest()
+            .equals(other.getChangeColorRequest());
+      }
+      result = result && (hasChangeShapeRequest() == other.hasChangeShapeRequest());
+      if (hasChangeShapeRequest()) {
+        result = result && getChangeShapeRequest()
+            .equals(other.getChangeShapeRequest());
+      }
+      result = result && (hasRegistrationRequest() == other.hasRegistrationRequest());
+      if (hasRegistrationRequest()) {
+        result = result && getRegistrationRequest()
+            .equals(other.getRegistrationRequest());
+      }
+      result = result && (hasRequestPacketVersion() == other.hasRequestPacketVersion());
+      if (hasRequestPacketVersion()) {
+        result = result && (getRequestPacketVersion()
+            == other.getRequestPacketVersion());
+      }
+      result = result && (hasClientId() == other.hasClientId());
+      if (hasClientId()) {
+        result = result && (getClientId()
+            == other.getClientId());
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasType()) {
+        hash = (37 * hash) + TYPE_FIELD_NUMBER;
+        hash = (53 * hash) + type_;
+      }
+      if (hasMoveRequest()) {
+        hash = (37 * hash) + MOVE_REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getMoveRequest().hashCode();
+      }
+      if (hasChangeColorRequest()) {
+        hash = (37 * hash) + CHANGE_COLOR_REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getChangeColorRequest().hashCode();
+      }
+      if (hasChangeShapeRequest()) {
+        hash = (37 * hash) + CHANGE_SHAPE_REQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getChangeShapeRequest().hashCode();
+      }
+      if (hasRegistrationRequest()) {
+        hash = (37 * hash) + REGISTRATIONREQUEST_FIELD_NUMBER;
+        hash = (53 * hash) + getRegistrationRequest().hashCode();
+      }
+      if (hasRequestPacketVersion()) {
+        hash = (37 * hash) + REQUEST_PACKET_VERSION_FIELD_NUMBER;
+        hash = (53 * hash) + getRequestPacketVersion();
+      }
+      if (hasClientId()) {
+        hash = (37 * hash) + CLIENT_ID_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getClientId());
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.artempopov.ServerFirst.proto.RequestProto.Request parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.artempopov.ServerFirst.proto.RequestProto.Request parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static org.artempopov.ServerFirst.proto.RequestProto.Request parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -961,46 +1054,57 @@ public final class RequestProto {
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.Request parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.Request parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.Request parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.Request parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.Request parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.Request parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.Request prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.Request prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1008,14 +1112,15 @@ public final class RequestProto {
      * Protobuf type {@code Request}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.artempopov.ServerFirst.proto.RequestProto.RequestOrBuilder {
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Request)
+        org.artempopov.ServerFirst.proto.RequestProto.RequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_Request_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_Request_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1028,46 +1133,43 @@ public final class RequestProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
           getMoveRequestFieldBuilder();
           getChangeColorRequestFieldBuilder();
           getChangeShapeRequestFieldBuilder();
           getRegistrationRequestFieldBuilder();
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
       public Builder clear() {
         super.clear();
-        type_ = org.artempopov.ServerFirst.proto.RequestProto.RequestType.REGISTRATION;
+        type_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         if (moveRequestBuilder_ == null) {
-          moveRequest_ = org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance();
+          moveRequest_ = null;
         } else {
           moveRequestBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000002);
         if (changeColorRequestBuilder_ == null) {
-          changeColorRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance();
+          changeColorRequest_ = null;
         } else {
           changeColorRequestBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000004);
         if (changeShapeRequestBuilder_ == null) {
-          changeShapeRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance();
+          changeShapeRequest_ = null;
         } else {
           changeShapeRequestBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000008);
         if (registrationRequestBuilder_ == null) {
-          registrationRequest_ = org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance();
+          registrationRequest_ = null;
         } else {
           registrationRequestBuilder_.clear();
         }
@@ -1077,10 +1179,6 @@ public final class RequestProto {
         clientId_ = 0L;
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -1153,6 +1251,32 @@ public final class RequestProto {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.artempopov.ServerFirst.proto.RequestProto.Request) {
           return mergeFrom((org.artempopov.ServerFirst.proto.RequestProto.Request)other);
@@ -1185,40 +1309,35 @@ public final class RequestProto {
         if (other.hasClientId()) {
           setClientId(other.getClientId());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasType()) {
-          
           return false;
         }
         if (!hasRequestPacketVersion()) {
-          
           return false;
         }
         if (hasMoveRequest()) {
           if (!getMoveRequest().isInitialized()) {
-            
             return false;
           }
         }
         if (hasChangeColorRequest()) {
           if (!getChangeColorRequest().isInitialized()) {
-            
             return false;
           }
         }
         if (hasChangeShapeRequest()) {
           if (!getChangeShapeRequest().isInitialized()) {
-            
             return false;
           }
         }
         if (hasRegistrationRequest()) {
           if (!getRegistrationRequest().isInitialized()) {
-            
             return false;
           }
         }
@@ -1234,7 +1353,7 @@ public final class RequestProto {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.artempopov.ServerFirst.proto.RequestProto.Request) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -1244,8 +1363,7 @@ public final class RequestProto {
       }
       private int bitField0_;
 
-      // required .RequestType type = 1;
-      private org.artempopov.ServerFirst.proto.RequestProto.RequestType type_ = org.artempopov.ServerFirst.proto.RequestProto.RequestType.REGISTRATION;
+      private int type_ = 0;
       /**
        * <code>required .RequestType type = 1;</code>
        */
@@ -1256,7 +1374,8 @@ public final class RequestProto {
        * <code>required .RequestType type = 1;</code>
        */
       public org.artempopov.ServerFirst.proto.RequestProto.RequestType getType() {
-        return type_;
+        org.artempopov.ServerFirst.proto.RequestProto.RequestType result = org.artempopov.ServerFirst.proto.RequestProto.RequestType.valueOf(type_);
+        return result == null ? org.artempopov.ServerFirst.proto.RequestProto.RequestType.REGISTRATION : result;
       }
       /**
        * <code>required .RequestType type = 1;</code>
@@ -1266,7 +1385,7 @@ public final class RequestProto {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        type_ = value;
+        type_ = value.getNumber();
         onChanged();
         return this;
       }
@@ -1275,14 +1394,13 @@ public final class RequestProto {
        */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        type_ = org.artempopov.ServerFirst.proto.RequestProto.RequestType.REGISTRATION;
+        type_ = 0;
         onChanged();
         return this;
       }
 
-      // optional .MoveRequest move_request = 2;
-      private org.artempopov.ServerFirst.proto.RequestProto.MoveRequest moveRequest_ = org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      private org.artempopov.ServerFirst.proto.RequestProto.MoveRequest moveRequest_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.MoveRequest, org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.MoveRequestOrBuilder> moveRequestBuilder_;
       /**
        * <code>optional .MoveRequest move_request = 2;</code>
@@ -1295,7 +1413,7 @@ public final class RequestProto {
        */
       public org.artempopov.ServerFirst.proto.RequestProto.MoveRequest getMoveRequest() {
         if (moveRequestBuilder_ == null) {
-          return moveRequest_;
+          return moveRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance() : moveRequest_;
         } else {
           return moveRequestBuilder_.getMessage();
         }
@@ -1336,6 +1454,7 @@ public final class RequestProto {
       public Builder mergeMoveRequest(org.artempopov.ServerFirst.proto.RequestProto.MoveRequest value) {
         if (moveRequestBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              moveRequest_ != null &&
               moveRequest_ != org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance()) {
             moveRequest_ =
               org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.newBuilder(moveRequest_).mergeFrom(value).buildPartial();
@@ -1354,7 +1473,7 @@ public final class RequestProto {
        */
       public Builder clearMoveRequest() {
         if (moveRequestBuilder_ == null) {
-          moveRequest_ = org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance();
+          moveRequest_ = null;
           onChanged();
         } else {
           moveRequestBuilder_.clear();
@@ -1377,19 +1496,20 @@ public final class RequestProto {
         if (moveRequestBuilder_ != null) {
           return moveRequestBuilder_.getMessageOrBuilder();
         } else {
-          return moveRequest_;
+          return moveRequest_ == null ?
+              org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.getDefaultInstance() : moveRequest_;
         }
       }
       /**
        * <code>optional .MoveRequest move_request = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.MoveRequest, org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.MoveRequestOrBuilder> 
           getMoveRequestFieldBuilder() {
         if (moveRequestBuilder_ == null) {
-          moveRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          moveRequestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.artempopov.ServerFirst.proto.RequestProto.MoveRequest, org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.MoveRequestOrBuilder>(
-                  moveRequest_,
+                  getMoveRequest(),
                   getParentForChildren(),
                   isClean());
           moveRequest_ = null;
@@ -1397,9 +1517,8 @@ public final class RequestProto {
         return moveRequestBuilder_;
       }
 
-      // optional .ChangeColorRequest change_color_request = 3;
-      private org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest changeColorRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      private org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest changeColorRequest_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest, org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequestOrBuilder> changeColorRequestBuilder_;
       /**
        * <code>optional .ChangeColorRequest change_color_request = 3;</code>
@@ -1412,7 +1531,7 @@ public final class RequestProto {
        */
       public org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest getChangeColorRequest() {
         if (changeColorRequestBuilder_ == null) {
-          return changeColorRequest_;
+          return changeColorRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance() : changeColorRequest_;
         } else {
           return changeColorRequestBuilder_.getMessage();
         }
@@ -1453,6 +1572,7 @@ public final class RequestProto {
       public Builder mergeChangeColorRequest(org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest value) {
         if (changeColorRequestBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              changeColorRequest_ != null &&
               changeColorRequest_ != org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance()) {
             changeColorRequest_ =
               org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.newBuilder(changeColorRequest_).mergeFrom(value).buildPartial();
@@ -1471,7 +1591,7 @@ public final class RequestProto {
        */
       public Builder clearChangeColorRequest() {
         if (changeColorRequestBuilder_ == null) {
-          changeColorRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance();
+          changeColorRequest_ = null;
           onChanged();
         } else {
           changeColorRequestBuilder_.clear();
@@ -1494,19 +1614,20 @@ public final class RequestProto {
         if (changeColorRequestBuilder_ != null) {
           return changeColorRequestBuilder_.getMessageOrBuilder();
         } else {
-          return changeColorRequest_;
+          return changeColorRequest_ == null ?
+              org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.getDefaultInstance() : changeColorRequest_;
         }
       }
       /**
        * <code>optional .ChangeColorRequest change_color_request = 3;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest, org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequestOrBuilder> 
           getChangeColorRequestFieldBuilder() {
         if (changeColorRequestBuilder_ == null) {
-          changeColorRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          changeColorRequestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest, org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequestOrBuilder>(
-                  changeColorRequest_,
+                  getChangeColorRequest(),
                   getParentForChildren(),
                   isClean());
           changeColorRequest_ = null;
@@ -1514,9 +1635,8 @@ public final class RequestProto {
         return changeColorRequestBuilder_;
       }
 
-      // optional .ChangeShapeRequest change_shape_request = 4;
-      private org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest changeShapeRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      private org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest changeShapeRequest_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest, org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequestOrBuilder> changeShapeRequestBuilder_;
       /**
        * <code>optional .ChangeShapeRequest change_shape_request = 4;</code>
@@ -1529,7 +1649,7 @@ public final class RequestProto {
        */
       public org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest getChangeShapeRequest() {
         if (changeShapeRequestBuilder_ == null) {
-          return changeShapeRequest_;
+          return changeShapeRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance() : changeShapeRequest_;
         } else {
           return changeShapeRequestBuilder_.getMessage();
         }
@@ -1570,6 +1690,7 @@ public final class RequestProto {
       public Builder mergeChangeShapeRequest(org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest value) {
         if (changeShapeRequestBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              changeShapeRequest_ != null &&
               changeShapeRequest_ != org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance()) {
             changeShapeRequest_ =
               org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.newBuilder(changeShapeRequest_).mergeFrom(value).buildPartial();
@@ -1588,7 +1709,7 @@ public final class RequestProto {
        */
       public Builder clearChangeShapeRequest() {
         if (changeShapeRequestBuilder_ == null) {
-          changeShapeRequest_ = org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance();
+          changeShapeRequest_ = null;
           onChanged();
         } else {
           changeShapeRequestBuilder_.clear();
@@ -1611,19 +1732,20 @@ public final class RequestProto {
         if (changeShapeRequestBuilder_ != null) {
           return changeShapeRequestBuilder_.getMessageOrBuilder();
         } else {
-          return changeShapeRequest_;
+          return changeShapeRequest_ == null ?
+              org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.getDefaultInstance() : changeShapeRequest_;
         }
       }
       /**
        * <code>optional .ChangeShapeRequest change_shape_request = 4;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest, org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequestOrBuilder> 
           getChangeShapeRequestFieldBuilder() {
         if (changeShapeRequestBuilder_ == null) {
-          changeShapeRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          changeShapeRequestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest, org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequestOrBuilder>(
-                  changeShapeRequest_,
+                  getChangeShapeRequest(),
                   getParentForChildren(),
                   isClean());
           changeShapeRequest_ = null;
@@ -1631,9 +1753,8 @@ public final class RequestProto {
         return changeShapeRequestBuilder_;
       }
 
-      // optional .RegistrationRequest registrationRequest = 5;
-      private org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest registrationRequest_ = org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      private org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest registrationRequest_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest, org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequestOrBuilder> registrationRequestBuilder_;
       /**
        * <code>optional .RegistrationRequest registrationRequest = 5;</code>
@@ -1646,7 +1767,7 @@ public final class RequestProto {
        */
       public org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest getRegistrationRequest() {
         if (registrationRequestBuilder_ == null) {
-          return registrationRequest_;
+          return registrationRequest_ == null ? org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance() : registrationRequest_;
         } else {
           return registrationRequestBuilder_.getMessage();
         }
@@ -1687,6 +1808,7 @@ public final class RequestProto {
       public Builder mergeRegistrationRequest(org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest value) {
         if (registrationRequestBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              registrationRequest_ != null &&
               registrationRequest_ != org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance()) {
             registrationRequest_ =
               org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.newBuilder(registrationRequest_).mergeFrom(value).buildPartial();
@@ -1705,7 +1827,7 @@ public final class RequestProto {
        */
       public Builder clearRegistrationRequest() {
         if (registrationRequestBuilder_ == null) {
-          registrationRequest_ = org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance();
+          registrationRequest_ = null;
           onChanged();
         } else {
           registrationRequestBuilder_.clear();
@@ -1728,19 +1850,20 @@ public final class RequestProto {
         if (registrationRequestBuilder_ != null) {
           return registrationRequestBuilder_.getMessageOrBuilder();
         } else {
-          return registrationRequest_;
+          return registrationRequest_ == null ?
+              org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.getDefaultInstance() : registrationRequest_;
         }
       }
       /**
        * <code>optional .RegistrationRequest registrationRequest = 5;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      private com.google.protobuf.SingleFieldBuilderV3<
           org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest, org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequestOrBuilder> 
           getRegistrationRequestFieldBuilder() {
         if (registrationRequestBuilder_ == null) {
-          registrationRequestBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+          registrationRequestBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest, org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.Builder, org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequestOrBuilder>(
-                  registrationRequest_,
+                  getRegistrationRequest(),
                   getParentForChildren(),
                   isClean());
           registrationRequest_ = null;
@@ -1748,7 +1871,6 @@ public final class RequestProto {
         return registrationRequestBuilder_;
       }
 
-      // required int32 request_packet_version = 6;
       private int requestPacketVersion_ ;
       /**
        * <code>required int32 request_packet_version = 6;</code>
@@ -1781,7 +1903,6 @@ public final class RequestProto {
         return this;
       }
 
-      // optional int64 client_id = 7;
       private long clientId_ ;
       /**
        * <code>optional int64 client_id = 7;</code>
@@ -1813,22 +1934,59 @@ public final class RequestProto {
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:Request)
     }
 
+    // @@protoc_insertion_point(class_scope:Request)
+    private static final org.artempopov.ServerFirst.proto.RequestProto.Request DEFAULT_INSTANCE;
     static {
-      defaultInstance = new Request(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new org.artempopov.ServerFirst.proto.RequestProto.Request();
     }
 
-    // @@protoc_insertion_point(class_scope:Request)
+    public static org.artempopov.ServerFirst.proto.RequestProto.Request getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<Request>
+        PARSER = new com.google.protobuf.AbstractParser<Request>() {
+      public Request parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Request(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Request> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Request> getParserForType() {
+      return PARSER;
+    }
+
+    public org.artempopov.ServerFirst.proto.RequestProto.Request getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
-  public interface MoveRequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface MoveRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:MoveRequest)
+      com.google.protobuf.MessageOrBuilder {
 
-    // required .MoveDirection direction = 1;
     /**
      * <code>required .MoveDirection direction = 1;</code>
      */
@@ -1841,36 +1999,32 @@ public final class RequestProto {
   /**
    * Protobuf type {@code MoveRequest}
    */
-  public static final class MoveRequest extends
-      com.google.protobuf.GeneratedMessage
-      implements MoveRequestOrBuilder {
+  public  static final class MoveRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:MoveRequest)
+      MoveRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use MoveRequest.newBuilder() to construct.
-    private MoveRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private MoveRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private MoveRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final MoveRequest defaultInstance;
-    public static MoveRequest getDefaultInstance() {
-      return defaultInstance;
+    private MoveRequest() {
+      direction_ = 0;
     }
 
-    public MoveRequest getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private MoveRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -1883,8 +2037,8 @@ public final class RequestProto {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -1896,7 +2050,7 @@ public final class RequestProto {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                direction_ = value;
+                direction_ = rawValue;
               }
               break;
             }
@@ -1906,7 +2060,7 @@ public final class RequestProto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -1917,32 +2071,16 @@ public final class RequestProto {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_MoveRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_MoveRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.class, org.artempopov.ServerFirst.proto.RequestProto.MoveRequest.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<MoveRequest> PARSER =
-        new com.google.protobuf.AbstractParser<MoveRequest>() {
-      public MoveRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new MoveRequest(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<MoveRequest> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
-    // required .MoveDirection direction = 1;
     public static final int DIRECTION_FIELD_NUMBER = 1;
-    private org.artempopov.ServerFirst.proto.RequestProto.MoveDirection direction_;
+    private int direction_;
     /**
      * <code>required .MoveDirection direction = 1;</code>
      */
@@ -1953,16 +2091,15 @@ public final class RequestProto {
      * <code>required .MoveDirection direction = 1;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.MoveDirection getDirection() {
-      return direction_;
+      org.artempopov.ServerFirst.proto.RequestProto.MoveDirection result = org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.valueOf(direction_);
+      return result == null ? org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.UP : result;
     }
 
-    private void initFields() {
-      direction_ = org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.UP;
-    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (!hasDirection()) {
         memoizedIsInitialized = 0;
@@ -1974,35 +2111,72 @@ public final class RequestProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, direction_.getNumber());
+        output.writeEnum(1, direction_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, direction_.getNumber());
+          .computeEnumSize(1, direction_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.artempopov.ServerFirst.proto.RequestProto.MoveRequest)) {
+        return super.equals(obj);
+      }
+      org.artempopov.ServerFirst.proto.RequestProto.MoveRequest other = (org.artempopov.ServerFirst.proto.RequestProto.MoveRequest) obj;
+
+      boolean result = true;
+      result = result && (hasDirection() == other.hasDirection());
+      if (hasDirection()) {
+        result = result && direction_ == other.direction_;
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasDirection()) {
+        hash = (37 * hash) + DIRECTION_FIELD_NUMBER;
+        hash = (53 * hash) + direction_;
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2026,46 +2200,57 @@ public final class RequestProto {
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.MoveRequest prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.MoveRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2073,14 +2258,15 @@ public final class RequestProto {
      * Protobuf type {@code MoveRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.artempopov.ServerFirst.proto.RequestProto.MoveRequestOrBuilder {
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:MoveRequest)
+        org.artempopov.ServerFirst.proto.RequestProto.MoveRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_MoveRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_MoveRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2093,27 +2279,20 @@ public final class RequestProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
       public Builder clear() {
         super.clear();
-        direction_ = org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.UP;
+        direction_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -2146,6 +2325,32 @@ public final class RequestProto {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.artempopov.ServerFirst.proto.RequestProto.MoveRequest) {
           return mergeFrom((org.artempopov.ServerFirst.proto.RequestProto.MoveRequest)other);
@@ -2160,13 +2365,13 @@ public final class RequestProto {
         if (other.hasDirection()) {
           setDirection(other.getDirection());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasDirection()) {
-          
           return false;
         }
         return true;
@@ -2181,7 +2386,7 @@ public final class RequestProto {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.artempopov.ServerFirst.proto.RequestProto.MoveRequest) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -2191,8 +2396,7 @@ public final class RequestProto {
       }
       private int bitField0_;
 
-      // required .MoveDirection direction = 1;
-      private org.artempopov.ServerFirst.proto.RequestProto.MoveDirection direction_ = org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.UP;
+      private int direction_ = 0;
       /**
        * <code>required .MoveDirection direction = 1;</code>
        */
@@ -2203,7 +2407,8 @@ public final class RequestProto {
        * <code>required .MoveDirection direction = 1;</code>
        */
       public org.artempopov.ServerFirst.proto.RequestProto.MoveDirection getDirection() {
-        return direction_;
+        org.artempopov.ServerFirst.proto.RequestProto.MoveDirection result = org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.valueOf(direction_);
+        return result == null ? org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.UP : result;
       }
       /**
        * <code>required .MoveDirection direction = 1;</code>
@@ -2213,7 +2418,7 @@ public final class RequestProto {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        direction_ = value;
+        direction_ = value.getNumber();
         onChanged();
         return this;
       }
@@ -2222,26 +2427,63 @@ public final class RequestProto {
        */
       public Builder clearDirection() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        direction_ = org.artempopov.ServerFirst.proto.RequestProto.MoveDirection.UP;
+        direction_ = 0;
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:MoveRequest)
     }
 
+    // @@protoc_insertion_point(class_scope:MoveRequest)
+    private static final org.artempopov.ServerFirst.proto.RequestProto.MoveRequest DEFAULT_INSTANCE;
     static {
-      defaultInstance = new MoveRequest(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new org.artempopov.ServerFirst.proto.RequestProto.MoveRequest();
     }
 
-    // @@protoc_insertion_point(class_scope:MoveRequest)
+    public static org.artempopov.ServerFirst.proto.RequestProto.MoveRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<MoveRequest>
+        PARSER = new com.google.protobuf.AbstractParser<MoveRequest>() {
+      public MoveRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MoveRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<MoveRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MoveRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public org.artempopov.ServerFirst.proto.RequestProto.MoveRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
-  public interface ChangeColorRequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ChangeColorRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ChangeColorRequest)
+      com.google.protobuf.MessageOrBuilder {
 
-    // required .Color color = 1;
     /**
      * <code>required .Color color = 1;</code>
      */
@@ -2254,36 +2496,32 @@ public final class RequestProto {
   /**
    * Protobuf type {@code ChangeColorRequest}
    */
-  public static final class ChangeColorRequest extends
-      com.google.protobuf.GeneratedMessage
-      implements ChangeColorRequestOrBuilder {
+  public  static final class ChangeColorRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ChangeColorRequest)
+      ChangeColorRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ChangeColorRequest.newBuilder() to construct.
-    private ChangeColorRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private ChangeColorRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private ChangeColorRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final ChangeColorRequest defaultInstance;
-    public static ChangeColorRequest getDefaultInstance() {
-      return defaultInstance;
+    private ChangeColorRequest() {
+      color_ = 0;
     }
 
-    public ChangeColorRequest getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private ChangeColorRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2296,8 +2534,8 @@ public final class RequestProto {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2309,7 +2547,7 @@ public final class RequestProto {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                color_ = value;
+                color_ = rawValue;
               }
               break;
             }
@@ -2319,7 +2557,7 @@ public final class RequestProto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2330,32 +2568,16 @@ public final class RequestProto {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeColorRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeColorRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.class, org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<ChangeColorRequest> PARSER =
-        new com.google.protobuf.AbstractParser<ChangeColorRequest>() {
-      public ChangeColorRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ChangeColorRequest(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ChangeColorRequest> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
-    // required .Color color = 1;
     public static final int COLOR_FIELD_NUMBER = 1;
-    private org.artempopov.ServerFirst.proto.RequestProto.Color color_;
+    private int color_;
     /**
      * <code>required .Color color = 1;</code>
      */
@@ -2366,16 +2588,15 @@ public final class RequestProto {
      * <code>required .Color color = 1;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.Color getColor() {
-      return color_;
+      org.artempopov.ServerFirst.proto.RequestProto.Color result = org.artempopov.ServerFirst.proto.RequestProto.Color.valueOf(color_);
+      return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Color.RED : result;
     }
 
-    private void initFields() {
-      color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
-    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (!hasColor()) {
         memoizedIsInitialized = 0;
@@ -2387,35 +2608,72 @@ public final class RequestProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, color_.getNumber());
+        output.writeEnum(1, color_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, color_.getNumber());
+          .computeEnumSize(1, color_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest)) {
+        return super.equals(obj);
+      }
+      org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest other = (org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest) obj;
+
+      boolean result = true;
+      result = result && (hasColor() == other.hasColor());
+      if (hasColor()) {
+        result = result && color_ == other.color_;
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasColor()) {
+        hash = (37 * hash) + COLOR_FIELD_NUMBER;
+        hash = (53 * hash) + color_;
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2439,46 +2697,57 @@ public final class RequestProto {
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2486,14 +2755,15 @@ public final class RequestProto {
      * Protobuf type {@code ChangeColorRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequestOrBuilder {
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ChangeColorRequest)
+        org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeColorRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeColorRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2506,27 +2776,20 @@ public final class RequestProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
       public Builder clear() {
         super.clear();
-        color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
+        color_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -2559,6 +2822,32 @@ public final class RequestProto {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest) {
           return mergeFrom((org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest)other);
@@ -2573,13 +2862,13 @@ public final class RequestProto {
         if (other.hasColor()) {
           setColor(other.getColor());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasColor()) {
-          
           return false;
         }
         return true;
@@ -2594,7 +2883,7 @@ public final class RequestProto {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -2604,8 +2893,7 @@ public final class RequestProto {
       }
       private int bitField0_;
 
-      // required .Color color = 1;
-      private org.artempopov.ServerFirst.proto.RequestProto.Color color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
+      private int color_ = 0;
       /**
        * <code>required .Color color = 1;</code>
        */
@@ -2616,7 +2904,8 @@ public final class RequestProto {
        * <code>required .Color color = 1;</code>
        */
       public org.artempopov.ServerFirst.proto.RequestProto.Color getColor() {
-        return color_;
+        org.artempopov.ServerFirst.proto.RequestProto.Color result = org.artempopov.ServerFirst.proto.RequestProto.Color.valueOf(color_);
+        return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Color.RED : result;
       }
       /**
        * <code>required .Color color = 1;</code>
@@ -2626,7 +2915,7 @@ public final class RequestProto {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        color_ = value;
+        color_ = value.getNumber();
         onChanged();
         return this;
       }
@@ -2635,26 +2924,63 @@ public final class RequestProto {
        */
       public Builder clearColor() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
+        color_ = 0;
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:ChangeColorRequest)
     }
 
+    // @@protoc_insertion_point(class_scope:ChangeColorRequest)
+    private static final org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest DEFAULT_INSTANCE;
     static {
-      defaultInstance = new ChangeColorRequest(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest();
     }
 
-    // @@protoc_insertion_point(class_scope:ChangeColorRequest)
+    public static org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<ChangeColorRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ChangeColorRequest>() {
+      public ChangeColorRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ChangeColorRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ChangeColorRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ChangeColorRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public org.artempopov.ServerFirst.proto.RequestProto.ChangeColorRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
-  public interface ChangeShapeRequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ChangeShapeRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ChangeShapeRequest)
+      com.google.protobuf.MessageOrBuilder {
 
-    // required .Shape shape = 1;
     /**
      * <code>required .Shape shape = 1;</code>
      */
@@ -2667,36 +2993,32 @@ public final class RequestProto {
   /**
    * Protobuf type {@code ChangeShapeRequest}
    */
-  public static final class ChangeShapeRequest extends
-      com.google.protobuf.GeneratedMessage
-      implements ChangeShapeRequestOrBuilder {
+  public  static final class ChangeShapeRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ChangeShapeRequest)
+      ChangeShapeRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use ChangeShapeRequest.newBuilder() to construct.
-    private ChangeShapeRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private ChangeShapeRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private ChangeShapeRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final ChangeShapeRequest defaultInstance;
-    public static ChangeShapeRequest getDefaultInstance() {
-      return defaultInstance;
+    private ChangeShapeRequest() {
+      shape_ = 0;
     }
 
-    public ChangeShapeRequest getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private ChangeShapeRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -2709,8 +3031,8 @@ public final class RequestProto {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -2722,7 +3044,7 @@ public final class RequestProto {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                shape_ = value;
+                shape_ = rawValue;
               }
               break;
             }
@@ -2732,7 +3054,7 @@ public final class RequestProto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -2743,32 +3065,16 @@ public final class RequestProto {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeShapeRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeShapeRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.class, org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<ChangeShapeRequest> PARSER =
-        new com.google.protobuf.AbstractParser<ChangeShapeRequest>() {
-      public ChangeShapeRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ChangeShapeRequest(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ChangeShapeRequest> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
-    // required .Shape shape = 1;
     public static final int SHAPE_FIELD_NUMBER = 1;
-    private org.artempopov.ServerFirst.proto.RequestProto.Shape shape_;
+    private int shape_;
     /**
      * <code>required .Shape shape = 1;</code>
      */
@@ -2779,16 +3085,15 @@ public final class RequestProto {
      * <code>required .Shape shape = 1;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.Shape getShape() {
-      return shape_;
+      org.artempopov.ServerFirst.proto.RequestProto.Shape result = org.artempopov.ServerFirst.proto.RequestProto.Shape.valueOf(shape_);
+      return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE : result;
     }
 
-    private void initFields() {
-      shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
-    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (!hasShape()) {
         memoizedIsInitialized = 0;
@@ -2800,35 +3105,72 @@ public final class RequestProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, shape_.getNumber());
+        output.writeEnum(1, shape_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, shape_.getNumber());
+          .computeEnumSize(1, shape_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest)) {
+        return super.equals(obj);
+      }
+      org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest other = (org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest) obj;
+
+      boolean result = true;
+      result = result && (hasShape() == other.hasShape());
+      if (hasShape()) {
+        result = result && shape_ == other.shape_;
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasShape()) {
+        hash = (37 * hash) + SHAPE_FIELD_NUMBER;
+        hash = (53 * hash) + shape_;
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2852,46 +3194,57 @@ public final class RequestProto {
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2899,14 +3252,15 @@ public final class RequestProto {
      * Protobuf type {@code ChangeShapeRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequestOrBuilder {
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ChangeShapeRequest)
+        org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeShapeRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_ChangeShapeRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2919,27 +3273,20 @@ public final class RequestProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
       public Builder clear() {
         super.clear();
-        shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
+        shape_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
         return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -2972,6 +3319,32 @@ public final class RequestProto {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest) {
           return mergeFrom((org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest)other);
@@ -2986,13 +3359,13 @@ public final class RequestProto {
         if (other.hasShape()) {
           setShape(other.getShape());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasShape()) {
-          
           return false;
         }
         return true;
@@ -3007,7 +3380,7 @@ public final class RequestProto {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -3017,8 +3390,7 @@ public final class RequestProto {
       }
       private int bitField0_;
 
-      // required .Shape shape = 1;
-      private org.artempopov.ServerFirst.proto.RequestProto.Shape shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
+      private int shape_ = 0;
       /**
        * <code>required .Shape shape = 1;</code>
        */
@@ -3029,7 +3401,8 @@ public final class RequestProto {
        * <code>required .Shape shape = 1;</code>
        */
       public org.artempopov.ServerFirst.proto.RequestProto.Shape getShape() {
-        return shape_;
+        org.artempopov.ServerFirst.proto.RequestProto.Shape result = org.artempopov.ServerFirst.proto.RequestProto.Shape.valueOf(shape_);
+        return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE : result;
       }
       /**
        * <code>required .Shape shape = 1;</code>
@@ -3039,7 +3412,7 @@ public final class RequestProto {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        shape_ = value;
+        shape_ = value.getNumber();
         onChanged();
         return this;
       }
@@ -3048,26 +3421,63 @@ public final class RequestProto {
        */
       public Builder clearShape() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
+        shape_ = 0;
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:ChangeShapeRequest)
     }
 
+    // @@protoc_insertion_point(class_scope:ChangeShapeRequest)
+    private static final org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest DEFAULT_INSTANCE;
     static {
-      defaultInstance = new ChangeShapeRequest(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest();
     }
 
-    // @@protoc_insertion_point(class_scope:ChangeShapeRequest)
+    public static org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<ChangeShapeRequest>
+        PARSER = new com.google.protobuf.AbstractParser<ChangeShapeRequest>() {
+      public ChangeShapeRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ChangeShapeRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ChangeShapeRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ChangeShapeRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public org.artempopov.ServerFirst.proto.RequestProto.ChangeShapeRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
-  public interface RegistrationRequestOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface RegistrationRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:RegistrationRequest)
+      com.google.protobuf.MessageOrBuilder {
 
-    // required .Color color = 1;
     /**
      * <code>required .Color color = 1;</code>
      */
@@ -3077,7 +3487,6 @@ public final class RequestProto {
      */
     org.artempopov.ServerFirst.proto.RequestProto.Color getColor();
 
-    // required .Shape shape = 2;
     /**
      * <code>required .Shape shape = 2;</code>
      */
@@ -3090,36 +3499,33 @@ public final class RequestProto {
   /**
    * Protobuf type {@code RegistrationRequest}
    */
-  public static final class RegistrationRequest extends
-      com.google.protobuf.GeneratedMessage
-      implements RegistrationRequestOrBuilder {
+  public  static final class RegistrationRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:RegistrationRequest)
+      RegistrationRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
     // Use RegistrationRequest.newBuilder() to construct.
-    private RegistrationRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private RegistrationRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private RegistrationRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-    private static final RegistrationRequest defaultInstance;
-    public static RegistrationRequest getDefaultInstance() {
-      return defaultInstance;
+    private RegistrationRequest() {
+      color_ = 0;
+      shape_ = 0;
     }
 
-    public RegistrationRequest getDefaultInstanceForType() {
-      return defaultInstance;
-    }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
+    getUnknownFields() {
       return this.unknownFields;
     }
     private RegistrationRequest(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -3132,8 +3538,8 @@ public final class RequestProto {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -3145,7 +3551,7 @@ public final class RequestProto {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
                 bitField0_ |= 0x00000001;
-                color_ = value;
+                color_ = rawValue;
               }
               break;
             }
@@ -3156,7 +3562,7 @@ public final class RequestProto {
                 unknownFields.mergeVarintField(2, rawValue);
               } else {
                 bitField0_ |= 0x00000002;
-                shape_ = value;
+                shape_ = rawValue;
               }
               break;
             }
@@ -3166,7 +3572,7 @@ public final class RequestProto {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
+            e).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -3177,32 +3583,16 @@ public final class RequestProto {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_RegistrationRequest_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.artempopov.ServerFirst.proto.RequestProto.internal_static_RegistrationRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.class, org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<RegistrationRequest> PARSER =
-        new com.google.protobuf.AbstractParser<RegistrationRequest>() {
-      public RegistrationRequest parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new RegistrationRequest(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<RegistrationRequest> getParserForType() {
-      return PARSER;
-    }
-
     private int bitField0_;
-    // required .Color color = 1;
     public static final int COLOR_FIELD_NUMBER = 1;
-    private org.artempopov.ServerFirst.proto.RequestProto.Color color_;
+    private int color_;
     /**
      * <code>required .Color color = 1;</code>
      */
@@ -3213,12 +3603,12 @@ public final class RequestProto {
      * <code>required .Color color = 1;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.Color getColor() {
-      return color_;
+      org.artempopov.ServerFirst.proto.RequestProto.Color result = org.artempopov.ServerFirst.proto.RequestProto.Color.valueOf(color_);
+      return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Color.RED : result;
     }
 
-    // required .Shape shape = 2;
     public static final int SHAPE_FIELD_NUMBER = 2;
-    private org.artempopov.ServerFirst.proto.RequestProto.Shape shape_;
+    private int shape_;
     /**
      * <code>required .Shape shape = 2;</code>
      */
@@ -3229,17 +3619,15 @@ public final class RequestProto {
      * <code>required .Shape shape = 2;</code>
      */
     public org.artempopov.ServerFirst.proto.RequestProto.Shape getShape() {
-      return shape_;
+      org.artempopov.ServerFirst.proto.RequestProto.Shape result = org.artempopov.ServerFirst.proto.RequestProto.Shape.valueOf(shape_);
+      return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE : result;
     }
 
-    private void initFields() {
-      color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
-      shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
-    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       if (!hasColor()) {
         memoizedIsInitialized = 0;
@@ -3255,42 +3643,87 @@ public final class RequestProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeEnum(1, color_.getNumber());
+        output.writeEnum(1, color_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, shape_.getNumber());
+        output.writeEnum(2, shape_);
       }
-      getUnknownFields().writeTo(output);
+      unknownFields.writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSerializedSize;
+      int size = memoizedSize;
       if (size != -1) return size;
 
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, color_.getNumber());
+          .computeEnumSize(1, color_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, shape_.getNumber());
+          .computeEnumSize(2, shape_);
       }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest)) {
+        return super.equals(obj);
+      }
+      org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest other = (org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest) obj;
+
+      boolean result = true;
+      result = result && (hasColor() == other.hasColor());
+      if (hasColor()) {
+        result = result && color_ == other.color_;
+      }
+      result = result && (hasShape() == other.hasShape());
+      if (hasShape()) {
+        result = result && shape_ == other.shape_;
+      }
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
     }
 
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasColor()) {
+        hash = (37 * hash) + COLOR_FIELD_NUMBER;
+        hash = (53 * hash) + color_;
+      }
+      if (hasShape()) {
+        hash = (37 * hash) + SHAPE_FIELD_NUMBER;
+        hash = (53 * hash) + shape_;
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
     public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3314,46 +3747,57 @@ public final class RequestProto {
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return PARSER.parseFrom(input);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
     }
     public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
-    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest prototype) {
-      return newBuilder().mergeFrom(prototype);
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
     }
-    public Builder toBuilder() { return newBuilder(this); }
+    public static Builder newBuilder(org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3361,14 +3805,15 @@ public final class RequestProto {
      * Protobuf type {@code RegistrationRequest}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequestOrBuilder {
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:RegistrationRequest)
+        org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_RegistrationRequest_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.artempopov.ServerFirst.proto.RequestProto.internal_static_RegistrationRequest_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3381,29 +3826,22 @@ public final class RequestProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
-        return new Builder();
-      }
-
       public Builder clear() {
         super.clear();
-        color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
+        color_ = 0;
         bitField0_ = (bitField0_ & ~0x00000001);
-        shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
+        shape_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -3440,6 +3878,32 @@ public final class RequestProto {
         return result;
       }
 
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest) {
           return mergeFrom((org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest)other);
@@ -3457,17 +3921,16 @@ public final class RequestProto {
         if (other.hasShape()) {
           setShape(other.getShape());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasColor()) {
-          
           return false;
         }
         if (!hasShape()) {
-          
           return false;
         }
         return true;
@@ -3482,7 +3945,7 @@ public final class RequestProto {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest) e.getUnfinishedMessage();
-          throw e;
+          throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -3492,8 +3955,7 @@ public final class RequestProto {
       }
       private int bitField0_;
 
-      // required .Color color = 1;
-      private org.artempopov.ServerFirst.proto.RequestProto.Color color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
+      private int color_ = 0;
       /**
        * <code>required .Color color = 1;</code>
        */
@@ -3504,7 +3966,8 @@ public final class RequestProto {
        * <code>required .Color color = 1;</code>
        */
       public org.artempopov.ServerFirst.proto.RequestProto.Color getColor() {
-        return color_;
+        org.artempopov.ServerFirst.proto.RequestProto.Color result = org.artempopov.ServerFirst.proto.RequestProto.Color.valueOf(color_);
+        return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Color.RED : result;
       }
       /**
        * <code>required .Color color = 1;</code>
@@ -3514,7 +3977,7 @@ public final class RequestProto {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000001;
-        color_ = value;
+        color_ = value.getNumber();
         onChanged();
         return this;
       }
@@ -3523,13 +3986,12 @@ public final class RequestProto {
        */
       public Builder clearColor() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        color_ = org.artempopov.ServerFirst.proto.RequestProto.Color.RED;
+        color_ = 0;
         onChanged();
         return this;
       }
 
-      // required .Shape shape = 2;
-      private org.artempopov.ServerFirst.proto.RequestProto.Shape shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
+      private int shape_ = 0;
       /**
        * <code>required .Shape shape = 2;</code>
        */
@@ -3540,7 +4002,8 @@ public final class RequestProto {
        * <code>required .Shape shape = 2;</code>
        */
       public org.artempopov.ServerFirst.proto.RequestProto.Shape getShape() {
-        return shape_;
+        org.artempopov.ServerFirst.proto.RequestProto.Shape result = org.artempopov.ServerFirst.proto.RequestProto.Shape.valueOf(shape_);
+        return result == null ? org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE : result;
       }
       /**
        * <code>required .Shape shape = 2;</code>
@@ -3550,7 +4013,7 @@ public final class RequestProto {
           throw new NullPointerException();
         }
         bitField0_ |= 0x00000002;
-        shape_ = value;
+        shape_ = value.getNumber();
         onChanged();
         return this;
       }
@@ -3559,53 +4022,90 @@ public final class RequestProto {
        */
       public Builder clearShape() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        shape_ = org.artempopov.ServerFirst.proto.RequestProto.Shape.CIRCLE;
+        shape_ = 0;
         onChanged();
         return this;
       }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
 
       // @@protoc_insertion_point(builder_scope:RegistrationRequest)
     }
 
+    // @@protoc_insertion_point(class_scope:RegistrationRequest)
+    private static final org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest DEFAULT_INSTANCE;
     static {
-      defaultInstance = new RegistrationRequest(true);
-      defaultInstance.initFields();
+      DEFAULT_INSTANCE = new org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest();
     }
 
-    // @@protoc_insertion_point(class_scope:RegistrationRequest)
+    public static org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    @java.lang.Deprecated public static final com.google.protobuf.Parser<RegistrationRequest>
+        PARSER = new com.google.protobuf.AbstractParser<RegistrationRequest>() {
+      public RegistrationRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RegistrationRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<RegistrationRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RegistrationRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public org.artempopov.ServerFirst.proto.RequestProto.RegistrationRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Request_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Request_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_MoveRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_MoveRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ChangeColorRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ChangeColorRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ChangeShapeRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ChangeShapeRequest_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_RegistrationRequest_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_RegistrationRequest_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -3618,7 +4118,7 @@ public final class RequestProto {
       "onRequest\022\036\n\026request_packet_version\030\006 \002(" +
       "\005\022\021\n\tclient_id\030\007 \001(\003\"0\n\013MoveRequest\022!\n\td" +
       "irection\030\001 \002(\0162\016.MoveDirection\"+\n\022Change" +
-      "ColorRequest\022\025\n\005color\030\001 \002(\0162\006.Color\"+\n\022C",
+      "ColorRequest\022\025\n\005color\030\001 \002(\0162\006.Color\"+\n\022C" +
       "hangeShapeRequest\022\025\n\005shape\030\001 \002(\0162\006.Shape" +
       "\"C\n\023RegistrationRequest\022\025\n\005color\030\001 \002(\0162\006" +
       ".Color\022\025\n\005shape\030\002 \002(\0162\006.Shape*a\n\013Request" +
@@ -3628,51 +4128,51 @@ public final class RequestProto {
       "HT\020\001\022\010\n\004DOWN\020\002\022\010\n\004LEFT\020\004*H\n\005Color\022\007\n\003RED" +
       "\020\000\022\t\n\005GREEN\020\001\022\010\n\004BLUE\020\002\022\t\n\005BLACK\020\003\022\n\n\006OR" +
       "ANGE\020\004\022\n\n\006VIOLET\020\005*-\n\005Shape\022\n\n\006CIRCLE\020\000\022" +
-      "\n\n\006SQUARE\020\001\022\014\n\010TRIANGLE\020\002B0\n org.artempo",
+      "\n\n\006SQUARE\020\001\022\014\n\010TRIANGLE\020\002B0\n org.artempo" +
       "pov.ServerFirst.protoB\014RequestProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_Request_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_Request_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_Request_descriptor,
-              new java.lang.String[] { "Type", "MoveRequest", "ChangeColorRequest", "ChangeShapeRequest", "RegistrationRequest", "RequestPacketVersion", "ClientId", });
-          internal_static_MoveRequest_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_MoveRequest_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_MoveRequest_descriptor,
-              new java.lang.String[] { "Direction", });
-          internal_static_ChangeColorRequest_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_ChangeColorRequest_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_ChangeColorRequest_descriptor,
-              new java.lang.String[] { "Color", });
-          internal_static_ChangeShapeRequest_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_ChangeShapeRequest_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_ChangeShapeRequest_descriptor,
-              new java.lang.String[] { "Shape", });
-          internal_static_RegistrationRequest_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_RegistrationRequest_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_RegistrationRequest_descriptor,
-              new java.lang.String[] { "Color", "Shape", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
+    internal_static_Request_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_Request_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Request_descriptor,
+        new java.lang.String[] { "Type", "MoveRequest", "ChangeColorRequest", "ChangeShapeRequest", "RegistrationRequest", "RequestPacketVersion", "ClientId", });
+    internal_static_MoveRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_MoveRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_MoveRequest_descriptor,
+        new java.lang.String[] { "Direction", });
+    internal_static_ChangeColorRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_ChangeColorRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ChangeColorRequest_descriptor,
+        new java.lang.String[] { "Color", });
+    internal_static_ChangeShapeRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_ChangeShapeRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ChangeShapeRequest_descriptor,
+        new java.lang.String[] { "Shape", });
+    internal_static_RegistrationRequest_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_RegistrationRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_RegistrationRequest_descriptor,
+        new java.lang.String[] { "Color", "Shape", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

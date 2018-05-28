@@ -1,10 +1,15 @@
-package org.artempopov.serverFirst.net
+package org.artempopov.ServerFirst.net
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.serverFirst.handler.InvalidRequestException
-import org.artempopov.serverFirst.handler.MoveHandler
-import org.artempopov.serverFirst.proto.RequestProto
+import org.artempopov.ServerFirst.proto.RequestProto
+import org.artempopov.ServerFirst.handler.InvalidRequestException
+import org.artempopov.ServerFirst.handler.MoveHandler
+import org.artempopov.ServerFirst.handler.RegistrationHandler
+import org.artempopov.ServerFirst.handler.ShapeHandler
+import org.artempopov.ServerFirst.proto.ResponseProto
+import org.artempopov.ServerFirst.util.createErrorResponse
 import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.concurrent.ExecutorService
@@ -75,14 +80,19 @@ class RequestHandler(port: Int) {
 
                 LOG.debug("Request accepted: " + protoMessage)
 
-                val protoResponse = try {
-                    handleProtoMessage(protoMessage)
+                var protoResponse: ByteArray? = null
+                try {
+                    protoResponse = handleProtoMessage(protoMessage)
                 } catch (e: InvalidRequestException) {
                     LOG.error("Invalid request from client: " + protoMessage.clientId)
                     LOG.error(e.message)
+                    protoResponse = createErrorResponse(ResponseProto.ErrorType.BAD_REQUEST, e.message).toByteArray()
                 }
 
-                //sendResponse(protoResponse)
+                if (protoResponse != null) {
+                    sendResponse(protoResponse)
+                }
+
             } catch (e: Exception) {
                 LOG.error("ERROR OCCURRED: " + e)
                 LOG.debug(e.printStackTrace())
@@ -118,21 +128,21 @@ class RequestHandler(port: Int) {
         }
 
         private fun handleProtoMessage(protoMessage: RequestProto.Request) : ByteArray {
-            var response: ByteArray = ByteArray(5)
+            var response = ByteArray(5)
 
             when (protoMessage.type) {
                 RequestProto.RequestType.MOVE ->
                     response = MoveHandler.handleMove(protoMessage)
-//
-//                RequestProto.RequestType.CHANGE_COLOR ->
-//                    response = ShapeHanler.handleColorChange(protoMessage)
+
+                RequestProto.RequestType.CHANGE_COLOR ->
+                    response = ShapeHandler.handleShapeChange(protoMessage)
 //
 //                RequestProto.RequestType.CHANGE_SHAPE ->
 //                    response = ShapeHandler.handleShapeChange(protoMessage)
-//
-//                RequestProto.RequestType.REGISTRATION ->
-//                    response = RegistrationHandler.handleRegistration(protoMessage)
-//
+
+                RequestProto.RequestType.REGISTRATION ->
+                    response = RegistrationHandler.handleRegistration(protoMessage)
+
 //                RequestProto.RequestType.UNREGISTRATION ->
 //                    response = RegistrationHandler.handleUnregistration(protoMessage)
 
@@ -141,13 +151,27 @@ class RequestHandler(port: Int) {
 
             return response
         }
+
+        private fun sendResponse(response: ByteArray) {
+            val outputStream = socket.getOutputStream()
+            if (outputStream == null) {
+                throw IllegalStateException("Incoming client output stream is null")
+            }
+
+            val bos = BufferedOutputStream(socket.getOutputStream())
+            bos.write(response)
+
+            bos.close()
+        }
     }
 
     /**
-     * This function
+     * This function stops any opened by this handler thread
      */
     fun stop() {
         running = false
+
+        handlers.shutdownNow()
 
         serverSocket.close()
     }

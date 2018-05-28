@@ -1,0 +1,8 @@
+version 0.2
+
+pool
+
+- make interface for handler and extract common code for all handlers, make it easy to add new custom handlers
+- refactor existing classes
+- make centralized storage of data (without actual db)
+- logging for server (each request, error, actual status of model)

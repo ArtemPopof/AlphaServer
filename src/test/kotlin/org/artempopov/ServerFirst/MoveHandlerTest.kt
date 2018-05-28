@@ -1,12 +1,11 @@
-package org.artempopov.serverFirst
+package org.artempopov.ServerFirst
 
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.fail
-import org.artempopov.serverFirst.handler.InvalidRequestException
-import org.artempopov.serverFirst.handler.MoveHandler
-import org.artempopov.serverFirst.proto.RequestProto
-import org.artempopov.serverFirst.proto.ResponseProto
-import org.artempopov.serverFirst.util.createEmptyResponse
+import org.artempopov.ServerFirst.proto.RequestProto
+import org.artempopov.ServerFirst.handler.InvalidRequestException
+import org.artempopov.ServerFirst.handler.MoveHandler
+import org.artempopov.ServerFirst.util.createEmptyResponse
+import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Test
 import java.awt.Point
 
@@ -17,7 +16,7 @@ class MoveHandlerTest {
 
     @Test
     fun testBadMoveRequest() {
-        MoveHandler.clientsPosition[1] = Point(0, 0)
+        MoveHandler.registerClient(2)
         try {
             MoveHandler.handleMove(createBadRequest())
         } catch (e: InvalidRequestException) {
@@ -28,10 +27,9 @@ class MoveHandlerTest {
     }
 
     @Test fun testGoodRequest() {
-        MoveHandler.clientsPosition[1] = Point(0,0)
+        MoveHandler.registerClient(1)
         val response = MoveHandler.handleMove(createGoodRequest())
-        val expectedResponse = createEmptyResponse()
-        assertEquals(expectedResponse, response)
+        assertEquals(0, response.size)
     }
 
     private fun createGoodRequest(): RequestProto.Request {

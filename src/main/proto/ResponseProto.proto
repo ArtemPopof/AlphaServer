@@ -3,8 +3,15 @@ option java_outer_classname = "ResponseProto";
 
 message Response {
     optional ErrorType error = 1;
+    optional string errorMessage = 2;
+    optional RegistrationResponse registration = 3;
 }
 
 enum ErrorType {
     UNREGISTERED = 0;
+    BAD_REQUEST = 1;
+}
+
+message RegistrationResponse {
+    required int64 clientId = 1;
 }

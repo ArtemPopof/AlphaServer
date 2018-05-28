@@ -1,4 +1,4 @@
-package org.artempopov.serverFirst.handler
+package org.artempopov.ServerFirst.handler
 
 /**
  * Invalid format or data in request

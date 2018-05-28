@@ -1,5 +1,6 @@
-package org.artempopov.serverFirst.dto
+package org.artempopov.ServerFirst.dto
 
+import org.artempopov.ServerFirst.proto.RequestProto
 import java.awt.Color
 
 /**
