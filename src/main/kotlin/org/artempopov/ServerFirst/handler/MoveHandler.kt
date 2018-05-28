@@ -109,4 +109,8 @@ object MoveHandler {
     fun getClientPosition(id: Long): Point? {
         return clientsPosition[id]
     }
+
+    fun getAllClientsPosition(): HashMap<Long, Point> {
+        return clientsPosition
+    }
 }

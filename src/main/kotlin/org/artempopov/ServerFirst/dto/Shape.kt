@@ -2,11 +2,12 @@ package org.artempopov.ServerFirst.dto
 
 import org.artempopov.ServerFirst.proto.RequestProto
 import java.awt.Color
+import java.awt.Point
 
 /**
  * Shape dto
  */
-data class Shape(val id: Int, val shapeType: ShapeType, val color: ShapeColor)
+data class Shape(val shapeType: ShapeType, val color: ShapeColor, val position: Point)
 
 enum class ShapeType(val description: String) {
     CIRCLE("Circle"),

@@ -1,3 +1,5 @@
+version 0.1
+
 version 0.2
 
 pool
@@ -6,3 +8,4 @@ pool
 - refactor existing classes
 - make centralized storage of data (without actual db)
 - logging for server (each request, error, actual status of model)
+- color handler

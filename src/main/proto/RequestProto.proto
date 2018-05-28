@@ -1,3 +1,5 @@
+import "common.proto";
+
 option java_package = "org.artempopov.ServerFirst.proto";
 option java_outer_classname = "RequestProto";
 
@@ -17,6 +19,7 @@ enum RequestType {
     MOVE = 2;
     CHANGE_COLOR = 3;
     CHANGE_SHAPE = 4;
+    NOTIFY = 5;
 }
 
 message MoveRequest {
@@ -34,23 +37,8 @@ message ChangeColorRequest {
     required Color color = 1;
 }
 
-enum Color {
-    RED = 0;
-    GREEN = 1;
-    BLUE = 2;
-    BLACK = 3;
-    ORANGE = 4;
-    VIOLET = 5;
-}
-
 message ChangeShapeRequest {
     required Shape shape = 1;
-}
-
-enum Shape {
-    CIRCLE = 0;
-    SQUARE = 1;
-    TRIANGLE = 2;
 }
 
 message RegistrationRequest {

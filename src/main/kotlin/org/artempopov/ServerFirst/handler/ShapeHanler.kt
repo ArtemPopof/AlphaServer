@@ -57,4 +57,8 @@ object ShapeHandler {
         clientsShape[id] = shape
     }
 
+    fun getAllShapes(): HashMap<Long, ShapeType> {
+        return clientsShape
+    }
+
 }

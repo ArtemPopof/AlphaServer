@@ -1,0 +1,21 @@
+option java_package = "org.artempopov.ServerFirst.proto";
+
+enum Shape {
+    CIRCLE = 0;
+    SQUARE = 1;
+    TRIANGLE = 2;
+}
+
+enum Color {
+     RED = 0;
+     GREEN = 1;
+     BLUE = 2;
+     BLACK = 3;
+     ORANGE = 4;
+     VIOLET = 5;
+ }
+
+message Position {
+    required int32 x = 1;
+    required int32 y = 2;
+}

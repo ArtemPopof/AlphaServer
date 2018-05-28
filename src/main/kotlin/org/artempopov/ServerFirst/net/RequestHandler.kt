@@ -1,11 +1,8 @@
 package org.artempopov.ServerFirst.net
 
 import org.apache.logging.log4j.LogManager
+import org.artempopov.ServerFirst.handler.*
 import org.artempopov.ServerFirst.proto.RequestProto
-import org.artempopov.ServerFirst.handler.InvalidRequestException
-import org.artempopov.ServerFirst.handler.MoveHandler
-import org.artempopov.ServerFirst.handler.RegistrationHandler
-import org.artempopov.ServerFirst.handler.ShapeHandler
 import org.artempopov.ServerFirst.proto.ResponseProto
 import org.artempopov.ServerFirst.util.createErrorResponse
 import java.io.BufferedInputStream
@@ -145,6 +142,8 @@ class RequestHandler(port: Int) {
 
 //                RequestProto.RequestType.UNREGISTRATION ->
 //                    response = RegistrationHandler.handleUnregistration(protoMessage)
+
+                RequestProto.RequestType.NOTIFY -> response = WorldNotifier.handleNotifyRequest(protoMessage)
 
                 null -> throw IllegalArgumentException("Type is null")
             }
