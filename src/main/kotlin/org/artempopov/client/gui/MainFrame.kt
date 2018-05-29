@@ -1,5 +1,6 @@
 package org.artempopov.client.gui
 
+import org.artempopov.client.graphics.Drawable
 import org.artempopov.client.shapes.Square
 import javax.swing.JFrame
 import javax.swing.WindowConstants
@@ -19,12 +20,20 @@ class MainFrame: JFrame(WINDOW_TITLE) {
         this.isVisible = true
 
         this.add(surface)
+    }
 
-        // init scene manipulations
-        surface.addToScene(Square(50, 50))
-        surface.addToScene(Square(200, 77))
+    /**
+     * Add drawable to scene
+     */
+    fun addToScene(drawable: Drawable) {
+        surface.addToScene(drawable)
+    }
 
-        surface.repaint()
+    /**
+     * Remove drawable from scene
+     */
+    fun removeFromScene(name: String) {
+        surface.removeDrawable(name)
     }
 
 }

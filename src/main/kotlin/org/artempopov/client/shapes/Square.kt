@@ -15,7 +15,7 @@ const val SQUARE_SIZE = 20
 class Square(x: Int, y: Int) : Drawable {
     override val id = "Square" + lastSquareId++
 
-    val position = Point(x, y)
+    private val position = Point(x, y)
 
     override fun draw(g: Graphics) {
         val oldColor = g.color

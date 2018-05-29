@@ -77,7 +77,7 @@ class RequestHandler(port: Int) {
 
                 LOG.debug("Request accepted: " + protoMessage)
 
-                var protoResponse: ByteArray? = null
+                var protoResponse: ByteArray?
                 try {
                     protoResponse = handleProtoMessage(protoMessage)
                 } catch (e: InvalidRequestException) {

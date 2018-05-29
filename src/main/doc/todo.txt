@@ -9,3 +9,5 @@ pool
 - make centralized storage of data (without actual db)
 - logging for server (each request, error, actual status of model)
 - color handler
+- remove shape from all places
+- normal model for client

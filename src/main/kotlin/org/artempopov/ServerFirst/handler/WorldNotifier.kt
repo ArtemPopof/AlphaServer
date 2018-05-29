@@ -41,7 +41,7 @@ object WorldNotifier {
                                  types: HashMap<Long, ShapeType>): List<ResponseProto.ShapeInfo> {
         val shapes = ArrayList<ResponseProto.ShapeInfo>(positions.size)
 
-        var type: ShapeType? = null
+        var type: ShapeType?
         for ((key, position) in positions) {
             // check for model unsync state
             type = types[key]
@@ -55,7 +55,7 @@ object WorldNotifier {
         return shapes
     }
 
-    private fun createShapeInfo(type: ShapeType, blue: ShapeColor, position: Point): ResponseProto.ShapeInfo {
+    private fun createShapeInfo(type: ShapeType, color: ShapeColor, position: Point): ResponseProto.ShapeInfo {
         val shape = ResponseProto.ShapeInfo.newBuilder()
 
         shape.position = createPosition(position)
