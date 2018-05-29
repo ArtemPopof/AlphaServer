@@ -36,4 +36,11 @@ class MainFrame: JFrame(WINDOW_TITLE) {
         surface.removeDrawable(name)
     }
 
+    /**
+     * Repaint scene
+     */
+    fun updateScene() {
+        surface.repaint()
+    }
+
 }

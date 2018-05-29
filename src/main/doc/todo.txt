@@ -11,3 +11,5 @@ pool
 - color handler
 - remove shape from all places
 - normal model for client
+- make one place for constants
+- make world updater understand shapes different from square

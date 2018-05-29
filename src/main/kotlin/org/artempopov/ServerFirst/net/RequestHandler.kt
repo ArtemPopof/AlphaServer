@@ -5,15 +5,15 @@ import org.artempopov.ServerFirst.handler.*
 import org.artempopov.ServerFirst.proto.RequestProto
 import org.artempopov.ServerFirst.proto.ResponseProto
 import org.artempopov.ServerFirst.util.createErrorResponse
-import java.io.BufferedInputStream
+import org.artempopov.common.net.readSocketData
 import java.io.BufferedOutputStream
 import java.net.ServerSocket
 import java.net.Socket
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+
 const val MAX_THREADS = 20
-const val BUFFER_SIZE = 1024
 
 /**
  * RequestHandler handles request received from clients
@@ -69,7 +69,7 @@ class RequestHandler(port: Int) {
 
         override fun run() {
             try {
-                val bytes = readSocketData()
+                val bytes = readSocketData(socket)
 
                 LOG.debug("Message bytes: " + bytes)
 
@@ -94,30 +94,6 @@ class RequestHandler(port: Int) {
                 LOG.error("ERROR OCCURRED: " + e)
                 LOG.debug(e.printStackTrace())
             }
-        }
-
-        private fun readSocketData(): ByteArray {
-            val bis = BufferedInputStream(socket.getInputStream())
-
-            val buffer = ByteArray(BUFFER_SIZE)
-
-            var byte = bis.read()
-            var counter = 0
-            while (byte != -1) {
-                buffer[counter++] = byte.toByte()
-                byte = try {
-                    bis.read()
-                } catch (e: Exception) {
-                    LOG.error("Error while reading data from socket: " + e)
-                    throw e
-                }
-            }
-
-            val data = ByteArray(counter)
-
-            System.arraycopy(buffer, 0, data, 0, counter)
-
-            return data
         }
 
         private fun parseProtoMessage(socketData: ByteArray): RequestProto.Request {
