@@ -17,7 +17,7 @@ object WorldUpdater {
     private fun createUpdateTask(): Runnable {
         return Runnable {
             while (running) {
-                
+
             }
         }
     }
