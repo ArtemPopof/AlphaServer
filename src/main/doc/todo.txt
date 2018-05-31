@@ -13,9 +13,5 @@ pool
 - normal model for client
 - make one place for constants
 - make world updater understand shapes different from square
-
-- make separate project for client
-
+- fix layout in registration form
 bugs
-
-- notify response didn't came back

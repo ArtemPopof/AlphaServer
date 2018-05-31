@@ -23,6 +23,7 @@ object NetworkManager {
     private val LOG = LogManager.getLogger()
 
     private var socketToServer: Socket? = null
+    private var clientId: Long? = null
 
     /**
      * Connect to server
@@ -33,6 +34,33 @@ object NetworkManager {
         } catch (e: Exception) {
             throw CannotConnectToServerException(e)
         }
+    }
+
+    /**
+     * Send registration request
+     *
+     * @throws ErrorResponseException when error occurred on server side
+     * @throws IOException sending problem
+     * @throws InvalidResponseException response malformed
+     */
+    fun sendRegistrationRequest(request: RequestProto.Request): ResponseProto.RegistrationResponse {
+        checkConnection()
+
+        send(request.toByteArray())
+        val response = waitForResponse()
+        if (!response.hasRegistration()) {
+            throw ErrorResponseException(getErrorFromResponse(response))
+        }
+
+        return response.registration
+    }
+
+    private fun getErrorFromResponse(response: ResponseProto.Response): Error {
+        if (!response.hasError()) {
+            throw InvalidResponseException()
+        }
+
+        return Error(response.errorMessage, response.error)
     }
 
     /**
@@ -91,5 +119,9 @@ object NetworkManager {
         if (socketToServer!!.isClosed || !socketToServer!!.isConnected) {
             connectToServer()
         }
+    }
+
+    fun setClientId(clientId: Long) {
+        this.clientId = clientId
     }
 }

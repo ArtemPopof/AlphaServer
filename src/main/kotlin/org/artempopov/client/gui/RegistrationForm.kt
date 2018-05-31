@@ -1,14 +1,21 @@
 package org.artempopov.client.gui
 
+import jdk.nashorn.internal.scripts.JO
+import org.apache.logging.log4j.LogManager
+import org.artempopov.client.registration.RegistrationException
+import org.artempopov.client.registration.RegistrationManager
 import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.dto.ShapeType
 import javax.swing.*
 
-const val TITLE = "Регистрация"
+private const val TITLE = "Регистрация"
+private const val LOG_TAG = "RegistrationForm"
 private const val WINDOW_WIDTH = 500
 private const val WINDOW_HEIGHT = 500
 
 class RegistrationForm(): JFrame(TITLE) {
+
+    private val LOG = LogManager.getLogger()
 
     private val colorComboBox = createColorComboBox()
     private val shapeComboBox = createShapeComboBox()
@@ -63,10 +70,24 @@ class RegistrationForm(): JFrame(TITLE) {
 
     private fun setupActions() {
         okButton.addActionListener{
-            //RegistrationManager.register(getChosenShape(), getChoosenColor())
+            performRegistration()
         }
         exitButton.addActionListener{
             this.dispose()
+        }
+    }
+
+    private fun performRegistration() {
+        try {
+            RegistrationManager.register(getChosenShape(), getChoosenColor())
+
+            LOG.info("Registered!")
+            JOptionPane.showMessageDialog(this, "Registered Successful",
+                    "Registration", JOptionPane.INFORMATION_MESSAGE)
+        } catch (e: RegistrationException) {
+            LOG.error(LOG_TAG, "Registration failed")
+            JOptionPane.showMessageDialog(this, "Registration failed",
+                    "Registration", JOptionPane.ERROR_MESSAGE)
         }
     }
 
