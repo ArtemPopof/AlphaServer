@@ -68,7 +68,7 @@ object WorldUpdater {
             return Square(0, 0)
         }
 
-        LOG.error(TAG, "STUB!! Only position parameter parser implemented!")
+        LOG.error(TAG + "| STUB!! Only position parameter parser implemented!")
 
         val x = protoShape.position.x
         val y = protoShape.position.y

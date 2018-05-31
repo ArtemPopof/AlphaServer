@@ -10,12 +10,3 @@ fun main(args : Array<String>) {
 
     RegistrationForm()
 }
-
-private fun startWorld() {
-    val scene = MainFrame()
-
-    val worldUpdater = WorldUpdater
-    worldUpdater.setScene(scene)
-
-    worldUpdater.start()
-}

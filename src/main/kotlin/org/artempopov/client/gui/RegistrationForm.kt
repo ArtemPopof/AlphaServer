@@ -84,6 +84,8 @@ class RegistrationForm(): JFrame(TITLE) {
             LOG.info("Registered!")
             JOptionPane.showMessageDialog(this, "Registered Successful",
                     "Registration", JOptionPane.INFORMATION_MESSAGE)
+
+            WindowManager.registrationCompleted()
         } catch (e: RegistrationException) {
             LOG.error(LOG_TAG, "Registration failed")
             JOptionPane.showMessageDialog(this, "Registration failed",
