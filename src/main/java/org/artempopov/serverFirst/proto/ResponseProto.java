@@ -1490,16 +1490,6 @@ public final class ResponseProto {
      */
     org.artempopov.serverFirst.proto.ResponseProto.ShapeInfoOrBuilder getShapesOrBuilder(
         int index);
-
-    // optional int32 notNull = 2;
-    /**
-     * <code>optional int32 notNull = 2;</code>
-     */
-    boolean hasNotNull();
-    /**
-     * <code>optional int32 notNull = 2;</code>
-     */
-    int getNotNull();
   }
   /**
    * Protobuf type {@code NotifyResponse}
@@ -1560,11 +1550,6 @@ public final class ResponseProto {
               shapes_.add(input.readMessage(org.artempopov.serverFirst.proto.ResponseProto.ShapeInfo.PARSER, extensionRegistry));
               break;
             }
-            case 16: {
-              bitField0_ |= 0x00000001;
-              notNull_ = input.readInt32();
-              break;
-            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1607,7 +1592,6 @@ public final class ResponseProto {
       return PARSER;
     }
 
-    private int bitField0_;
     // repeated .ShapeInfo shapes = 1;
     public static final int SHAPES_FIELD_NUMBER = 1;
     private java.util.List<org.artempopov.serverFirst.proto.ResponseProto.ShapeInfo> shapes_;
@@ -1644,25 +1628,8 @@ public final class ResponseProto {
       return shapes_.get(index);
     }
 
-    // optional int32 notNull = 2;
-    public static final int NOTNULL_FIELD_NUMBER = 2;
-    private int notNull_;
-    /**
-     * <code>optional int32 notNull = 2;</code>
-     */
-    public boolean hasNotNull() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>optional int32 notNull = 2;</code>
-     */
-    public int getNotNull() {
-      return notNull_;
-    }
-
     private void initFields() {
       shapes_ = java.util.Collections.emptyList();
-      notNull_ = 0;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1685,9 +1652,6 @@ public final class ResponseProto {
       for (int i = 0; i < shapes_.size(); i++) {
         output.writeMessage(1, shapes_.get(i));
       }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeInt32(2, notNull_);
-      }
       getUnknownFields().writeTo(output);
     }
 
@@ -1700,10 +1664,6 @@ public final class ResponseProto {
       for (int i = 0; i < shapes_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, shapes_.get(i));
-      }
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, notNull_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1828,8 +1788,6 @@ public final class ResponseProto {
         } else {
           shapesBuilder_.clear();
         }
-        notNull_ = 0;
-        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -1857,7 +1815,6 @@ public final class ResponseProto {
       public org.artempopov.serverFirst.proto.ResponseProto.NotifyResponse buildPartial() {
         org.artempopov.serverFirst.proto.ResponseProto.NotifyResponse result = new org.artempopov.serverFirst.proto.ResponseProto.NotifyResponse(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (shapesBuilder_ == null) {
           if (((bitField0_ & 0x00000001) == 0x00000001)) {
             shapes_ = java.util.Collections.unmodifiableList(shapes_);
@@ -1867,11 +1824,6 @@ public final class ResponseProto {
         } else {
           result.shapes_ = shapesBuilder_.build();
         }
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.notNull_ = notNull_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1912,9 +1864,6 @@ public final class ResponseProto {
               shapesBuilder_.addAllMessages(other.shapes_);
             }
           }
-        }
-        if (other.hasNotNull()) {
-          setNotNull(other.getNotNull());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -2187,39 +2136,6 @@ public final class ResponseProto {
           shapes_ = null;
         }
         return shapesBuilder_;
-      }
-
-      // optional int32 notNull = 2;
-      private int notNull_ ;
-      /**
-       * <code>optional int32 notNull = 2;</code>
-       */
-      public boolean hasNotNull() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional int32 notNull = 2;</code>
-       */
-      public int getNotNull() {
-        return notNull_;
-      }
-      /**
-       * <code>optional int32 notNull = 2;</code>
-       */
-      public Builder setNotNull(int value) {
-        bitField0_ |= 0x00000002;
-        notNull_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 notNull = 2;</code>
-       */
-      public Builder clearNotNull() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        notNull_ = 0;
-        onChanged();
-        return this;
       }
 
       // @@protoc_insertion_point(builder_scope:NotifyResponse)
@@ -2986,13 +2902,13 @@ public final class ResponseProto {
       "rrorMessage\030\002 \001(\t\022+\n\014registration\030\003 \001(\0132" +
       "\025.RegistrationResponse\022\037\n\006notify\030\004 \001(\0132\017" +
       ".NotifyResponse\"(\n\024RegistrationResponse\022" +
-      "\020\n\010clientId\030\001 \002(\003\"=\n\016NotifyResponse\022\032\n\006s" +
-      "hapes\030\001 \003(\0132\n.ShapeInfo\022\017\n\007notNull\030\002 \001(\005" +
-      "\"V\n\tShapeInfo\022\025\n\005color\030\001 \002(\0162\006.Color\022\025\n\005" +
-      "shape\030\002 \002(\0162\006.Shape\022\033\n\010position\030\003 \002(\0132\t." +
-      "Position*.\n\tErrorType\022\020\n\014UNREGISTERED\020\000\022",
-      "\017\n\013BAD_REQUEST\020\001B1\n org.artempopov.serve" +
-      "rFirst.protoB\rResponseProto"
+      "\020\n\010clientId\030\001 \002(\003\",\n\016NotifyResponse\022\032\n\006s" +
+      "hapes\030\001 \003(\0132\n.ShapeInfo\"V\n\tShapeInfo\022\025\n\005" +
+      "color\030\001 \002(\0162\006.Color\022\025\n\005shape\030\002 \002(\0162\006.Sha" +
+      "pe\022\033\n\010position\030\003 \002(\0132\t.Position*.\n\tError" +
+      "Type\022\020\n\014UNREGISTERED\020\000\022\017\n\013BAD_REQUEST\020\001B",
+      "1\n org.artempopov.serverFirst.protoB\rRes" +
+      "ponseProto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3016,7 +2932,7 @@ public final class ResponseProto {
           internal_static_NotifyResponse_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_NotifyResponse_descriptor,
-              new java.lang.String[] { "Shapes", "NotNull", });
+              new java.lang.String[] { "Shapes", });
           internal_static_ShapeInfo_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_ShapeInfo_fieldAccessorTable = new
