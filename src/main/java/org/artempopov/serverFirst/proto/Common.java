@@ -6,13 +6,7 @@ package org.artempopov.serverFirst.proto;
 public final class Common {
   private Common() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistryLite registry) {
-  }
-
-  public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
-    registerAllExtensions(
-        (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   /**
    * Protobuf enum {@code Shape}
@@ -22,15 +16,15 @@ public final class Common {
     /**
      * <code>CIRCLE = 0;</code>
      */
-    CIRCLE(0),
+    CIRCLE(0, 0),
     /**
      * <code>SQUARE = 1;</code>
      */
-    SQUARE(1),
+    SQUARE(1, 1),
     /**
      * <code>TRIANGLE = 2;</code>
      */
-    TRIANGLE(2),
+    TRIANGLE(2, 2),
     ;
 
     /**
@@ -47,19 +41,9 @@ public final class Common {
     public static final int TRIANGLE_VALUE = 2;
 
 
-    public final int getNumber() {
-      return value;
-    }
+    public final int getNumber() { return value; }
 
-    /**
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
     public static Shape valueOf(int value) {
-      return forNumber(value);
-    }
-
-    public static Shape forNumber(int value) {
       switch (value) {
         case 0: return CIRCLE;
         case 1: return SQUARE;
@@ -72,17 +56,17 @@ public final class Common {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        Shape> internalValueMap =
+    private static com.google.protobuf.Internal.EnumLiteMap<Shape>
+        internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<Shape>() {
             public Shape findValueByNumber(int number) {
-              return Shape.forNumber(number);
+              return Shape.valueOf(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(ordinal());
+      return getDescriptor().getValues().get(index);
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -104,9 +88,11 @@ public final class Common {
       return VALUES[desc.getIndex()];
     }
 
+    private final int index;
     private final int value;
 
-    private Shape(int value) {
+    private Shape(int index, int value) {
+      this.index = index;
       this.value = value;
     }
 
@@ -121,27 +107,27 @@ public final class Common {
     /**
      * <code>RED = 0;</code>
      */
-    RED(0),
+    RED(0, 0),
     /**
      * <code>GREEN = 1;</code>
      */
-    GREEN(1),
+    GREEN(1, 1),
     /**
      * <code>BLUE = 2;</code>
      */
-    BLUE(2),
+    BLUE(2, 2),
     /**
      * <code>BLACK = 3;</code>
      */
-    BLACK(3),
+    BLACK(3, 3),
     /**
      * <code>ORANGE = 4;</code>
      */
-    ORANGE(4),
+    ORANGE(4, 4),
     /**
      * <code>VIOLET = 5;</code>
      */
-    VIOLET(5),
+    VIOLET(5, 5),
     ;
 
     /**
@@ -170,19 +156,9 @@ public final class Common {
     public static final int VIOLET_VALUE = 5;
 
 
-    public final int getNumber() {
-      return value;
-    }
+    public final int getNumber() { return value; }
 
-    /**
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
     public static Color valueOf(int value) {
-      return forNumber(value);
-    }
-
-    public static Color forNumber(int value) {
       switch (value) {
         case 0: return RED;
         case 1: return GREEN;
@@ -198,17 +174,17 @@ public final class Common {
         internalGetValueMap() {
       return internalValueMap;
     }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        Color> internalValueMap =
+    private static com.google.protobuf.Internal.EnumLiteMap<Color>
+        internalValueMap =
           new com.google.protobuf.Internal.EnumLiteMap<Color>() {
             public Color findValueByNumber(int number) {
-              return Color.forNumber(number);
+              return Color.valueOf(number);
             }
           };
 
     public final com.google.protobuf.Descriptors.EnumValueDescriptor
         getValueDescriptor() {
-      return getDescriptor().getValues().get(ordinal());
+      return getDescriptor().getValues().get(index);
     }
     public final com.google.protobuf.Descriptors.EnumDescriptor
         getDescriptorForType() {
@@ -230,19 +206,21 @@ public final class Common {
       return VALUES[desc.getIndex()];
     }
 
+    private final int index;
     private final int value;
 
-    private Color(int value) {
+    private Color(int index, int value) {
+      this.index = index;
       this.value = value;
     }
 
     // @@protoc_insertion_point(enum_scope:Color)
   }
 
-  public interface PositionOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Position)
-      com.google.protobuf.MessageOrBuilder {
+  public interface PositionOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
 
+    // required int32 x = 1;
     /**
      * <code>required int32 x = 1;</code>
      */
@@ -252,6 +230,7 @@ public final class Common {
      */
     int getX();
 
+    // required int32 y = 2;
     /**
      * <code>required int32 y = 2;</code>
      */
@@ -264,33 +243,36 @@ public final class Common {
   /**
    * Protobuf type {@code Position}
    */
-  public  static final class Position extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Position)
-      PositionOrBuilder {
-  private static final long serialVersionUID = 0L;
+  public static final class Position extends
+      com.google.protobuf.GeneratedMessage
+      implements PositionOrBuilder {
     // Use Position.newBuilder() to construct.
-    private Position(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    private Position(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Position() {
-      x_ = 0;
-      y_ = 0;
+    private Position(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Position defaultInstance;
+    public static Position getDefaultInstance() {
+      return defaultInstance;
     }
 
+    public Position getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
+        getUnknownFields() {
       return this.unknownFields;
     }
     private Position(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
+      initFields();
       int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
@@ -303,8 +285,8 @@ public final class Common {
               done = true;
               break;
             default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
                 done = true;
               }
               break;
@@ -325,7 +307,7 @@ public final class Common {
         throw e.setUnfinishedMessage(this);
       } catch (java.io.IOException e) {
         throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
+            e.getMessage()).setUnfinishedMessage(this);
       } finally {
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -336,14 +318,30 @@ public final class Common {
       return org.artempopov.serverFirst.proto.Common.internal_static_Position_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.artempopov.serverFirst.proto.Common.internal_static_Position_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               org.artempopov.serverFirst.proto.Common.Position.class, org.artempopov.serverFirst.proto.Common.Position.Builder.class);
     }
 
+    public static com.google.protobuf.Parser<Position> PARSER =
+        new com.google.protobuf.AbstractParser<Position>() {
+      public Position parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Position(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Position> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
+    // required int32 x = 1;
     public static final int X_FIELD_NUMBER = 1;
     private int x_;
     /**
@@ -359,6 +357,7 @@ public final class Common {
       return x_;
     }
 
+    // required int32 y = 2;
     public static final int Y_FIELD_NUMBER = 2;
     private int y_;
     /**
@@ -374,11 +373,14 @@ public final class Common {
       return y_;
     }
 
+    private void initFields() {
+      x_ = 0;
+      y_ = 0;
+    }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
+      if (isInitialized != -1) return isInitialized == 1;
 
       if (!hasX()) {
         memoizedIsInitialized = 0;
@@ -394,17 +396,19 @@ public final class Common {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeInt32(1, x_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         output.writeInt32(2, y_);
       }
-      unknownFields.writeTo(output);
+      getUnknownFields().writeTo(output);
     }
 
+    private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
-      int size = memoizedSize;
+      int size = memoizedSerializedSize;
       if (size != -1) return size;
 
       size = 0;
@@ -416,67 +420,18 @@ public final class Common {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, y_);
       }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
       return size;
     }
 
+    private static final long serialVersionUID = 0L;
     @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof org.artempopov.serverFirst.proto.Common.Position)) {
-        return super.equals(obj);
-      }
-      org.artempopov.serverFirst.proto.Common.Position other = (org.artempopov.serverFirst.proto.Common.Position) obj;
-
-      boolean result = true;
-      result = result && (hasX() == other.hasX());
-      if (hasX()) {
-        result = result && (getX()
-            == other.getX());
-      }
-      result = result && (hasY() == other.hasY());
-      if (hasY()) {
-        result = result && (getY()
-            == other.getY());
-      }
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
     }
 
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasX()) {
-        hash = (37 * hash) + X_FIELD_NUMBER;
-        hash = (53 * hash) + getX();
-      }
-      if (hasY()) {
-        hash = (37 * hash) + Y_FIELD_NUMBER;
-        hash = (53 * hash) + getY();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static org.artempopov.serverFirst.proto.Common.Position parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.artempopov.serverFirst.proto.Common.Position parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
     public static org.artempopov.serverFirst.proto.Common.Position parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -500,57 +455,46 @@ public final class Common {
     }
     public static org.artempopov.serverFirst.proto.Common.Position parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.artempopov.serverFirst.proto.Common.Position parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static org.artempopov.serverFirst.proto.Common.Position parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
+      return PARSER.parseDelimitedFrom(input);
     }
     public static org.artempopov.serverFirst.proto.Common.Position parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static org.artempopov.serverFirst.proto.Common.Position parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
+      return PARSER.parseFrom(input);
     }
     public static org.artempopov.serverFirst.proto.Common.Position parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
+      return PARSER.parseFrom(input, extensionRegistry);
     }
 
+    public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
     public static Builder newBuilder(org.artempopov.serverFirst.proto.Common.Position prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      return newBuilder().mergeFrom(prototype);
     }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
+    public Builder toBuilder() { return newBuilder(this); }
 
     @java.lang.Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -558,15 +502,14 @@ public final class Common {
      * Protobuf type {@code Position}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Position)
-        org.artempopov.serverFirst.proto.Common.PositionOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements org.artempopov.serverFirst.proto.Common.PositionOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return org.artempopov.serverFirst.proto.Common.internal_static_Position_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.artempopov.serverFirst.proto.Common.internal_static_Position_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -579,15 +522,18 @@ public final class Common {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
       private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
+      private static Builder create() {
+        return new Builder();
+      }
+
       public Builder clear() {
         super.clear();
         x_ = 0;
@@ -595,6 +541,10 @@ public final class Common {
         y_ = 0;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
       }
 
       public com.google.protobuf.Descriptors.Descriptor
@@ -631,32 +581,6 @@ public final class Common {
         return result;
       }
 
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.artempopov.serverFirst.proto.Common.Position) {
           return mergeFrom((org.artempopov.serverFirst.proto.Common.Position)other);
@@ -674,16 +598,17 @@ public final class Common {
         if (other.hasY()) {
           setY(other.getY());
         }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
+        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
 
       public final boolean isInitialized() {
         if (!hasX()) {
+          
           return false;
         }
         if (!hasY()) {
+          
           return false;
         }
         return true;
@@ -698,7 +623,7 @@ public final class Common {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
           parsedMessage = (org.artempopov.serverFirst.proto.Common.Position) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
+          throw e;
         } finally {
           if (parsedMessage != null) {
             mergeFrom(parsedMessage);
@@ -708,6 +633,7 @@ public final class Common {
       }
       private int bitField0_;
 
+      // required int32 x = 1;
       private int x_ ;
       /**
        * <code>required int32 x = 1;</code>
@@ -740,6 +666,7 @@ public final class Common {
         return this;
       }
 
+      // required int32 y = 2;
       private int y_ ;
       /**
        * <code>required int32 y = 2;</code>
@@ -771,66 +698,29 @@ public final class Common {
         onChanged();
         return this;
       }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
 
       // @@protoc_insertion_point(builder_scope:Position)
     }
 
-    // @@protoc_insertion_point(class_scope:Position)
-    private static final org.artempopov.serverFirst.proto.Common.Position DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new org.artempopov.serverFirst.proto.Common.Position();
+      defaultInstance = new Position(true);
+      defaultInstance.initFields();
     }
 
-    public static org.artempopov.serverFirst.proto.Common.Position getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    @java.lang.Deprecated public static final com.google.protobuf.Parser<Position>
-        PARSER = new com.google.protobuf.AbstractParser<Position>() {
-      public Position parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Position(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Position> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Position> getParserForType() {
-      return PARSER;
-    }
-
-    public org.artempopov.serverFirst.proto.Common.Position getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
+    // @@protoc_insertion_point(class_scope:Position)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  private static com.google.protobuf.Descriptors.Descriptor
     internal_static_Position_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_Position_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
   }
-  private static  com.google.protobuf.Descriptors.FileDescriptor
+  private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -842,23 +732,23 @@ public final class Common {
       "proto"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
+      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
+        public com.google.protobuf.ExtensionRegistry assignDescriptors(
+            com.google.protobuf.Descriptors.FileDescriptor root) {
+          descriptor = root;
+          internal_static_Position_descriptor =
+            getDescriptor().getMessageTypes().get(0);
+          internal_static_Position_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_Position_descriptor,
+              new java.lang.String[] { "X", "Y", });
+          return null;
+        }
+      };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_Position_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_Position_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Position_descriptor,
-        new java.lang.String[] { "X", "Y", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

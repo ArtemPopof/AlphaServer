@@ -9,6 +9,7 @@ import org.artempopov.common.net.readSocketData
 import java.io.BufferedOutputStream
 import java.net.ServerSocket
 import java.net.Socket
+import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -71,7 +72,7 @@ class RequestHandler(port: Int) {
             try {
                 val bytes = readSocketData(socket)
 
-                LOG.debug("Message bytes: " + bytes)
+                LOG.debug("Message bytes: " + Arrays.toString(bytes))
 
                 val protoMessage = parseProtoMessage(bytes)
 

@@ -12,6 +12,9 @@ const val PACKET_VERSION = 0x101
 // request timeout in ms
 const val REQUEST_TIMEOUT = 100
 
+const val HOST = "localhost"
+const val PORT = 27029
+
 /**
  * All network specific functions for client
  */
@@ -24,9 +27,9 @@ object NetworkManager {
     /**
      * Connect to server
      */
-    fun connectToServer(host: String, port: Int) {
+    fun connectToServer() {
         try {
-            socketToServer = Socket(host, port)
+            socketToServer = Socket(HOST, PORT)
         } catch (e: Exception) {
             throw CannotConnectToServerException(e)
         }
@@ -66,10 +69,13 @@ object NetworkManager {
         val outStream = BufferedOutputStream(socketToServer!!.getOutputStream())
 
         outStream.write(byteArray)
+        outStream.flush()
+        socketToServer!!.shutdownOutput()
     }
 
     private fun waitForResponse(): ResponseProto.Response {
         val rawResponse = getRawResponse()
+        socketToServer!!.close()
         return ResponseProto.Response.parseFrom(rawResponse)
     }
 
@@ -81,6 +87,9 @@ object NetworkManager {
         if (socketToServer == null) {
             throw IllegalStateException("Network manager must be connected to server" +
                     " in order to send request. Use connect() method.")
+        }
+        if (socketToServer!!.isClosed || !socketToServer!!.isConnected) {
+            connectToServer()
         }
     }
 }

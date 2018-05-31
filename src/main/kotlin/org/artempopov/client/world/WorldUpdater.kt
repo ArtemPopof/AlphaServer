@@ -9,6 +9,7 @@ import org.artempopov.client.net.NetworkManager
 import org.artempopov.client.shapes.Square
 
 const val TAG = "WorldUpdater"
+const val UPDATE_CYCLE_PERIOD = 1000 / 120
 
 /**
  * This object periodically request server for
@@ -26,11 +27,26 @@ object WorldUpdater {
 
     private fun createUpdateTask(): Runnable {
         return Runnable {
+            var lastTime = 0L
+            var fpsLastTime = System.currentTimeMillis()
+            var fps = 0
             while (running) {
+                lastTime = System.currentTimeMillis()
+
                 val notifyResponse = NetworkManager.sendNotifyRequest()
                 val shapes = getShapesFromResponse(notifyResponse)
                 addShapesToScene(shapes)
                 updateScene()
+
+                fps++
+
+                sleepOvertime(System.currentTimeMillis() - lastTime)
+
+                if (System.currentTimeMillis() - fpsLastTime >= 1000) {
+                    LOG.info("Current FPS: $fps")
+                    fpsLastTime = System.currentTimeMillis()
+                    fps = 0
+                }
             }
         }
     }
@@ -72,6 +88,15 @@ object WorldUpdater {
 
     private fun updateScene() {
         scene!!.updateScene()
+    }
+
+    private fun sleepOvertime(milisPast: Long) {
+        val overTime = UPDATE_CYCLE_PERIOD - milisPast
+        if (overTime <= 0) {
+            return
+        }
+
+        Thread.sleep(overTime)
     }
 
     /**

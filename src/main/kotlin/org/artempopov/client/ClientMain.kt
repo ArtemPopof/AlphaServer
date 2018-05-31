@@ -6,7 +6,7 @@ import org.artempopov.client.shapes.Square
 import org.artempopov.client.world.WorldUpdater
 
 fun main(args : Array<String>) {
-    NetworkManager.connectToServer("localhost", 27029)
+    NetworkManager.connectToServer()
     val scene = MainFrame()
 
 

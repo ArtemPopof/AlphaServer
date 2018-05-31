@@ -32,7 +32,7 @@ object WorldNotifier {
 
         val shapesInfo = createShapeInfos(positions, shapes)
 
-        response.notify.shapesList.addAll(0, shapesInfo)
+        response.notify = createNotify(shapesInfo)
 
         return response.build()
     }
@@ -75,10 +75,18 @@ object WorldNotifier {
     }
 
     private fun createShapeType(type: ShapeType): Common.Shape {
-       when (type) {
-           ShapeType.SQUARE -> return Common.Shape.SQUARE
-           ShapeType.TRIANGLE -> return Common.Shape.TRIANGLE
-           ShapeType.CIRCLE -> return Common.Shape.CIRCLE
+       return when (type) {
+           ShapeType.SQUARE -> Common.Shape.SQUARE
+           ShapeType.TRIANGLE -> Common.Shape.TRIANGLE
+           ShapeType.CIRCLE -> Common.Shape.CIRCLE
        }
+    }
+
+    private fun createNotify(shapes: List<ResponseProto.ShapeInfo>): ResponseProto.NotifyResponse {
+        val notify = ResponseProto.NotifyResponse.newBuilder()
+
+        notify.addAllShapes(shapes)
+
+        return notify.build()
     }
 }
