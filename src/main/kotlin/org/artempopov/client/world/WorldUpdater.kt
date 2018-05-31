@@ -1,8 +1,8 @@
 package org.artempopov.client.world
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.ServerFirst.proto.Common
-import org.artempopov.ServerFirst.proto.ResponseProto
+import org.artempopov.serverFirst.proto.Common
+import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.client.graphics.Drawable
 import org.artempopov.client.gui.MainFrame
 import org.artempopov.client.net.NetworkManager

@@ -1,10 +1,10 @@
-package org.artempopov.ServerFirst.handler
+package org.artempopov.serverFirst.handler
 
-import org.artempopov.ServerFirst.dto.ShapeType
-import org.artempopov.ServerFirst.proto.RequestProto
-import org.artempopov.ServerFirst.proto.ResponseProto
-import org.artempopov.ServerFirst.util.createEmptyResponse
-import org.artempopov.ServerFirst.util.createErrorResponse
+import org.artempopov.serverFirst.dto.ShapeType
+import org.artempopov.serverFirst.proto.RequestProto
+import org.artempopov.serverFirst.proto.ResponseProto
+import org.artempopov.serverFirst.util.createEmptyResponse
+import org.artempopov.serverFirst.util.createErrorResponse
 
 /**
  * Handles shape changing requests

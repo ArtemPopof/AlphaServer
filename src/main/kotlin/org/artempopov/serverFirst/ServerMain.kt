@@ -1,6 +1,6 @@
-package org.artempopov.ServerFirst
+package org.artempopov.serverFirst
 
-import org.artempopov.ServerFirst.net.RequestHandler
+import org.artempopov.serverFirst.net.RequestHandler
 
 fun main(args: Array<String>) {
     println("Starting server...")

@@ -1,13 +1,11 @@
-package org.artempopov.ServerFirst
+package org.artempopov.serverFirst
 
-import org.artempopov.ServerFirst.proto.RequestProto
-import org.artempopov.ServerFirst.handler.InvalidRequestException
-import org.artempopov.ServerFirst.handler.MoveHandler
-import org.artempopov.ServerFirst.util.createEmptyResponse
+import org.artempopov.serverFirst.handler.InvalidRequestException
+import org.artempopov.serverFirst.handler.MoveHandler
+import org.artempopov.serverFirst.proto.RequestProto
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
 import org.junit.Test
-import java.awt.Point
 
 /**
  * Move handler tests

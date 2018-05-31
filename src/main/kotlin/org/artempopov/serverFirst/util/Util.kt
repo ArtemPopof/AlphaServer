@@ -1,6 +1,6 @@
-package org.artempopov.ServerFirst.util
+package org.artempopov.serverFirst.util
 
-import org.artempopov.ServerFirst.proto.ResponseProto
+import org.artempopov.serverFirst.proto.ResponseProto
 
 fun createErrorResponse(error: ResponseProto.ErrorType): ResponseProto.Response {
     val builder = ResponseProto.Response.newBuilder()

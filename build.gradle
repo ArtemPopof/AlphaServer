@@ -43,3 +43,11 @@ compileTestKotlin {
 protobuf {
     generatedFilesBaseDir = "$projectDir/src"
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.artempopov.serverFirst.ServerMainKt'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}

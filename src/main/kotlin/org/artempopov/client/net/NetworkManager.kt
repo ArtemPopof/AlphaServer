@@ -1,10 +1,9 @@
 package org.artempopov.client.net
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.ServerFirst.proto.RequestProto
-import org.artempopov.ServerFirst.proto.ResponseProto
+import org.artempopov.serverFirst.proto.RequestProto
+import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.common.net.readSocketData
-import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.IOException
 import java.net.Socket

@@ -1,10 +1,10 @@
-package org.artempopov.ServerFirst.net
+package org.artempopov.serverFirst.net
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.ServerFirst.handler.*
-import org.artempopov.ServerFirst.proto.RequestProto
-import org.artempopov.ServerFirst.proto.ResponseProto
-import org.artempopov.ServerFirst.util.createErrorResponse
+import org.artempopov.serverFirst.handler.*
+import org.artempopov.serverFirst.proto.RequestProto
+import org.artempopov.serverFirst.proto.ResponseProto
+import org.artempopov.serverFirst.util.createErrorResponse
 import org.artempopov.common.net.readSocketData
 import java.io.BufferedOutputStream
 import java.net.ServerSocket

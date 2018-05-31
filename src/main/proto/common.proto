@@ -1,4 +1,4 @@
-option java_package = "org.artempopov.ServerFirst.proto";
+option java_package = "org.artempopov.serverFirst.proto";
 
 enum Shape {
     CIRCLE = 0;

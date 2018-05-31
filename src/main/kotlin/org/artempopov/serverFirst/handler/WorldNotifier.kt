@@ -1,10 +1,10 @@
-package org.artempopov.ServerFirst.handler
+package org.artempopov.serverFirst.handler
 
-import org.artempopov.ServerFirst.dto.ShapeColor
-import org.artempopov.ServerFirst.dto.ShapeType
-import org.artempopov.ServerFirst.proto.Common
-import org.artempopov.ServerFirst.proto.RequestProto
-import org.artempopov.ServerFirst.proto.ResponseProto
+import org.artempopov.serverFirst.dto.ShapeColor
+import org.artempopov.serverFirst.dto.ShapeType
+import org.artempopov.serverFirst.proto.Common
+import org.artempopov.serverFirst.proto.RequestProto
+import org.artempopov.serverFirst.proto.ResponseProto
 import java.awt.Point
 
 /**

@@ -1,8 +1,8 @@
-package org.artempopov.ServerFirst
+package org.artempopov.serverFirst
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.ServerFirst.proto.RequestProto
-import org.artempopov.ServerFirst.net.RequestHandler
+import org.artempopov.serverFirst.net.RequestHandler
+import org.artempopov.serverFirst.proto.RequestProto
 import org.junit.Test
 import java.net.Socket
 
@@ -16,7 +16,8 @@ const val TEST_PORT = 27028
 class RequestHandlerTest {
     val LOG = LogManager.getLogger()
 
-    @Test fun testInvalidMessageDelivery() {
+    @Test
+    fun testInvalidMessageDelivery() {
         val server = createAndStartServer()
 
         val socket = Socket("localhost", TEST_PORT)

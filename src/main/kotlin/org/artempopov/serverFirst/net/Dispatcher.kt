@@ -1,4 +1,4 @@
-package org.artempopov.ServerFirst.net
+package org.artempopov.serverFirst.net
 
 /**
  * Dispatcher interface.

@@ -1,6 +1,6 @@
 import "common.proto";
 
-option java_package = "org.artempopov.ServerFirst.proto";
+option java_package = "org.artempopov.serverFirst.proto";
 option java_outer_classname = "RequestProto";
 
 message Request {
