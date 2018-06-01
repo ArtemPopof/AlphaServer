@@ -2,6 +2,11 @@ package org.artempopov.client.gui
 
 import org.artempopov.client.graphics.Drawable
 import org.artempopov.client.shapes.Square
+import org.artempopov.client.world.WorldUpdater
+import org.artempopov.serverFirst.proto.RequestProto
+import java.awt.event.KeyEvent
+import java.awt.event.KeyListener
+import java.security.Key
 import javax.swing.JFrame
 import javax.swing.WindowConstants
 
@@ -9,7 +14,7 @@ const val WINDOW_TITLE = "Alpha Client"
 private const val WINDOW_HEIGHT = 500
 private const val WINDOW_WIDTH = 500 * 5 / 4
 
-class MainFrame: JFrame(WINDOW_TITLE) {
+class MainFrame: JFrame(WINDOW_TITLE), KeyListener{
 
     private val surface = RenderSurface()
 
@@ -20,6 +25,8 @@ class MainFrame: JFrame(WINDOW_TITLE) {
         this.isVisible = true
 
         this.add(surface)
+
+        this.addKeyListener(this)
     }
 
     /**
@@ -37,10 +44,36 @@ class MainFrame: JFrame(WINDOW_TITLE) {
     }
 
     /**
+     * delete all drawables from scene
+     */
+    fun clear() {
+        surface.clear()
+    }
+
+    /**
      * Repaint scene
      */
     fun updateScene() {
         surface.repaint()
+    }
+
+    override fun keyTyped(e: KeyEvent?) {
+    }
+
+    override fun keyPressed(e: KeyEvent?) {
+        if (e == null) {
+            return
+        }
+
+        when (e.keyCode) {
+            KeyEvent.VK_W -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.UP)
+            KeyEvent.VK_S -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.DOWN)
+            KeyEvent.VK_A -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.LEFT)
+            KeyEvent.VK_D -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.RIGHT)
+        }
+    }
+
+    override fun keyReleased(e: KeyEvent?) {
     }
 
 }

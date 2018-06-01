@@ -124,4 +124,62 @@ object NetworkManager {
     fun setClientId(clientId: Long) {
         this.clientId = clientId
     }
+
+    /**
+     * Send move direction to server
+     *
+     * @throws NotRegisteredException when client not registered yet
+     * @throws ErrorResponseException when error occurred on server side
+     * @throws IOException sending problem
+     * @throws InvalidResponseException response malformed
+     */
+    fun sendMoveRequest(moveDirection: RequestProto.MoveDirection) {
+        checkConnection()
+        checkClientRegistered()
+
+        val request = createRequest(moveDirection)
+        send(request.toByteArray())
+        val response = waitForResponse()
+        checkForErrors(response)
+    }
+
+    private fun checkClientRegistered() {
+        if (clientId == null) {
+            throw NotRegisteredException()
+        }
+    }
+
+    private fun createRequest(direction: RequestProto.MoveDirection): RequestProto.Request {
+        val request = RequestProto.Request.newBuilder()
+
+        request.type = RequestProto.RequestType.MOVE
+        request.requestPacketVersion = PACKET_VERSION
+        request.clientId = clientId as Long
+        request.moveRequest = createMoveRequest(direction)
+
+        return request.build()
+    }
+
+    private fun createMoveRequest(direction: RequestProto.MoveDirection): RequestProto.MoveRequest {
+        val request = RequestProto.MoveRequest.newBuilder()
+
+        request.direction = direction
+
+        return request.build()
+    }
+
+    private fun checkForErrors(response: ResponseProto.Response) {
+        if (hasError(response)) {
+            throw ErrorResponseException(getError(response))
+        }
+    }
+
+    private fun hasError(response: ResponseProto.Response): Boolean {
+        return response.hasError() || response.hasErrorMessage()
+    }
+
+    private fun getError(response: ResponseProto.Response): Error {
+        return Error(response.errorMessage, response.error)
+    }
+
 }

@@ -43,4 +43,11 @@ class RenderSurface: Canvas() {
             }
         }
     }
+
+    /**
+     * Remove all drawables from scene
+     */
+    fun clear() {
+        drawables.clear()
+    }
 }

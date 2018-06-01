@@ -7,9 +7,10 @@ import org.artempopov.client.graphics.Drawable
 import org.artempopov.client.gui.MainFrame
 import org.artempopov.client.net.NetworkManager
 import org.artempopov.client.shapes.Square
+import org.artempopov.serverFirst.proto.RequestProto
 
 const val TAG = "WorldUpdater"
-const val UPDATE_CYCLE_PERIOD = 1000 / 120
+const val UPDATE_CYCLE_PERIOD = 1000 / 5
 
 /**
  * This object periodically request server for
@@ -25,6 +26,8 @@ object WorldUpdater {
     private val updater = Thread(createUpdateTask())
     private var running = false
 
+    private var moveDirection: RequestProto.MoveDirection? = null
+
     private fun createUpdateTask(): Runnable {
         return Runnable {
             var lastTime = 0L
@@ -35,8 +38,11 @@ object WorldUpdater {
 
                 val notifyResponse = NetworkManager.sendNotifyRequest()
                 val shapes = getShapesFromResponse(notifyResponse)
+                removeOldShapes()
                 addShapesToScene(shapes)
                 updateScene()
+
+                sendMoveRequest()
 
                 fps++
 
@@ -68,12 +74,16 @@ object WorldUpdater {
             return Square(0, 0)
         }
 
-        LOG.error(TAG + "| STUB!! Only position parameter parser implemented!")
+        //LOG.error(TAG + "| STUB!! Only position parameter parser implemented!")
 
         val x = protoShape.position.x
         val y = protoShape.position.y
 
         return Square(x, y)
+    }
+
+    private fun removeOldShapes() {
+        scene!!.clear()
     }
 
     private fun addShapesToScene(shapes: List<Drawable>) {
@@ -99,6 +109,14 @@ object WorldUpdater {
         Thread.sleep(overTime)
     }
 
+    private fun sendMoveRequest() {
+        if (moveDirection == null) {
+            return
+        }
+
+        NetworkManager.sendMoveRequest(moveDirection as RequestProto.MoveDirection)
+    }
+
     /**
      * Set scene, where info about world stored
      */
@@ -119,5 +137,12 @@ object WorldUpdater {
      */
     fun stop() {
         running = false
+    }
+
+    /**
+     * Set current move direction
+     */
+    fun setMoveDirection(direction: RequestProto.MoveDirection?) {
+        moveDirection = direction
     }
 }
