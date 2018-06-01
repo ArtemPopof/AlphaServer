@@ -62,8 +62,8 @@ object MoveHandler {
         val newPosition = Point(clientPosition)
 
         when (direction) {
-            RequestProto.MoveDirection.DOWN -> newPosition.y -= MOVE_SPEED
-            RequestProto.MoveDirection.UP -> newPosition.y += MOVE_SPEED
+            RequestProto.MoveDirection.DOWN -> newPosition.y += MOVE_SPEED
+            RequestProto.MoveDirection.UP -> newPosition.y -= MOVE_SPEED
             RequestProto.MoveDirection.LEFT -> newPosition.x -= MOVE_SPEED
             RequestProto.MoveDirection.RIGHT -> newPosition.x += MOVE_SPEED
         }

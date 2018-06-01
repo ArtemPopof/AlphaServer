@@ -74,6 +74,16 @@ class MainFrame: JFrame(WINDOW_TITLE), KeyListener{
     }
 
     override fun keyReleased(e: KeyEvent?) {
+        if (e == null) {
+            return
+        }
+
+        when (e.keyCode) {
+            KeyEvent.VK_W -> WorldUpdater.setMoveDirection(null)
+            KeyEvent.VK_S -> WorldUpdater.setMoveDirection(null)
+            KeyEvent.VK_A -> WorldUpdater.setMoveDirection(null)
+            KeyEvent.VK_D -> WorldUpdater.setMoveDirection(null)
+        }
     }
 
 }

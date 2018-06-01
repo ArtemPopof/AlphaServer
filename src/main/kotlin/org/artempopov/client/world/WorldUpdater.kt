@@ -10,7 +10,7 @@ import org.artempopov.client.shapes.Square
 import org.artempopov.serverFirst.proto.RequestProto
 
 const val TAG = "WorldUpdater"
-const val UPDATE_CYCLE_PERIOD = 1000 / 5
+const val UPDATE_CYCLE_PERIOD = 1000 / 24
 
 /**
  * This object periodically request server for

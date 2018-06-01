@@ -1,6 +1,10 @@
 version 0.1
+done
 
 version 0.2
+* client
+* registration
+* moving of figures (only square realized)
 
 pool
 
