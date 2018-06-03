@@ -35,7 +35,7 @@ object RegistrationManager {
             throw RegistrationException()
         }
 
-        connection.setClientId(response.clientId)
+        connection.clientId = response.clientId
     }
 
     private fun createRequest(shape: ShapeType, color: ShapeColor): RequestProto.Request {
