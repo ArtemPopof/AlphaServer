@@ -26,9 +26,9 @@ object DefaultController: Controller {
         try {
             owner.dispose()
 
-            val connection = Connection(host, port)
+            connection = Connection(host, port)
 
-            RegistrationForm(connection)
+            RegistrationForm(connection as Connection)
         } catch (e: CannotConnectToServerException) {
             JOptionPane.showMessageDialog(owner, "Registration error: ${e.message}",
                     "Registration", JOptionPane.ERROR_MESSAGE)

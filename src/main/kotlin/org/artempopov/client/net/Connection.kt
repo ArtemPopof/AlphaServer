@@ -48,8 +48,6 @@ class Connection(private val host: String, private val port: Int) {
      * @throws InvalidResponseException response malformed
      */
     fun sendRegistrationRequest(request: RequestProto.Request): ResponseProto.RegistrationResponse {
-        checkConnection()
-
         send(request.toByteArray())
         val response = waitForResponse()
         if (!response.hasRegistration()) {
@@ -75,8 +73,6 @@ class Connection(private val host: String, private val port: Int) {
      * @throws InvalidResponseException response malformed
      */
     fun sendNotifyRequest(): ResponseProto.NotifyResponse {
-        checkConnection()
-
         val request = createNotifyRequest()
         send(request)
         val response = waitForResponse()
@@ -98,6 +94,7 @@ class Connection(private val host: String, private val port: Int) {
     }
 
     private fun send(byteArray: ByteArray) {
+        socketToServer = connectToServer()
         val outStream = BufferedOutputStream(socketToServer.getOutputStream())
 
         outStream.write(byteArray)
@@ -107,7 +104,6 @@ class Connection(private val host: String, private val port: Int) {
 
     private fun waitForResponse(): ResponseProto.Response {
         val rawResponse = getRawResponse()
-        socketToServer.close()
         return ResponseProto.Response.parseFrom(rawResponse)
     }
 
@@ -130,7 +126,6 @@ class Connection(private val host: String, private val port: Int) {
      * @throws InvalidResponseException response malformed
      */
     fun sendMoveRequest(moveDirection: RequestProto.MoveDirection) {
-        checkConnection()
         checkClientRegistered()
 
         val request = createRequest(moveDirection)
