@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-const val MAX_THREADS = 20
+const val MAX_THREADS = 100
 
 /**
  * RequestHandler handles request received from clients

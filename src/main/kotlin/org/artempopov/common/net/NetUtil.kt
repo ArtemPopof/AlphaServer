@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager
 import java.io.BufferedInputStream
 import java.net.Socket
 
-private const val BUFFER_SIZE = 1024
+private const val BUFFER_SIZE = 1024 * 10
 private const val LOG_TAG = "NetUtil"
 const val REQUEST_PACKET_VERSION = 0x101
 // common net util functions
