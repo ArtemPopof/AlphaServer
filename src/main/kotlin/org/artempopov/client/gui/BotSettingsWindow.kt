@@ -1,32 +1,29 @@
 package org.artempopov.client.gui
 
-import org.artempopov.client.controller.ControllerFactory
-import org.artempopov.client.controller.DefaultController
+import org.artempopov.client.controller.BotController
 import javax.swing.*
 
-private const val TITLE = "Set server address"
-
-private const val WINDOW_WIDTH = 500
+private const val WINDOW_TITLE = "Bot farm settings"
 private const val WINDOW_HEIGHT = 500
+private const val WINDOW_WIDTH = 500
 
 /**
- * Frame for choosing server address
+ * Settings window for bot farm
  */
-class ChoseAddressFrame: JFrame(TITLE) {
+class BotSettingsWindow: JFrame(WINDOW_TITLE) {
 
-    private val hostTf = JTextField()
-    private val portTf = JTextField()
+    private val numberOfBots = JTextField()
 
     init {
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
         this.isResizable = false
-        this.defaultCloseOperation = javax.swing.WindowConstants.EXIT_ON_CLOSE
+        this.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         this.isVisible = true
 
-        setComponents()
+        addComponents()
     }
 
-    private fun setComponents() {
+    private fun addComponents() {
         this.add(createMainPanel())
     }
 
@@ -34,10 +31,16 @@ class ChoseAddressFrame: JFrame(TITLE) {
         val panel = JPanel()
         panel.layout = BoxLayout(panel, BoxLayout.PAGE_AXIS)
 
-        panel.add(JLabel("Host"))
-        panel.add(hostTf)
-        panel.add(JLabel("Port"))
-        panel.add(portTf)
+        panel.add(JLabel("Choose bot count for farm"))
+        panel.add(numberOfBots)
+        panel.add(createButtonsPanel())
+
+        return panel
+    }
+
+    private fun createButtonsPanel(): JPanel {
+        val panel = JPanel()
+        panel.layout = BoxLayout(panel, BoxLayout.LINE_AXIS)
 
         panel.add(createOkButton())
         panel.add(createExitButton())
@@ -46,10 +49,10 @@ class ChoseAddressFrame: JFrame(TITLE) {
     }
 
     private fun createOkButton(): JButton {
-        val button = JButton("Ok")
+        val button = JButton("Start")
 
         button.addActionListener{
-            ControllerFactory.currentController.addressIsSet(hostTf.text, Integer.parseInt(portTf.text), this)
+            BotController.botConfigurationComplete(Integer.parseInt(numberOfBots.text))
         }
 
         return button
@@ -64,6 +67,4 @@ class ChoseAddressFrame: JFrame(TITLE) {
 
         return button
     }
-
-
 }

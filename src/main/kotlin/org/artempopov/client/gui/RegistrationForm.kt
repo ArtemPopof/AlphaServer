@@ -1,7 +1,7 @@
 package org.artempopov.client.gui
 
-import jdk.nashorn.internal.scripts.JO
 import org.apache.logging.log4j.LogManager
+import org.artempopov.client.controller.DefaultController
 import org.artempopov.client.registration.RegistrationException
 import org.artempopov.client.registration.RegistrationManager
 import org.artempopov.serverFirst.dto.ShapeColor
@@ -86,7 +86,7 @@ class RegistrationForm(): JFrame(TITLE) {
                     "Registration", JOptionPane.INFORMATION_MESSAGE)
 
             this.dispose()
-            WindowManager.registrationCompleted()
+            DefaultController.registrationCompleted()
         } catch (e: RegistrationException) {
             LOG.error(LOG_TAG, "Registration failed")
             JOptionPane.showMessageDialog(this, "Registration failed",
