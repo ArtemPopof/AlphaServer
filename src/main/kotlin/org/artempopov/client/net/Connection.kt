@@ -15,25 +15,26 @@ const val REQUEST_TIMEOUT = 100
 /**
  * All network specific functions for client
  */
-object NetworkManager {
-
+class Connection(private val host: String, private val port: Int) {
     private val LOG = LogManager.getLogger()
 
-    private var socketToServer: Socket? = null
+    private var socketToServer: Socket = connectToServer()
     private var clientId: Long? = null
-
-    private var host: String? = null
-    private var port: Int? = null
 
     /**
      * Connect to server
      */
-    fun connectToServer() {
-        assert(host != null)
-        assert(port != null)
-
+    private fun connectToServer(): Socket {
         try {
-            socketToServer = Socket(host as String, port as Int)
+            return Socket(host, port)
+        } catch (e: Exception) {
+            throw CannotConnectToServerException(e)
+        }
+    }
+
+    private fun reconnect() {
+        try {
+            this.socketToServer = connectToServer()
         } catch (e: Exception) {
             throw CannotConnectToServerException(e)
         }
@@ -97,29 +98,25 @@ object NetworkManager {
     }
 
     private fun send(byteArray: ByteArray) {
-        val outStream = BufferedOutputStream(socketToServer!!.getOutputStream())
+        val outStream = BufferedOutputStream(socketToServer.getOutputStream())
 
         outStream.write(byteArray)
         outStream.flush()
-        socketToServer!!.shutdownOutput()
+        socketToServer.shutdownOutput()
     }
 
     private fun waitForResponse(): ResponseProto.Response {
         val rawResponse = getRawResponse()
-        socketToServer!!.close()
+        socketToServer.close()
         return ResponseProto.Response.parseFrom(rawResponse)
     }
 
     private fun getRawResponse(): ByteArray {
-        return readSocketData(socketToServer!!)
+        return readSocketData(socketToServer)
     }
 
     private fun checkConnection() {
-        if (socketToServer == null) {
-            throw IllegalStateException("Network manager must be connected to server" +
-                    " in order to send request. Use connect() method.")
-        }
-        if (socketToServer!!.isClosed || !socketToServer!!.isConnected) {
+        if (socketToServer.isClosed || !socketToServer.isConnected) {
             connectToServer()
         }
     }
@@ -183,14 +180,6 @@ object NetworkManager {
 
     private fun getError(response: ResponseProto.Response): Error {
         return Error(response.errorMessage, response.error)
-    }
-
-    /**
-     * Init network manager before calling conenct function
-     */
-    fun init(host: String, port: Int) {
-        this.host = host
-        this.port = port
     }
 
 }

@@ -4,8 +4,8 @@ import org.apache.logging.log4j.LogManager
 import org.artempopov.serverFirst.proto.Common
 import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.client.graphics.Drawable
-import org.artempopov.client.gui.MainFrame
-import org.artempopov.client.net.NetworkManager
+import org.artempopov.client.gui.EngineMain
+import org.artempopov.client.net.Connection
 import org.artempopov.client.shapes.Square
 import org.artempopov.serverFirst.proto.RequestProto
 
@@ -18,11 +18,10 @@ const val UPDATE_CYCLE_PERIOD = 1000 / 24
  *
  * @author Artem Popov
  */
-object WorldUpdater {
+class WorldUpdater(private val connection: Connection) {
 
     private val LOG = LogManager.getLogger()
 
-    private var scene: MainFrame? = null
     private val updater = Thread(createUpdateTask())
     private var running = false
 
@@ -36,7 +35,7 @@ object WorldUpdater {
             while (running) {
                 lastTime = System.currentTimeMillis()
 
-                val notifyResponse = NetworkManager.sendNotifyRequest()
+                val notifyResponse = connection.sendNotifyRequest()
                 val shapes = getShapesFromResponse(notifyResponse)
                 removeOldShapes()
                 addShapesToScene(shapes)
@@ -83,21 +82,17 @@ object WorldUpdater {
     }
 
     private fun removeOldShapes() {
-        scene!!.clear()
+        EngineMain.clear()
     }
 
     private fun addShapesToScene(shapes: List<Drawable>) {
-        if (scene == null) {
-            return
-        }
-
         for (shape in shapes) {
-            scene!!.addToScene(shape)
+            EngineMain.addToScene(shape)
         }
     }
 
     private fun updateScene() {
-        scene!!.updateScene()
+        EngineMain.updateScene()
     }
 
     private fun sleepOvertime(milisPast: Long) {
@@ -114,14 +109,7 @@ object WorldUpdater {
             return
         }
 
-        NetworkManager.sendMoveRequest(moveDirection as RequestProto.MoveDirection)
-    }
-
-    /**
-     * Set scene, where info about world stored
-     */
-    fun setScene(scene: MainFrame) {
-        this.scene = scene
+        connection.sendMoveRequest(moveDirection as RequestProto.MoveDirection)
     }
 
     /**

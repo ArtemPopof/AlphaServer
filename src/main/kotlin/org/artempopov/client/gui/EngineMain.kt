@@ -14,9 +14,10 @@ private const val WINDOW_TITLE = "Alpha Client"
 private const val WINDOW_HEIGHT = 500
 private const val WINDOW_WIDTH = 500 * 5 / 4
 
-class MainFrame: JFrame(WINDOW_TITLE), KeyListener{
+object EngineMain: JFrame(WINDOW_TITLE), KeyListener{
 
     private val surface = RenderSurface()
+    var worldUpdater: WorldUpdater? = null
 
     init {
         this.isResizable = false
@@ -66,10 +67,10 @@ class MainFrame: JFrame(WINDOW_TITLE), KeyListener{
         }
 
         when (e.keyCode) {
-            KeyEvent.VK_W -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.UP)
-            KeyEvent.VK_S -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.DOWN)
-            KeyEvent.VK_A -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.LEFT)
-            KeyEvent.VK_D -> WorldUpdater.setMoveDirection(RequestProto.MoveDirection.RIGHT)
+            KeyEvent.VK_W -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.UP)
+            KeyEvent.VK_S -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.DOWN)
+            KeyEvent.VK_A -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.LEFT)
+            KeyEvent.VK_D -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.RIGHT)
         }
     }
 
@@ -79,10 +80,10 @@ class MainFrame: JFrame(WINDOW_TITLE), KeyListener{
         }
 
         when (e.keyCode) {
-            KeyEvent.VK_W -> WorldUpdater.setMoveDirection(null)
-            KeyEvent.VK_S -> WorldUpdater.setMoveDirection(null)
-            KeyEvent.VK_A -> WorldUpdater.setMoveDirection(null)
-            KeyEvent.VK_D -> WorldUpdater.setMoveDirection(null)
+            KeyEvent.VK_W -> worldUpdater!!.setMoveDirection(null)
+            KeyEvent.VK_S -> worldUpdater!!.setMoveDirection(null)
+            KeyEvent.VK_A -> worldUpdater!!.setMoveDirection(null)
+            KeyEvent.VK_D -> worldUpdater!!.setMoveDirection(null)
         }
     }
 

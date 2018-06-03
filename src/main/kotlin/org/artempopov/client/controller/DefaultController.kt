@@ -1,10 +1,10 @@
 package org.artempopov.client.controller
 
 import org.artempopov.client.gui.ChoseAddressFrame
-import org.artempopov.client.gui.MainFrame
+import org.artempopov.client.gui.EngineMain
 import org.artempopov.client.gui.RegistrationForm
 import org.artempopov.client.net.CannotConnectToServerException
-import org.artempopov.client.net.NetworkManager
+import org.artempopov.client.net.Connection
 import org.artempopov.client.world.WorldUpdater
 import javax.swing.JFrame
 import javax.swing.JOptionPane
@@ -14,10 +14,11 @@ import javax.swing.JOptionPane
  */
 object DefaultController: Controller {
 
+    private var connection: Connection? = null
+
     override fun registrationCompleted() {
-        val scene = MainFrame()
-        val worldUpdater = WorldUpdater
-        worldUpdater.setScene(scene)
+        val worldUpdater = WorldUpdater(connection as Connection)
+        EngineMain.worldUpdater = worldUpdater
         worldUpdater.start()
     }
 
@@ -25,10 +26,9 @@ object DefaultController: Controller {
         try {
             owner.dispose()
 
-            NetworkManager.init(host, port)
-            NetworkManager.connectToServer()
+            val connection = Connection(host, port)
 
-            RegistrationForm()
+            RegistrationForm(connection)
         } catch (e: CannotConnectToServerException) {
             JOptionPane.showMessageDialog(owner, "Registration error: ${e.message}",
                     "Registration", JOptionPane.ERROR_MESSAGE)

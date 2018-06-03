@@ -1,7 +1,7 @@
 package org.artempopov.client.registration
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.client.net.NetworkManager
+import org.artempopov.client.net.Connection
 import org.artempopov.common.net.REQUEST_PACKET_VERSION
 import org.artempopov.common.util.fromDto
 import org.artempopov.serverFirst.dto.ShapeColor
@@ -21,20 +21,21 @@ object RegistrationManager {
      *
      * @param shape Shape type
      * @param color Shape color
+     * @param connection established connection with server
      *
      * @throws RegistrationException exception in registration process
      */
-    fun register(shape: ShapeType, color: ShapeColor) {
+    fun register(shape: ShapeType, color: ShapeColor, connection: Connection) {
         val request = createRequest(shape, color)
 
         val response = try {
-            NetworkManager.sendRegistrationRequest(request)
+            connection.sendRegistrationRequest(request)
         } catch (e: Exception) {
             LOG.error(LOG_TAG, e.message)
             throw RegistrationException()
         }
 
-        NetworkManager.setClientId(response.clientId)
+        connection.setClientId(response.clientId)
     }
 
     private fun createRequest(shape: ShapeType, color: ShapeColor): RequestProto.Request {
