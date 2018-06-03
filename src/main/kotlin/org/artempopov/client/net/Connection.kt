@@ -19,7 +19,7 @@ class Connection(private val host: String, private val port: Int) {
     private val LOG = LogManager.getLogger()
 
     private var socketToServer: Socket = connectToServer()
-    private var clientId: Long? = null
+    var clientId: Long? = null
 
     /**
      * Connect to server
@@ -121,10 +121,6 @@ class Connection(private val host: String, private val port: Int) {
         }
     }
 
-    fun setClientId(clientId: Long) {
-        this.clientId = clientId
-    }
-
     /**
      * Send move direction to server
      *
@@ -182,4 +178,11 @@ class Connection(private val host: String, private val port: Int) {
         return Error(response.errorMessage, response.error)
     }
 
+    override fun toString(): String {
+        if (clientId == null) {
+            return "not initialized connection"
+        } else {
+            return (clientId as Long).toString()
+        }
+    }
 }

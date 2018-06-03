@@ -6,6 +6,7 @@ import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.client.graphics.Drawable
 import org.artempopov.client.gui.EngineMain
 import org.artempopov.client.net.Connection
+import org.artempopov.client.net.getAllShapesFromServer
 import org.artempopov.client.shapes.Square
 import org.artempopov.serverFirst.proto.RequestProto
 
@@ -35,8 +36,7 @@ class WorldUpdater(private val connection: Connection) {
             while (running) {
                 lastTime = System.currentTimeMillis()
 
-                val notifyResponse = connection.sendNotifyRequest()
-                val shapes = getShapesFromResponse(notifyResponse)
+                val shapes = getAllShapesFromServer(connection)
                 removeOldShapes()
                 addShapesToScene(shapes)
                 updateScene()
@@ -54,31 +54,6 @@ class WorldUpdater(private val connection: Connection) {
                 }
             }
         }
-    }
-
-    private fun getShapesFromResponse(response: ResponseProto.NotifyResponse): List<Drawable> {
-        val shapes = ArrayList<Drawable>(response.shapesCount)
-
-        val protoShapes = response.shapesList
-        for (protoShape in protoShapes) {
-            shapes.add(toDtoShape(protoShape))
-        }
-
-        return shapes
-    }
-
-    private fun toDtoShape(protoShape: ResponseProto.ShapeInfo): Drawable {
-        if (protoShape.shape != Common.Shape.SQUARE) {
-            LOG.error(TAG, "STUB!! Only square shape parser implemented!")
-            return Square(0, 0)
-        }
-
-        //LOG.error(TAG + "| STUB!! Only position parameter parser implemented!")
-
-        val x = protoShape.position.x
-        val y = protoShape.position.y
-
-        return Square(x, y)
     }
 
     private fun removeOldShapes() {
