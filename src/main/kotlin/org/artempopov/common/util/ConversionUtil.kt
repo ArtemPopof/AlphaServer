@@ -3,6 +3,7 @@ package org.artempopov.common.util
 import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.dto.ShapeType
 import org.artempopov.serverFirst.proto.Common
+import java.awt.Point
 
 /**
  * Utility classes for conversion
@@ -37,4 +38,28 @@ fun fromDto(color: ShapeColor): Common.Color {
         ShapeColor.ORANGE -> Common.Color.ORANGE
         ShapeColor.VIOLET -> Common.Color.VIOLET
     }
+}
+
+/**
+ * Convert proto to bean Color
+ *
+ * @param proto based object
+ * @return ShapeColor object
+ */
+fun toDto(color: Common.Color): ShapeColor {
+    return when (color) {
+        Common.Color.BLACK -> ShapeColor.BLACK
+        Common.Color.BLUE -> ShapeColor.BLUE
+        Common.Color.GREEN -> ShapeColor.GREEN
+        Common.Color.RED -> ShapeColor.RED
+        Common.Color.ORANGE -> ShapeColor.ORANGE
+        Common.Color.VIOLET -> ShapeColor.VIOLET
+    }
+}
+
+/**
+ * From proto position to point
+ */
+fun fromProto(position: Common.Position): Point {
+    return Point(position.x, position.y)
 }

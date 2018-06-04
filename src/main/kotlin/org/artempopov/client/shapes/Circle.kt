@@ -5,22 +5,22 @@ import org.artempopov.serverFirst.dto.ShapeType
 import java.awt.Graphics
 import java.awt.Point
 
-private var lastSquareId = 0
+private var lastCircleId = 0
 
-const val SQUARE_SIZE = 20
+const val CIRCLE_SIZE = 20
 
 /**
- * Square shape class
+ * Drawable circle class
  */
-class Square(color: ShapeColor, position: Point): Shape(color, ShapeType.SQUARE, position) {
-    override val id = "Square" + lastSquareId++
+class Circle(color: ShapeColor, position: Point): Shape(color, ShapeType.CIRCLE, position) {
+    override val id = "Circle" + lastCircleId++
 
     override fun draw(g: Graphics) {
         val oldColor = g.color
 
         g.color = color.color
 
-        g.fillRect(position.x, position.y, SQUARE_SIZE, SQUARE_SIZE)
+        g.fillOval(position.x, position.y, CIRCLE_SIZE, CIRCLE_SIZE)
 
         g.color = oldColor
     }

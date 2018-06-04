@@ -37,7 +37,7 @@ object RegistrationHandler {
     private fun registerInOtherHandlers(color: ShapeColor, shape: ShapeType) {
         MoveHandler.registerClient(lastClientId)
         ShapeHandler.registerClient(lastClientId, shape)
-        //ColorHandler.registerClient(lastClientId, color)
+        ColorHandler.registerClient(lastClientId, color)
     }
 
     private fun createGoodResponse(): ResponseProto.Response {

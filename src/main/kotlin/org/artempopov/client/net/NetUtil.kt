@@ -1,24 +1,30 @@
 package org.artempopov.client.net
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.client.graphics.Drawable
+import org.artempopov.client.shapes.Circle
+import org.artempopov.client.shapes.Shape
 import org.artempopov.client.shapes.Square
-import org.artempopov.client.world.TAG
+import org.artempopov.client.shapes.Triangle
+import org.artempopov.common.util.fromDto
+import org.artempopov.common.util.fromProto
+import org.artempopov.common.util.toDto
+import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.proto.Common
 import org.artempopov.serverFirst.proto.ResponseProto
+import java.awt.Point
 
 private val LOG = LogManager.getLogger()
 
 /**
  * Request shape info from server for all shapes
  */
-fun getAllShapesFromServer(connection: Connection): List<Drawable> {
+fun getAllShapesFromServer(connection: Connection): List<Shape> {
     val notifyResponse = connection.sendNotifyRequest()
     return getShapesFromResponse(notifyResponse)
 }
 
-private fun getShapesFromResponse(response: ResponseProto.NotifyResponse): List<Drawable> {
-    val shapes = ArrayList<Drawable>(response.shapesCount)
+private fun getShapesFromResponse(response: ResponseProto.NotifyResponse): List<Shape> {
+    val shapes = ArrayList<Shape>(response.shapesCount)
 
     val protoShapes = response.shapesList
     for (protoShape in protoShapes) {
@@ -28,16 +34,15 @@ private fun getShapesFromResponse(response: ResponseProto.NotifyResponse): List<
     return shapes
 }
 
-private fun toDtoShape(protoShape: ResponseProto.ShapeInfo): Drawable {
-    if (protoShape.shape != Common.Shape.SQUARE) {
-        LOG.error(TAG, "STUB!! Only square shape parser implemented!")
-        return Square(0, 0)
+private fun toDtoShape(protoShape: ResponseProto.ShapeInfo): Shape {
+    return when (protoShape.shape) {
+        Common.Shape.TRIANGLE -> Triangle(getColor(protoShape.color), fromProto(protoShape.position))
+        Common.Shape.CIRCLE -> Circle(getColor(protoShape.color), fromProto(protoShape.position))
+        Common.Shape.SQUARE -> Square(getColor(protoShape.color), fromProto(protoShape.position))
+        null -> throw IllegalArgumentException("shape is null!")
     }
+}
 
-    //LOG.error(TAG + "| STUB!! Only position parameter parser implemented!")
-
-    val x = protoShape.position.x
-    val y = protoShape.position.y
-
-    return Square(x, y)
+private fun getColor(color: Common.Color): ShapeColor {
+    return toDto(color)
 }

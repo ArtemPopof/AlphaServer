@@ -1,5 +1,6 @@
 package org.artempopov.serverFirst.handler
 
+import org.artempopov.common.util.fromDto
 import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.dto.ShapeType
 import org.artempopov.serverFirst.proto.Common
@@ -21,16 +22,18 @@ object WorldNotifier {
     fun handleNotifyRequest(request: RequestProto.Request): ByteArray {
         val positions = MoveHandler.getAllClientsPosition()
         val shapes = ShapeHandler.getAllShapes()
+        val colors = ColorHandler.getAllColors()
 
-        return createNotifyResponse(positions, shapes).toByteArray()
+        return createNotifyResponse(positions, shapes, colors).toByteArray()
     }
 
     private fun createNotifyResponse(positions: HashMap<Long, Point>,
-                                     shapes: HashMap<Long, ShapeType>): ResponseProto.Response {
+                                     shapes: HashMap<Long, ShapeType>,
+                                     colors: HashMap<Long, ShapeColor>): ResponseProto.Response {
 
         val response = ResponseProto.Response.newBuilder()
 
-        val shapesInfo = createShapeInfos(positions, shapes)
+        val shapesInfo = createShapeInfos(positions, shapes, colors)
 
         response.notify = createNotify(shapesInfo)
 
@@ -38,18 +41,25 @@ object WorldNotifier {
     }
 
     private fun createShapeInfos(positions: HashMap<Long, Point>,
-                                 types: HashMap<Long, ShapeType>): List<ResponseProto.ShapeInfo> {
+                                 types: HashMap<Long, ShapeType>,
+                                 colors: HashMap<Long, ShapeColor>): List<ResponseProto.ShapeInfo> {
         val shapes = ArrayList<ResponseProto.ShapeInfo>(positions.size)
 
         var type: ShapeType?
+        var color: ShapeColor?
         for ((key, position) in positions) {
             // check for model unsync state
             type = types[key]
             if (type == null) {
                 throw IllegalStateException("Model storages is not in sync")
             }
+            color = colors[key]
+            if (color == null) {
+                throw IllegalStateException("Model storages is not in sync")
+            }
 
-            shapes.add(createShapeInfo(type, ShapeColor.BLUE, position))
+
+            shapes.add(createShapeInfo(type, color, position))
         }
 
         return shapes
@@ -60,7 +70,7 @@ object WorldNotifier {
 
         shape.position = createPosition(position)
         shape.shape = createShapeType(type)
-        shape.color = Common.Color.BLUE
+        shape.color = fromDto(color)
 
         return shape.build()
     }

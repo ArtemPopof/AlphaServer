@@ -110,9 +110,9 @@ class RequestHandler(port: Int) {
 
                 RequestProto.RequestType.CHANGE_COLOR ->
                     response = ShapeHandler.handleShapeChange(protoMessage)
-//
-//                RequestProto.RequestType.CHANGE_SHAPE ->
-//                    response = ShapeHandler.handleShapeChange(protoMessage)
+
+               RequestProto.RequestType.CHANGE_SHAPE ->
+                    response = ShapeHandler.handleShapeChange(protoMessage)
 
                 RequestProto.RequestType.REGISTRATION ->
                     response = RegistrationHandler.handleRegistration(protoMessage)

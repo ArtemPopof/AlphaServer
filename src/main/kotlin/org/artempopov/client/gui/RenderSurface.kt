@@ -1,13 +1,14 @@
 package org.artempopov.client.gui
 
 import org.artempopov.client.graphics.Drawable
-import java.awt.Canvas
+import java.awt.Color
 import java.awt.Graphics
+import javax.swing.JPanel
 
 /**
  * Main render surface where all paint activity resides
  */
-class RenderSurface: Canvas() {
+class RenderSurface: JPanel() {
 
     /**
      * Drawable elements of scene
@@ -15,7 +16,8 @@ class RenderSurface: Canvas() {
     private val drawables = ArrayList<Drawable>()
 
     override fun paint(g: Graphics) {
-        g.clearRect(0, 0, width, height)
+        g.color = Color.WHITE
+        g.fillRect(0, 0, width, height)
 
         drawables.forEach{
             it.draw(g)
