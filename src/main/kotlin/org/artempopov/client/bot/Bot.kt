@@ -2,10 +2,13 @@ package org.artempopov.client.bot
 
 import org.apache.logging.log4j.LogManager
 import org.artempopov.client.graphics.Drawable
-import org.artempopov.client.net.Connection
+import org.artempopov.client.net.Channel
+import org.artempopov.client.net.UpdateListener
 import org.artempopov.client.net.getAllShapesFromServer
+import org.artempopov.client.net.getShapesFromResponse
 import org.artempopov.serverFirst.handler.MOVE_SPEED
 import org.artempopov.serverFirst.proto.RequestProto
+import org.artempopov.serverFirst.proto.ResponseProto
 import java.awt.Point
 import java.lang.Math.abs
 import java.util.*
@@ -20,51 +23,32 @@ private const val Y_MAX = 500 - 50
 /**
  * Class for bot simulation
  */
-class Bot(private val connection: Connection) {
+class Bot(private val channel: Channel): UpdateListener {
     private val LOG = LogManager.getLogger()
 
     private var position = Point(0, 0)
     private var shapes: List<Drawable> = ArrayList()
-    private val worldUpdaterThread = Thread(createUpdaterTask(), "WorldUpdater$connection")
-    private val moverThread = Thread(createMoverTask(), "BotMover$connection")
+    private val moverThread = Thread(createMoverTask(), "BotMover$channel")
 
     private var state = BotState.IDLE
     private var idleTime = 0L
     private var lastStateTime = System.currentTimeMillis()
     private var goalPosition = Point(0, 0)
 
-    private val random = Random(System.currentTimeMillis())
+    private val random = Random(System.nanoTime())
 
     init {
         idleTime = getIdleDelay()
 
-        worldUpdaterThread.start()
         moverThread.start()
+    }
+
+    override fun onUpdate(notifyResponse: ResponseProto.NotifyResponse) {
+        shapes = getShapesFromResponse(notifyResponse)
     }
 
     private fun getIdleDelay(): Long {
         return abs(random.nextLong()) % IDLE_DELAY_MAX
-    }
-
-    private fun createUpdaterTask(): Runnable {
-        return Runnable {
-            var startTime = System.currentTimeMillis()
-
-            while (!Thread.currentThread().isInterrupted) {
-                shapes = getAllShapesFromServer(connection)
-                sleepRemainingTimeInLoop(startTime)
-                startTime = System.currentTimeMillis()
-            }
-        }
-    }
-
-    private fun sleepRemainingTimeInLoop(startTime: Long) {
-        val cycleTime = System.currentTimeMillis() - startTime
-
-        val timeReminder = UPDATE_PERIOD - cycleTime
-        if (timeReminder > 0) {
-            Thread.sleep(timeReminder)
-        }
     }
 
     private fun createMoverTask(): Runnable {
@@ -220,7 +204,7 @@ class Bot(private val connection: Connection) {
 
     private fun move(direction: RequestProto.MoveDirection) {
         try {
-            connection.sendMoveRequest(direction)
+            channel.sendMoveRequest(direction)
         } catch (e: Exception) {
             LOG.error("Move request failed: " + e)
         }

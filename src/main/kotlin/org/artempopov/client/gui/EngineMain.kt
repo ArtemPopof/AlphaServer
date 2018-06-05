@@ -1,5 +1,6 @@
 package org.artempopov.client.gui
 
+import org.artempopov.client.controller.DefaultController
 import org.artempopov.client.graphics.Drawable
 import org.artempopov.client.shapes.Square
 import org.artempopov.client.world.WorldUpdater
@@ -18,17 +19,17 @@ private const val WINDOW_WIDTH = 500 * 5 / 4
 object EngineMain: JFrame(WINDOW_TITLE) {
 
     private val surface = RenderSurface()
-    var worldUpdater: WorldUpdater? = null
 
     init {
         this.isResizable = false
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
         this.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-        this.isVisible = true
 
         this.add(surface)
 
         this.addKeyListener(PlayerKeyListener())
+
+        this.isVisible = true
     }
 
     /**
@@ -69,10 +70,10 @@ object EngineMain: JFrame(WINDOW_TITLE) {
             }
 
             when (e.keyCode) {
-                KeyEvent.VK_W -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.UP)
-                KeyEvent.VK_S -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.DOWN)
-                KeyEvent.VK_A -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.LEFT)
-                KeyEvent.VK_D -> worldUpdater!!.setMoveDirection(RequestProto.MoveDirection.RIGHT)
+                KeyEvent.VK_W -> DefaultController.movePlayer(RequestProto.MoveDirection.UP)
+                KeyEvent.VK_S -> DefaultController.movePlayer(RequestProto.MoveDirection.DOWN)
+                KeyEvent.VK_A -> DefaultController.movePlayer(RequestProto.MoveDirection.LEFT)
+                KeyEvent.VK_D -> DefaultController.movePlayer(RequestProto.MoveDirection.RIGHT)
             }
         }
 
@@ -82,10 +83,10 @@ object EngineMain: JFrame(WINDOW_TITLE) {
             }
 
             when (e.keyCode) {
-                KeyEvent.VK_W -> worldUpdater!!.setMoveDirection(null)
-                KeyEvent.VK_S -> worldUpdater!!.setMoveDirection(null)
-                KeyEvent.VK_A -> worldUpdater!!.setMoveDirection(null)
-                KeyEvent.VK_D -> worldUpdater!!.setMoveDirection(null)
+                KeyEvent.VK_W -> DefaultController.movePlayer(null)
+                KeyEvent.VK_S -> DefaultController.movePlayer(null)
+                KeyEvent.VK_A -> DefaultController.movePlayer(null)
+                KeyEvent.VK_D -> DefaultController.movePlayer(null)
             }
         }
     }

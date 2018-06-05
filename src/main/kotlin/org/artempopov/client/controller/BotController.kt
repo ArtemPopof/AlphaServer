@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager
 import org.artempopov.client.bot.Bot
 import org.artempopov.client.gui.BotSettingsWindow
 import org.artempopov.client.gui.ChoseAddressFrame
-import org.artempopov.client.net.Connection
+import org.artempopov.client.net.Channel
 import org.artempopov.client.registration.RegistrationManager
 import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.dto.ShapeType
@@ -50,26 +50,26 @@ object BotController: Controller {
         registrationCompleted()
     }
 
-    private fun openConnections(botCount: Int): List<Connection> {
-        val connections = ArrayList<Connection>(botCount)
+    private fun openConnections(botCount: Int): List<Channel> {
+        val connections = ArrayList<Channel>(botCount)
 
         for (i in 1..botCount) {
-            connections.add(Connection(host as String, port as Int))
+            connections.add(Channel(host as String, port as Int))
         }
 
         return connections
     }
 
-    private fun registerBots(bots: List<Connection>) {
+    private fun registerBots(bots: List<Channel>) {
         for (bot in bots) {
             RegistrationManager.register(ShapeType.SQUARE, ShapeColor.BLUE, bot)
         }
     }
 
-    private fun createBots(connections: List<Connection>): List<Bot> {
-        val bots = ArrayList<Bot>(connections.size)
+    private fun createBots(channels: List<Channel>): List<Bot> {
+        val bots = ArrayList<Bot>(channels.size)
 
-        for (connection in connections) {
+        for (connection in channels) {
             bots.add(Bot(connection))
         }
 

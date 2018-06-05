@@ -2,7 +2,7 @@ package org.artempopov.client.gui
 
 import org.apache.logging.log4j.LogManager
 import org.artempopov.client.controller.DefaultController
-import org.artempopov.client.net.Connection
+import org.artempopov.client.net.Channel
 import org.artempopov.client.registration.RegistrationException
 import org.artempopov.client.registration.RegistrationManager
 import org.artempopov.serverFirst.dto.ShapeColor
@@ -14,11 +14,11 @@ private const val LOG_TAG = "RegistrationForm"
 private const val WINDOW_WIDTH = 500
 private const val WINDOW_HEIGHT = 500
 
-class RegistrationForm(connection: Connection): JFrame(TITLE) {
+class RegistrationForm(channel: Channel): JFrame(TITLE) {
 
     private val LOG = LogManager.getLogger()
 
-    private val connection: Connection = connection
+    private val channel: Channel = channel
     private val colorComboBox = createColorComboBox()
     private val shapeComboBox = createShapeComboBox()
     private val okButton = JButton("Create")
@@ -81,7 +81,7 @@ class RegistrationForm(connection: Connection): JFrame(TITLE) {
 
     private fun performRegistration() {
         try {
-            RegistrationManager.register(getChosenShape(), getChoosenColor(), connection)
+            RegistrationManager.register(getChosenShape(), getChoosenColor(), channel)
 
             LOG.info("Registered!")
             JOptionPane.showMessageDialog(this, "Registered Successful",

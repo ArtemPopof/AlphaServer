@@ -20,4 +20,4 @@ pool
 - fix layout in registration form
 
 bugs
-- make NetworkManager able to create many connections (for bot farm)
+- make NetworkManager able to create many channels (for bot farm)

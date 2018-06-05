@@ -23,7 +23,6 @@ const val MAX_THREADS = 100
  */
 class RequestHandler(port: Int) {
 
-
     /**
      * Socket that listens to all incoming packets
      */

@@ -6,6 +6,7 @@ import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.common.net.readSocketData
 import java.io.BufferedOutputStream
 import java.io.IOException
+import java.net.ServerSocket
 import java.net.Socket
 
 const val PACKET_VERSION = 0x101
@@ -13,13 +14,53 @@ const val PACKET_VERSION = 0x101
 const val REQUEST_TIMEOUT = 100
 
 /**
- * All network specific functions for client
+ * One channel with server. Contains two sockets,
+ * first listen to server update packets and second used to send
+ * event requests to server.
+ *
+ * Common practice to use 1 channel per server.
  */
-class Connection(private val host: String, private val port: Int) {
+class Channel(private val host: String, private val port: Int) {
     private val LOG = LogManager.getLogger()
 
-    private var socketToServer: Socket = connectToServer()
+    private val listeners = ArrayList<UpdateListener>(1)
+    private var listenThread = Thread(createListenTask(), "UpdateListener")
+    private var listenSocket = createServerSocket()
+    private var requestSocket = connectToServer()
     var clientId: Long? = null
+
+    init {
+        listenThread.start()
+    }
+
+    private fun createListenTask(): Runnable {
+        return Runnable{
+            while (!Thread.currentThread().isInterrupted) {
+                val socket = listenSocket.accept()
+                val rawData = readSocketData(socket)
+                val notifyResponse = ResponseProto.Response.parseFrom(rawData)
+                val valid = validateNotifyPacket(notifyResponse)
+                if (valid) {
+                    notifyListeners(notifyResponse.notify)
+                }
+            }
+        }
+    }
+
+    private fun validateNotifyPacket(packet: ResponseProto.Response): Boolean {
+        if (!packet.hasNotify()) {
+            LOG.error("Invalid notify packet. \n Error: ${packet.errorMessage}, Code: ${packet.error}")
+            return true
+        }
+
+        return false
+    }
+
+    private fun notifyListeners(notifyResponse: ResponseProto.NotifyResponse) {
+        for (listener in listeners) {
+            listener.onUpdate(notifyResponse)
+        }
+    }
 
     /**
      * Connect to server
@@ -32,9 +73,13 @@ class Connection(private val host: String, private val port: Int) {
         }
     }
 
+    private fun createServerSocket(): ServerSocket {
+        return ServerSocket(CLIENT_LISTEN_PORT)
+    }
+
     private fun reconnect() {
         try {
-            this.socketToServer = connectToServer()
+            this.requestSocket = connectToServer()
         } catch (e: Exception) {
             throw CannotConnectToServerException(e)
         }
@@ -94,12 +139,11 @@ class Connection(private val host: String, private val port: Int) {
     }
 
     private fun send(byteArray: ByteArray) {
-        socketToServer = connectToServer()
-        val outStream = BufferedOutputStream(socketToServer.getOutputStream())
+        requestSocket = connectToServer()
+        val outStream = BufferedOutputStream(requestSocket.getOutputStream())
 
         outStream.write(byteArray)
         outStream.flush()
-        socketToServer.shutdownOutput()
     }
 
     private fun waitForResponse(): ResponseProto.Response {
@@ -108,14 +152,15 @@ class Connection(private val host: String, private val port: Int) {
     }
 
     private fun getRawResponse(): ByteArray {
-        return readSocketData(socketToServer)
+        return readSocketData(requestSocket)
     }
 
-    private fun checkConnection() {
-        if (socketToServer.isClosed || !socketToServer.isConnected) {
-            connectToServer()
-        }
-    }
+
+//    private fun checkConnection() {
+//        if (socketToServer.isClosed || !socketToServer.isConnected) {
+//            connectToServer()
+//        }
+//    }
 
     /**
      * Send move direction to server
@@ -179,5 +224,12 @@ class Connection(private val host: String, private val port: Int) {
         } else {
             return (clientId as Long).toString()
         }
+    }
+
+    /**
+     * Add update packets listener
+     */
+    fun addUpdateListener(listener: UpdateListener) {
+        listeners.add(listener)
     }
 }
