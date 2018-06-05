@@ -1,9 +1,12 @@
 package org.artempopov.serverFirst.handler
 
+import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.dto.ShapeType
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
+import org.artempopov.serverFirst.storage.ClientManager
+import java.awt.Point
 
 /**
  * Handles registration/unregistration related requests
@@ -17,13 +20,13 @@ object RegistrationHandler {
     /**
      * Perform registration
      */
-    fun handleRegistration(request: RequestProto.Request): ByteArray {
+    fun handleRegistration(request: RequestProto.Request, clientAddress: String): ByteArray {
         validateRequest(request)
 
         val color = ShapeColor.valueOf(request.registrationRequest.color.name)
         val shape = ShapeType.valueOf(request.registrationRequest.shape.name)
 
-        registerInOtherHandlers(color, shape)
+        registerInOtherHandlers(color, shape, clientAddress)
 
         return createGoodResponse().toByteArray()
     }
@@ -34,10 +37,9 @@ object RegistrationHandler {
         }
     }
 
-    private fun registerInOtherHandlers(color: ShapeColor, shape: ShapeType) {
-        MoveHandler.registerClient(lastClientId)
-        ShapeHandler.registerClient(lastClientId, shape)
-        ColorHandler.registerClient(lastClientId, color)
+    private fun registerInOtherHandlers(color: ShapeColor, shape: ShapeType, address: String) {
+        val client = Client(shape, color, Point(0, 0), address)
+        ClientManager.registerClient(client)
     }
 
     private fun createGoodResponse(): ResponseProto.Response {

@@ -1,12 +1,16 @@
 package org.artempopov.serverFirst.handler
 
+import org.artempopov.client.net.CLIENT_LISTEN_PORT
 import org.artempopov.common.util.fromDto
-import org.artempopov.serverFirst.dto.ShapeColor
-import org.artempopov.serverFirst.dto.ShapeType
+import org.artempopov.common.util.sleepRemainingTime
+import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.proto.Common
-import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
+import org.artempopov.serverFirst.storage.ClientManager
 import java.awt.Point
+import java.net.Socket
+
+private const val SERVER_UPDATE_TICK_PERIOD = 1000 / 15L
 
 /**
  * World notifier send information about world state
@@ -17,60 +21,65 @@ import java.awt.Point
 object WorldNotifier {
 
     /**
-     * Handle request for world state information
+     * Clients that moved since last tick
      */
-    fun handleNotifyRequest(request: RequestProto.Request): ByteArray {
-        val positions = MoveHandler.getAllClientsPosition()
-        val shapes = ShapeHandler.getAllShapes()
-        val colors = ColorHandler.getAllColors()
+    private val activeClients = ArrayList<Client>()
+    private val updaterThread = Thread(createUpdaterTask(), "WorldNotifier")
 
-        return createNotifyResponse(positions, shapes, colors).toByteArray()
+    init {
+        updaterThread.start()
     }
 
-    private fun createNotifyResponse(positions: HashMap<Long, Point>,
-                                     shapes: HashMap<Long, ShapeType>,
-                                     colors: HashMap<Long, ShapeColor>): ResponseProto.Response {
+    private fun createUpdaterTask(): Runnable {
+        return Runnable {
+            var lastTime = 0L
 
+            while (!Thread.currentThread().isInterrupted) {
+                lastTime = System.currentTimeMillis()
+
+                updateClients()
+
+                sleepRemainingTime(lastTime, SERVER_UPDATE_TICK_PERIOD)
+            }
+        }
+    }
+
+    private fun updateClients() {
+        for (client in activeClients) {
+            updateInfoForClient(client)
+        }
+    }
+
+    private fun updateInfoForClient(client: Client) {
+        val notifyPacket = createNotifyResponse()
+        send(notifyPacket.toByteArray(), client)
+    }
+
+    private fun createNotifyResponse(): ResponseProto.Response {
         val response = ResponseProto.Response.newBuilder()
 
-        val shapesInfo = createShapeInfos(positions, shapes, colors)
-
+        val shapesInfo = convertToProto(activeClients)
         response.notify = createNotify(shapesInfo)
 
         return response.build()
     }
 
-    private fun createShapeInfos(positions: HashMap<Long, Point>,
-                                 types: HashMap<Long, ShapeType>,
-                                 colors: HashMap<Long, ShapeColor>): List<ResponseProto.ShapeInfo> {
-        val shapes = ArrayList<ResponseProto.ShapeInfo>(positions.size)
+    private fun convertToProto(clients: List<Client>): List<ResponseProto.ShapeInfo> {
+        val protoClients = ArrayList<ResponseProto.ShapeInfo>(clients.size)
 
-        var type: ShapeType?
-        var color: ShapeColor?
-        for ((key, position) in positions) {
-            // check for model unsync state
-            type = types[key]
-            if (type == null) {
-                throw IllegalStateException("Model storages is not in sync")
-            }
-            color = colors[key]
-            if (color == null) {
-                throw IllegalStateException("Model storages is not in sync")
-            }
-
-
-            shapes.add(createShapeInfo(type, color, position))
+        for (client in clients) {
+            protoClients.add(convertToProto(client))
         }
 
-        return shapes
+        return protoClients
     }
 
-    private fun createShapeInfo(type: ShapeType, color: ShapeColor, position: Point): ResponseProto.ShapeInfo {
+    private fun convertToProto(client: Client): ResponseProto.ShapeInfo {
         val shape = ResponseProto.ShapeInfo.newBuilder()
 
-        shape.position = createPosition(position)
-        shape.shape = createShapeType(type)
-        shape.color = fromDto(color)
+        shape.position = createPosition(client.position)
+        shape.shape = fromDto(client.shape)
+        shape.color = fromDto(client.color)
 
         return shape.build()
     }
@@ -84,19 +93,23 @@ object WorldNotifier {
         return position.build()
     }
 
-    private fun createShapeType(type: ShapeType): Common.Shape {
-       return when (type) {
-           ShapeType.SQUARE -> Common.Shape.SQUARE
-           ShapeType.TRIANGLE -> Common.Shape.TRIANGLE
-           ShapeType.CIRCLE -> Common.Shape.CIRCLE
-       }
-    }
-
     private fun createNotify(shapes: List<ResponseProto.ShapeInfo>): ResponseProto.NotifyResponse {
         val notify = ResponseProto.NotifyResponse.newBuilder()
 
         notify.addAllShapes(shapes)
 
         return notify.build()
+    }
+
+    private fun send(bytes: ByteArray, client: Client) {
+        val socket = Socket(client.host, CLIENT_LISTEN_PORT)
+        org.artempopov.common.net.send(bytes, socket)
+    }
+
+    /**
+     * Client moved since last tick
+     */
+    fun clientMoved(clientId: Long) {
+        activeClients.add(ClientManager.getClient(clientId))
     }
 }

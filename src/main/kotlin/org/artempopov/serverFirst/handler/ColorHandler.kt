@@ -1,16 +1,16 @@
 package org.artempopov.serverFirst.handler
 
 import org.artempopov.common.util.toDto
-import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.proto.RequestProto
+import org.artempopov.serverFirst.proto.ResponseProto
+import org.artempopov.serverFirst.storage.ClientManager
 import org.artempopov.serverFirst.util.createEmptyResponse
+import org.artempopov.serverFirst.util.createErrorResponse
 
 /**
  * Handle all color change-set requests
  */
 object ColorHandler {
-
-    private val clientColors = HashMap<Long, ShapeColor>()
 
     /**
      * Handle colorChangeRequest
@@ -21,7 +21,11 @@ object ColorHandler {
         val clientID = request.clientId
         val color = request.changeColorRequest.color
 
-        clientColors[clientID] = toDto(color)
+        try {
+            ClientManager.getClient(clientID).color = toDto(color)
+        } catch (e: NoSuchClientException) {
+            return createErrorResponse(ResponseProto.ErrorType.UNREGISTERED).toByteArray()
+        }
 
         return createEmptyResponse().toByteArray()
     }
@@ -33,24 +37,5 @@ object ColorHandler {
         if (!request.hasChangeColorRequest()) {
             throw InvalidRequestException("Move request field must be not empty")
         }
-    }
-
-    /**
-     * Register new client
-     *
-     * @param id client id
-     * @param color shape color
-     * @throw IllegalArgumentException if client with id already exists
-     */
-    fun registerClient(id: Long, color: ShapeColor) {
-        if (clientColors.containsKey(id)) {
-            throw IllegalArgumentException("Client ID must be unique")
-        }
-
-        clientColors[id] = color
-    }
-
-    fun getAllColors(): HashMap<Long, ShapeColor> {
-        return clientColors
     }
 }

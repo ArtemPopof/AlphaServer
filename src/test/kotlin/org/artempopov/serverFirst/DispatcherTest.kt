@@ -1,7 +1,7 @@
 package org.artempopov.serverFirst
 
 import org.apache.logging.log4j.LogManager
-import org.artempopov.serverFirst.net.RequestHandler
+import org.artempopov.serverFirst.net.Dispatcher
 import org.artempopov.serverFirst.proto.RequestProto
 import org.junit.Test
 import java.net.Socket
@@ -13,7 +13,7 @@ const val TEST_PORT = 27028
  *
  * @author Artem Popov
  */
-class RequestHandlerTest {
+class DispatcherTest {
     val LOG = LogManager.getLogger()
 
     @Test
@@ -49,7 +49,7 @@ class RequestHandlerTest {
         return requestBuilder.build().toByteArray()
     }
 
-    private fun createAndStartServer(): RequestHandler {
-        return RequestHandler(TEST_PORT)
+    private fun createAndStartServer(): Dispatcher {
+        return Dispatcher(TEST_PORT)
     }
 }

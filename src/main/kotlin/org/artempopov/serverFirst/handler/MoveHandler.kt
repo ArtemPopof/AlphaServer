@@ -1,7 +1,10 @@
 package org.artempopov.serverFirst.handler
 
+import org.artempopov.common.util.toDto
+import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
+import org.artempopov.serverFirst.storage.ClientManager
 import org.artempopov.serverFirst.util.createEmptyResponse
 import org.artempopov.serverFirst.util.createErrorResponse
 import java.awt.Point
@@ -24,26 +27,24 @@ object MoveHandler {
     private val mapRect = Rectangle(500, 500)
 
     /**
-     * Map contains all clients current positions
-     */
-    private val clientsPosition = HashMap<Long, Point>()
-
-    /**
      * Handle move request
      */
     fun handleMove(request: RequestProto.Request): ByteArray {
         validateRequest(request)
 
-        val clientId = request.clientId
-        val oldPosition = clientsPosition[clientId]
-        if (oldPosition == null) {
-            return createUnregisteredResponse()
+        val client: Client = try {
+            ClientManager.getClient(request.clientId)
+        } catch (e: NoSuchClientException) {
+            return createErrorResponse(ResponseProto.ErrorType.UNREGISTERED).toByteArray()
         }
+
+        val oldPosition = client.position
 
         val newPosition = move(oldPosition, request.moveRequest.direction)
         val isMoveAllowed = checkPositionValid(newPosition)
         if (isMoveAllowed) {
-            clientsPosition[clientId] = newPosition
+            client.position = newPosition
+            WorldNotifier.clientMoved(request.clientId)
         }
 
         return createEmptyResponse().toByteArray()
@@ -82,35 +83,4 @@ object MoveHandler {
         return true
     }
 
-    private fun createUnregisteredResponse(): ByteArray {
-        return createErrorResponse(ResponseProto.ErrorType.UNREGISTERED).toByteArray()
-    }
-
-    /**
-     * Register new client
-     *
-     * @param id client id
-     * @throw IllegalArgumentException if client with id already exists
-     */
-    fun registerClient(id: Long) {
-        if (clientsPosition.containsKey(id)) {
-            throw IllegalArgumentException("Client ID must be unique")
-        }
-
-        clientsPosition[id] = Point(START_POINT_X, START_POINT_Y)
-    }
-
-    /**
-     * Get specified client position
-     *
-     * @param id client ID
-     * @return location of specified player or null if client doesn't exist
-     */
-    fun getClientPosition(id: Long): Point? {
-        return clientsPosition[id]
-    }
-
-    fun getAllClientsPosition(): HashMap<Long, Point> {
-        return clientsPosition
-    }
 }

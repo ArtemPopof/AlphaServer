@@ -58,6 +58,20 @@ fun toDto(color: Common.Color): ShapeColor {
 }
 
 /**
+ * Convert proto to bean ShapeType
+ *
+ * @param proto based object
+ * @return ShapeType object
+ */
+fun toDto(shape: Common.Shape): ShapeType {
+    return when (shape) {
+        Common.Shape.CIRCLE -> ShapeType.CIRCLE
+        Common.Shape.SQUARE -> ShapeType.SQUARE
+        Common.Shape.TRIANGLE -> ShapeType.TRIANGLE
+    }
+}
+
+/**
  * From proto position to point
  */
 fun fromProto(position: Common.Position): Point {

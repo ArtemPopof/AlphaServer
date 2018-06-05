@@ -6,6 +6,7 @@ import org.artempopov.client.net.Channel
 import org.artempopov.client.net.UpdateListener
 import org.artempopov.client.net.getAllShapesFromServer
 import org.artempopov.client.net.getShapesFromResponse
+import org.artempopov.common.util.sleepRemainingTime
 import org.artempopov.serverFirst.handler.MOVE_SPEED
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
@@ -13,7 +14,7 @@ import java.awt.Point
 import java.lang.Math.abs
 import java.util.*
 
-private const val UPDATE_PERIOD = 1000 / 5
+private const val UPDATE_PERIOD = 1000 / 5L
 private const val IDLE_DELAY_MAX = 5000
 private const val MAX_WALK_RANGE = 50
 
@@ -61,7 +62,7 @@ class Bot(private val channel: Channel): UpdateListener {
 
                 updateBotState()
 
-                sleepRemainingTime(lastTime)
+                sleepRemainingTime(lastTime, UPDATE_PERIOD)
 
                 LOG.debug("BOT STATE: $state")
                 LOG.debug("GOAL: $goalPosition")
@@ -209,13 +210,5 @@ class Bot(private val channel: Channel): UpdateListener {
             LOG.error("Move request failed: " + e)
         }
         LOG.debug("Moving $direction")
-    }
-
-    private fun sleepRemainingTime(lastTime: Long) {
-        val timeLeft = System.currentTimeMillis() - lastTime
-        val diff = UPDATE_PERIOD - timeLeft
-        if (diff > 0) {
-            Thread.sleep(diff)
-        }
     }
 }

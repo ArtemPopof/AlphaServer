@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.common.net.readSocketData
+import org.artempopov.common.net.send
 import java.io.BufferedOutputStream
 import java.io.IOException
 import java.net.ServerSocket
@@ -140,10 +141,7 @@ class Channel(private val host: String, private val port: Int) {
 
     private fun send(byteArray: ByteArray) {
         requestSocket = connectToServer()
-        val outStream = BufferedOutputStream(requestSocket.getOutputStream())
-
-        outStream.write(byteArray)
-        outStream.flush()
+        send(byteArray, requestSocket)
     }
 
     private fun waitForResponse(): ResponseProto.Response {

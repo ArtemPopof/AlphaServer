@@ -1,6 +1,6 @@
 package org.artempopov.serverFirst
 
-import org.artempopov.serverFirst.net.RequestHandler
+import org.artempopov.serverFirst.net.Dispatcher
 import java.awt.BorderLayout
 import java.awt.Color
 import javax.swing.JFrame
@@ -11,7 +11,7 @@ import javax.swing.WindowConstants
 fun main(args: Array<String>) {
     println("Starting server...")
 
-    RequestHandler(27029)
+    Dispatcher(27029)
 
     createStubGUI()
 

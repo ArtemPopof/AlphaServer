@@ -2,6 +2,7 @@ package org.artempopov.common.net
 
 import org.apache.logging.log4j.LogManager
 import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
 import java.net.Socket
 
 private const val BUFFER_SIZE = 1024 * 10
@@ -33,4 +34,15 @@ fun readSocketData(socket: Socket): ByteArray {
     System.arraycopy(buffer, 0, data, 0, counter)
 
     return data
+}
+
+/**
+ * Send data to socket and shutdown output
+ */
+fun send(byteArray: ByteArray, socket: Socket) {
+    val outStream = BufferedOutputStream(socket.getOutputStream())
+
+    outStream.write(byteArray)
+    outStream.flush()
+    socket.shutdownOutput()
 }
