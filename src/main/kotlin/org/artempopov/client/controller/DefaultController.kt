@@ -18,6 +18,8 @@ object DefaultController: Controller {
     private var channel: Channel? = null
 
     override fun registrationCompleted() {
+        EngineMain
+
         val worldUpdater = WorldUpdater()
 
         // now all messages will be dispatched from channel to worldUpdater

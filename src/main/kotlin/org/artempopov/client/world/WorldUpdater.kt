@@ -13,7 +13,7 @@ import org.artempopov.serverFirst.proto.ResponseProto
  *
  * @author Artem Popov
  */
-class WorldUpdater(): UpdateListener {
+class WorldUpdater: UpdateListener {
 
     private val LOG = LogManager.getLogger()
 
