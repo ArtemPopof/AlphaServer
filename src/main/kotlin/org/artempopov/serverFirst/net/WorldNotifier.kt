@@ -1,4 +1,4 @@
-package org.artempopov.serverFirst.handler
+package org.artempopov.serverFirst.net
 
 import org.artempopov.client.net.CLIENT_LISTEN_PORT
 import org.artempopov.common.util.fromDto
@@ -23,7 +23,7 @@ object WorldNotifier {
     /**
      * Clients that moved since last tick
      */
-    private val activeClients = ArrayList<Client>()
+    private var activeClients = ArrayList<Client>()
     private val updaterThread = Thread(createUpdaterTask(), "WorldNotifier")
 
     init {
@@ -45,13 +45,17 @@ object WorldNotifier {
     }
 
     private fun updateClients() {
-        for (client in activeClients) {
-            updateInfoForClient(client)
+        val clients = ClientManager.getClients()
+        val notifyPacket = createNotifyResponse()
+
+        for (client in clients) {
+            updateInfoForClient(client, notifyPacket)
         }
+
+        activeClients.clear()
     }
 
-    private fun updateInfoForClient(client: Client) {
-        val notifyPacket = createNotifyResponse()
+    private fun updateInfoForClient(client: Client, notifyPacket: ResponseProto.Response) {
         send(notifyPacket.toByteArray(), client)
     }
 
@@ -80,6 +84,7 @@ object WorldNotifier {
         shape.position = createPosition(client.position)
         shape.shape = fromDto(client.shape)
         shape.color = fromDto(client.color)
+        shape.id = client.id
 
         return shape.build()
     }
@@ -109,7 +114,7 @@ object WorldNotifier {
     /**
      * Client moved since last tick
      */
-    fun clientMoved(clientId: Long) {
+    fun markClientActive(clientId: Long) {
         activeClients.add(ClientManager.getClient(clientId))
     }
 }

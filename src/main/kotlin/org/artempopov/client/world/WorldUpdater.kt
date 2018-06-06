@@ -18,23 +18,18 @@ class WorldUpdater: UpdateListener {
     private val LOG = LogManager.getLogger()
 
     override fun onUpdate(notifyResponse: ResponseProto.NotifyResponse) {
-        removeOldShapes()
         val shapes = getShapesFromResponse(notifyResponse)
-        addShapesToScene(shapes)
+        updateShapesOnScene(shapes)
         updateScene()
     }
 
-    private fun removeOldShapes() {
-        EngineMain.clear()
-    }
-
-    private fun addShapesToScene(shapes: List<Drawable>) {
+    private fun updateShapesOnScene(shapes: List<Drawable>) {
         for (shape in shapes) {
-            EngineMain.addToScene(shape)
+            EngineMain.updateShapeOnScene(shape)
         }
     }
 
     private fun updateScene() {
-        EngineMain.updateScene()
+        EngineMain.repaintScene()
     }
 }

@@ -1,5 +1,6 @@
 package org.artempopov.client.gui
 
+import org.apache.logging.log4j.LogManager
 import org.artempopov.client.graphics.Drawable
 import java.awt.Color
 import java.awt.Graphics
@@ -9,6 +10,8 @@ import javax.swing.JPanel
  * Main render surface where all paint activity resides
  */
 class RenderSurface: JPanel() {
+
+    private val LOG = LogManager.getLogger()
 
     /**
      * Drawable elements of scene
@@ -51,5 +54,19 @@ class RenderSurface: JPanel() {
      */
     fun clear() {
         drawables.clear()
+    }
+
+    /**
+     * Update shape with new one
+     */
+    fun updateShape(shape: Drawable) {
+        for (i in 0 until drawables.size) {
+            if (drawables[i].id == shape.id) {
+                drawables[i] = shape
+                return
+            }
+        }
+
+        drawables.add(shape)
     }
 }

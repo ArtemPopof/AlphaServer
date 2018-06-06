@@ -9,7 +9,7 @@ interface Drawable {
     /**
      * Drawable name associated with this object
      */
-    val id: String
+    val id: Long
 
     /**
      * Draw element

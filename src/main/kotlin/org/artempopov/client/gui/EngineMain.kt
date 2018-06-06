@@ -56,8 +56,15 @@ object EngineMain: JFrame(WINDOW_TITLE) {
     /**
      * Repaint scene
      */
-    fun updateScene() {
+    fun repaintScene() {
         surface.repaint()
+    }
+
+    /**
+     * Update shape on the screne with new one
+     */
+    fun updateShapeOnScene(shape: Drawable) {
+        surface.updateShape(shape)
     }
 
     class PlayerKeyListener(): KeyListener {

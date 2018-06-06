@@ -3,6 +3,7 @@ package org.artempopov.serverFirst.handler
 import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.dto.ShapeType
+import org.artempopov.serverFirst.net.WorldNotifier
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.serverFirst.storage.ClientManager
@@ -27,6 +28,8 @@ object RegistrationHandler {
         val shape = ShapeType.valueOf(request.registrationRequest.shape.name)
 
         registerInOtherHandlers(color, shape, clientAddress)
+
+        WorldNotifier.markClientActive(request.clientId)
 
         return createGoodResponse().toByteArray()
     }

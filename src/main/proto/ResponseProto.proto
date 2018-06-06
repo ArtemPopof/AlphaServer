@@ -24,7 +24,8 @@ message NotifyResponse {
 }
 
 message ShapeInfo {
-    required Color color = 1;
-    required Shape shape = 2;
-    required Position position = 3;
+    required int64 id = 1;
+    required Color color = 2;
+    required Shape shape = 3;
+    required Position position = 4;
 }

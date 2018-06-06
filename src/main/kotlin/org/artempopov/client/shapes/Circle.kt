@@ -5,15 +5,12 @@ import org.artempopov.serverFirst.dto.ShapeType
 import java.awt.Graphics
 import java.awt.Point
 
-private var lastCircleId = 0
-
 const val CIRCLE_SIZE = 20
 
 /**
  * Drawable circle class
  */
-class Circle(color: ShapeColor, position: Point): Shape(color, ShapeType.CIRCLE, position) {
-    override val id = "Circle" + lastCircleId++
+class Circle(color: ShapeColor, position: Point, override val id: Long): Shape(color, ShapeType.CIRCLE, position, id) {
 
     override fun draw(g: Graphics) {
         val oldColor = g.color

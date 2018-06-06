@@ -6,16 +6,12 @@ import java.awt.Graphics
 import java.awt.Point
 import java.awt.Polygon
 
-private var lastTriangleId = 0
-
 const val TRIANGLE_SIZE = 20
 
 /**
  * Drawable triangle class
  */
-class Triangle(color: ShapeColor, position: Point): Shape(color, ShapeType.TRIANGLE, position) {
-    override val id = "Circle" + lastTriangleId++
-
+class Triangle(color: ShapeColor, position: Point, override val id: Long): Shape(color, ShapeType.TRIANGLE, position, id) {
     override fun draw(g: Graphics) {
         val oldColor = g.color
 

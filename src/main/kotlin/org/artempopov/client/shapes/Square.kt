@@ -5,16 +5,12 @@ import org.artempopov.serverFirst.dto.ShapeType
 import java.awt.Graphics
 import java.awt.Point
 
-private var lastSquareId = 0
-
 const val SQUARE_SIZE = 20
 
 /**
  * Square shape class
  */
-class Square(color: ShapeColor, position: Point): Shape(color, ShapeType.SQUARE, position) {
-    override val id = "Square" + lastSquareId++
-
+class Square(color: ShapeColor, position: Point, id: Long): Shape(color, ShapeType.SQUARE, position, id) {
     override fun draw(g: Graphics) {
         val oldColor = g.color
 

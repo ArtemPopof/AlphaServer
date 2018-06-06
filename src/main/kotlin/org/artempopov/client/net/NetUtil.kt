@@ -38,12 +38,14 @@ fun getShapesFromResponse(response: ResponseProto.NotifyResponse): List<Shape> {
 }
 
 private fun toDtoShape(protoShape: ResponseProto.ShapeInfo): Shape {
-    return when (protoShape.shape) {
-        Common.Shape.TRIANGLE -> Triangle(getColor(protoShape.color), fromProto(protoShape.position))
-        Common.Shape.CIRCLE -> Circle(getColor(protoShape.color), fromProto(protoShape.position))
-        Common.Shape.SQUARE -> Square(getColor(protoShape.color), fromProto(protoShape.position))
+    val shape = when (protoShape.shape) {
+        Common.Shape.TRIANGLE -> Triangle(getColor(protoShape.color), fromProto(protoShape.position), protoShape.id)
+        Common.Shape.CIRCLE -> Circle(getColor(protoShape.color), fromProto(protoShape.position), protoShape.id)
+        Common.Shape.SQUARE -> Square(getColor(protoShape.color), fromProto(protoShape.position), protoShape.id)
         null -> throw IllegalArgumentException("shape is null!")
     }
+
+    return shape
 }
 
 private fun getColor(color: Common.Color): ShapeColor {

@@ -71,6 +71,11 @@ class Dispatcher(port: Int) {
             try {
                 val bytes = readSocketData(socket)
 
+                //for some reason some request is not a requests but empty arrays
+                if (bytes.isEmpty()) {
+                    return
+                }
+
                 LOG.debug("Message bytes: " + Arrays.toString(bytes))
 
                 val protoMessage = parseProtoMessage(bytes)
@@ -114,7 +119,7 @@ class Dispatcher(port: Int) {
                     response = ShapeHandler.handleShapeChange(protoMessage)
 
                 RequestProto.RequestType.REGISTRATION ->
-                    response = RegistrationHandler.handleRegistration(protoMessage, socket.inetAddress.toString())
+                    response = RegistrationHandler.handleRegistration(protoMessage, getHost())
 
 //                RequestProto.RequestType.UNREGISTRATION ->
 //                    response = RegistrationHandler.handleUnregistration(protoMessage)
@@ -123,6 +128,10 @@ class Dispatcher(port: Int) {
             }
 
             return response
+        }
+
+        private fun getHost(): String {
+            return socket.inetAddress.hostAddress
         }
 
         private fun sendResponse(response: ByteArray) {

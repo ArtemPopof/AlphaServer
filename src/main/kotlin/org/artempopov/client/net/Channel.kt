@@ -51,10 +51,10 @@ class Channel(private val host: String, private val port: Int) {
     private fun validateNotifyPacket(packet: ResponseProto.Response): Boolean {
         if (!packet.hasNotify()) {
             LOG.error("Invalid notify packet. \n Error: ${packet.errorMessage}, Code: ${packet.error}")
-            return true
+            return false
         }
 
-        return false
+        return true
     }
 
     private fun notifyListeners(notifyResponse: ResponseProto.NotifyResponse) {

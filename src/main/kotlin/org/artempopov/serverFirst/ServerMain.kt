@@ -1,6 +1,7 @@
 package org.artempopov.serverFirst
 
 import org.artempopov.serverFirst.net.Dispatcher
+import org.artempopov.serverFirst.net.WorldNotifier
 import java.awt.BorderLayout
 import java.awt.Color
 import javax.swing.JFrame
@@ -12,6 +13,7 @@ fun main(args: Array<String>) {
     println("Starting server...")
 
     Dispatcher(27029)
+    WorldNotifier
 
     createStubGUI()
 

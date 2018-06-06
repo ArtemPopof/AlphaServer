@@ -1,7 +1,7 @@
 package org.artempopov.serverFirst.handler
 
-import org.artempopov.common.util.toDto
 import org.artempopov.serverFirst.dto.Client
+import org.artempopov.serverFirst.net.WorldNotifier
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.serverFirst.storage.ClientManager
@@ -44,7 +44,7 @@ object MoveHandler {
         val isMoveAllowed = checkPositionValid(newPosition)
         if (isMoveAllowed) {
             client.position = newPosition
-            WorldNotifier.clientMoved(request.clientId)
+            WorldNotifier.markClientActive(request.clientId)
         }
 
         return createEmptyResponse().toByteArray()

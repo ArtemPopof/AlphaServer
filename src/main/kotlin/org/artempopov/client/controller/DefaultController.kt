@@ -18,19 +18,21 @@ object DefaultController: Controller {
     private var channel: Channel? = null
 
     override fun registrationCompleted() {
-        EngineMain
-
-        val worldUpdater = WorldUpdater()
-
-        // now all messages will be dispatched from channel to worldUpdater
-        channel!!.addUpdateListener(worldUpdater)
+        EngineMain.isEnabled = true
+        EngineMain.toFront()
     }
 
     override fun addressIsSet(host: String, port: Int, owner: JFrame) {
         try {
+            EngineMain.isEnabled = false
+
+            val worldUpdater = WorldUpdater()
+
             owner.dispose()
 
             channel = Channel(host, port)
+
+            channel!!.addUpdateListener(worldUpdater)
 
             RegistrationForm(channel as Channel)
         } catch (e: CannotConnectToServerException) {

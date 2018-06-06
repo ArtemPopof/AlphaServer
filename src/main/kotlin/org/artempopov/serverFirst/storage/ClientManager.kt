@@ -3,8 +3,6 @@ package org.artempopov.serverFirst.storage
 import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.handler.NoSuchClientException
 
-private var lastClientId = 0L
-
 /**
  * Manage clients and all associated parameters
  *
@@ -12,7 +10,7 @@ private var lastClientId = 0L
  */
 object ClientManager {
 
-    private val clients = HashMap<Long, Client>()
+    private val clients = ArrayList<Client>()
 
     /**
      * Register new client
@@ -21,11 +19,9 @@ object ClientManager {
      * @return clientId of new client
      */
     fun registerClient(client: Client): Long {
-        val clientId = lastClientId++
+        clients.add(client)
 
-        clients.put(clientId, client)
-
-        return clientId
+        return client.id
     }
 
     /**
@@ -34,10 +30,17 @@ object ClientManager {
      * @throws NoSuchClientException if client with this id is not exists
      */
     fun getClient(clientID: Long): Client {
-        if (!clients.contains(clientID)) {
-            throw NoSuchClientException()
+        for (client in clients) {
+            if (client.id == clientID) {
+                return client
+            }
         }
-        return clients[clientID] as Client
+
+        throw NoSuchClientException()
+    }
+
+    fun getClients(): Collection<Client> {
+        return clients
     }
 
 }
