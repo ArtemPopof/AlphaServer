@@ -54,7 +54,7 @@ object BotController: Controller {
         val connections = ArrayList<Channel>(botCount)
 
         for (i in 1..botCount) {
-            connections.add(Channel(host as String, port as Int))
+            connections.add(Channel(host as String, port as Int, true))
         }
 
         return connections

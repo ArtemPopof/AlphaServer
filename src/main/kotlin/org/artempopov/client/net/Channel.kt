@@ -21,7 +21,7 @@ const val REQUEST_TIMEOUT = 100
  *
  * Common practice to use 1 channel per server.
  */
-class Channel(private val host: String, private val port: Int) {
+class Channel(private val host: String, private val port: Int, private val isBotConnection:Boolean = false) {
     private val LOG = LogManager.getLogger()
 
     private val listeners = ArrayList<UpdateListener>(1)
@@ -31,13 +31,15 @@ class Channel(private val host: String, private val port: Int) {
     var clientId: Long? = null
 
     init {
-        listenThread.start()
+        if (!isBotConnection) {
+            listenThread.start()
+        }
     }
 
     private fun createListenTask(): Runnable {
         return Runnable{
             while (!Thread.currentThread().isInterrupted) {
-                val socket = listenSocket.accept()
+                val socket = listenSocket!!.accept()
                 val rawData = readSocketData(socket)
                 val notifyResponse = ResponseProto.Response.parseFrom(rawData)
                 val valid = validateNotifyPacket(notifyResponse)
@@ -74,8 +76,12 @@ class Channel(private val host: String, private val port: Int) {
         }
     }
 
-    private fun createServerSocket(): ServerSocket {
-        return ServerSocket(CLIENT_LISTEN_PORT)
+    private fun createServerSocket(): ServerSocket? {
+        if (!isBotConnection) {
+            return ServerSocket(CLIENT_LISTEN_PORT)
+        } else {
+            return null
+        }
     }
 
     private fun reconnect() {
