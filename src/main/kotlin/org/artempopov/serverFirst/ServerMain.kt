@@ -9,7 +9,10 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 import javax.swing.WindowConstants
 
-fun main(args: Array<String>) {
+/**
+ * Server entry point
+ */
+fun serverMain(args: Array<String>) {
     println("Starting server...")
 
     Dispatcher(27029)

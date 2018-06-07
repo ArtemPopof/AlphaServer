@@ -6,6 +6,6 @@ import org.artempopov.client.controller.DefaultController
 /**
  * Entry for bot client main
  */
-fun main(args: Array<String>) {
+fun botMain(args: Array<String>) {
     BotController.init()
 }
