@@ -19,7 +19,6 @@ enum RequestType {
     MOVE = 2;
     CHANGE_COLOR = 3;
     CHANGE_SHAPE = 4;
-    NOTIFY = 5;
 }
 
 message MoveRequest {

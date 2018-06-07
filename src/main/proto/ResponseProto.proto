@@ -7,7 +7,6 @@ message Response {
     optional ErrorType error = 1;
     optional string errorMessage = 2;
     optional RegistrationResponse registration = 3;
-    optional NotifyResponse notify = 4;
 }
 
 enum ErrorType {
@@ -17,10 +16,6 @@ enum ErrorType {
 
 message RegistrationResponse {
     required int64 clientId = 1;
-}
-
-message NotifyResponse {
-    repeated ShapeInfo shapes = 1;
 }
 
 message ShapeInfo {

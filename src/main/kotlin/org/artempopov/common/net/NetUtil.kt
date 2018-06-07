@@ -7,7 +7,7 @@ import java.net.Socket
 
 private const val BUFFER_SIZE = 1024 * 10
 private const val LOG_TAG = "NetUtil"
-const val REQUEST_PACKET_VERSION = 0x101
+const val REQUEST_PACKET_VERSION = 0x102
 // common net util functions
 
 private val LOG = LogManager.getLogger()
