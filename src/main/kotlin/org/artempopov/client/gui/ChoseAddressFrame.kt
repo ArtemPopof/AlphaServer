@@ -21,13 +21,14 @@ class ChoseAddressFrame: JFrame(TITLE) {
         this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT)
         this.isResizable = false
         this.defaultCloseOperation = javax.swing.WindowConstants.EXIT_ON_CLOSE
-        this.isVisible = true
 
         setComponents()
+
+        this.isVisible = true
     }
 
     private fun setComponents() {
-        this.add(createMainPanel())
+        this.contentPane = createMainPanel()
     }
 
     private fun createMainPanel(): JPanel {

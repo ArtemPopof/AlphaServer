@@ -1,5 +1,6 @@
 package org.artempopov.serverFirst.net
 
+import org.apache.logging.log4j.LogManager
 import org.artempopov.client.net.CLIENT_LISTEN_PORT
 import org.artempopov.common.util.fromDto
 import org.artempopov.common.util.sleepRemainingTime
@@ -10,7 +11,9 @@ import org.artempopov.serverFirst.storage.ClientManager
 import java.awt.Point
 import java.net.Socket
 
-private const val SERVER_UPDATE_TICK_PERIOD = 1000 / 15L
+private const val UPS = 15L
+private const val SERVER_UPDATE_TICK_PERIOD = 1000 / UPS
+private const val MAX_CONNECT_ATTEMPTS = UPS
 
 /**
  * World notifier send information about world state
@@ -19,6 +22,8 @@ private const val SERVER_UPDATE_TICK_PERIOD = 1000 / 15L
  * @author Artem Popov
  */
 object WorldNotifier {
+
+    private val LOG = LogManager.getLogger()
 
     /**
      * Clients that moved since last tick
@@ -48,7 +53,9 @@ object WorldNotifier {
         val clients = ClientManager.getClients()
         val notifyPacket = createNotifyResponse()
 
-        for (client in clients) {
+        var client: Client
+        for (i in 0 until clients.size) {
+            client = clients.elementAt(i)
             updateInfoForClient(client, notifyPacket)
         }
 
@@ -56,7 +63,21 @@ object WorldNotifier {
     }
 
     private fun updateInfoForClient(client: Client, notifyPacket: ResponseProto.Response) {
-        send(notifyPacket.toByteArray(), client)
+        try {
+            send(notifyPacket.toByteArray(), client)
+        } catch (e: Exception) {
+            LOG.error("Cannot send notify packet for client: ${client.host}")
+            LOG.error("Error: $e")
+            unregisterClientIfReachedMaxAttempts(client)
+        }
+    }
+
+    private fun unregisterClientIfReachedMaxAttempts(client: Client) {
+        client.connectAttempts++
+        if (client.connectAttempts >= MAX_CONNECT_ATTEMPTS) {
+            ClientManager.unregisterClient(client)
+            LOG.info("Client ${client.id} unregistered")
+        }
     }
 
     private fun createNotifyResponse(): ResponseProto.Response {

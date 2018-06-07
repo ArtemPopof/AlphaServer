@@ -27,9 +27,9 @@ object RegistrationHandler {
         val color = ShapeColor.valueOf(request.registrationRequest.color.name)
         val shape = ShapeType.valueOf(request.registrationRequest.shape.name)
 
-        registerInOtherHandlers(color, shape, clientAddress)
+        val clientId = registerClient(color, shape, clientAddress)
 
-        WorldNotifier.markClientActive(request.clientId)
+        WorldNotifier.markClientActive(clientId)
 
         return createGoodResponse().toByteArray()
     }
@@ -40,9 +40,9 @@ object RegistrationHandler {
         }
     }
 
-    private fun registerInOtherHandlers(color: ShapeColor, shape: ShapeType, address: String) {
+    private fun registerClient(color: ShapeColor, shape: ShapeType, address: String): Long {
         val client = Client(shape, color, Point(0, 0), address)
-        ClientManager.registerClient(client)
+        return ClientManager.registerClient(client)
     }
 
     private fun createGoodResponse(): ResponseProto.Response {

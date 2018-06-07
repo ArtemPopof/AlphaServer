@@ -46,7 +46,7 @@ protobuf {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'org.artempopov.serverFirst.ServerMainKt'
+        attributes 'Main-Class': 'org.artempopov.client.BotMainKt'
     }
 
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }

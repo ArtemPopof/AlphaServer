@@ -43,4 +43,15 @@ object ClientManager {
         return clients
     }
 
+    /**
+     * Unregister specified client
+     */
+    fun unregisterClient(client: Client) {
+        for (i in 0 until clients.size) {
+            if (clients[i].id == client.id) {
+                clients.removeAt(i)
+            }
+        }
+    }
+
 }
