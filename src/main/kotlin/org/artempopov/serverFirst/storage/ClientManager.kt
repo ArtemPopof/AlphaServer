@@ -2,6 +2,7 @@ package org.artempopov.serverFirst.storage
 
 import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.handler.NoSuchClientException
+import java.util.*
 
 /**
  * Manage clients and all associated parameters
@@ -10,7 +11,7 @@ import org.artempopov.serverFirst.handler.NoSuchClientException
  */
 object ClientManager {
 
-    private val clients = ArrayList<Client>()
+    private val clients = Vector<Client>()
 
     /**
      * Register new client
