@@ -28,6 +28,8 @@ object DefaultController: Controller {
 
             val worldUpdater = WorldUpdater()
 
+            owner.dispose()
+
             channel = Channel(host, port)
 
             channel!!.addUpdateListener(worldUpdater)

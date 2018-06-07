@@ -98,7 +98,9 @@ object WorldNotifier {
     private fun convertToProto(clients: List<Client>): List<ResponseProto.ShapeInfo> {
         val protoClients = ArrayList<ResponseProto.ShapeInfo>(clients.size)
 
-        for (client in clients) {
+        var client: Client
+        for (i in 0 until clients.size) {
+            client = clients[i]
             protoClients.add(convertToProto(client))
         }
 
