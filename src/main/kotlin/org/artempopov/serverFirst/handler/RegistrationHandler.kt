@@ -3,6 +3,7 @@ package org.artempopov.serverFirst.handler
 import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.dto.ShapeColor
 import org.artempopov.serverFirst.dto.ShapeType
+import org.artempopov.serverFirst.net.Dispatcher
 import org.artempopov.serverFirst.net.WorldNotifier
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
@@ -59,5 +60,31 @@ object RegistrationHandler {
         message.clientId = lastClientId++
 
         return message.build()
+    }
+
+    /**
+     * Notify all clients that some clients unregistered
+     */
+    fun clientUnregistered(clientId: Long) {
+        val unregisteredMessage = createUnregisteredMessage(clientId)
+        val clients = ClientManager.getClients()
+
+        Dispatcher.sendMessageToAllClients(unregisteredMessage.toByteArray(), clients)
+    }
+
+    private fun createUnregisteredMessage(id: Long): ResponseProto.Response {
+        val responseProto = ResponseProto.Response.newBuilder()
+
+        responseProto.unregister = createUnregisterEvent(id)
+
+        return responseProto.build()
+    }
+
+    private fun createUnregisterEvent(id: Long): ResponseProto.UnregisterEvent {
+        val event = ResponseProto.UnregisterEvent.newBuilder()
+
+        event.clientId = id
+
+        return event.build()
     }
 }

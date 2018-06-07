@@ -2,6 +2,7 @@ package org.artempopov.serverFirst.storage
 
 import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.handler.NoSuchClientException
+import org.artempopov.serverFirst.handler.RegistrationHandler
 import java.util.*
 
 /**
@@ -50,6 +51,7 @@ object ClientManager {
     fun unregisterClient(client: Client) {
         for (i in 0 until clients.size) {
             if (clients[i].id == client.id) {
+                RegistrationHandler.clientUnregistered(clients[i].id)
                 clients.removeAt(i)
             }
         }

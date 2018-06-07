@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager
 import org.artempopov.client.graphics.Drawable
 import org.artempopov.client.net.Channel
 import org.artempopov.client.net.UpdateListener
-import org.artempopov.client.net.getAllShapesFromServer
 import org.artempopov.client.net.getShapesFromResponse
 import org.artempopov.common.util.sleepRemainingTime
 import org.artempopov.serverFirst.handler.MOVE_SPEED

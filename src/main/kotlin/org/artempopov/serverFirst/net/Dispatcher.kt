@@ -1,11 +1,13 @@
 package org.artempopov.serverFirst.net
 
 import org.apache.logging.log4j.LogManager
+import org.artempopov.client.net.CLIENT_LISTEN_PORT
 import org.artempopov.serverFirst.handler.*
 import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.serverFirst.util.createErrorResponse
 import org.artempopov.common.net.readSocketData
+import org.artempopov.serverFirst.dto.Client
 import java.io.BufferedOutputStream
 import java.net.ServerSocket
 import java.net.Socket
@@ -14,19 +16,24 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-const val MAX_THREADS = 100
+private const val MAX_THREADS = 100
+private const val RESPONSE_THREADS = 30
+
+private const val SERVER_PORT = 27029
 
 /**
  * Dispatches all request to corresponding handlers.
  *
  * First node where all packet come
  */
-class Dispatcher(port: Int) {
+object Dispatcher {
+
+    private val LOG = LogManager.getLogger()
 
     /**
      * Socket that listens to all incoming packets
      */
-    private val dispatherSocket: ServerSocket = ServerSocket(port)
+    private val dispatherSocket: ServerSocket = ServerSocket(SERVER_PORT)
 
     /**
      * Stop condition for receiving loop
@@ -42,6 +49,12 @@ class Dispatcher(port: Int) {
      * Threads from this executor handles requests
      */
     private var handlers: ExecutorService = Executors.newFixedThreadPool(MAX_THREADS)
+
+    /**
+     * Response threads
+     */
+    private val responseThreads = Executors.newFixedThreadPool(RESPONSE_THREADS)
+
 
     /**
      * Init handler but to start actual listening start() func must be called
@@ -156,5 +169,34 @@ class Dispatcher(port: Int) {
         handlers.shutdownNow()
 
         dispatherSocket.close()
+    }
+
+    /**
+     * Send message to specific clients
+     */
+    fun sendMessageToAllClients(bytes: ByteArray, clients: Collection<Client>) {
+        for (client in clients) {
+            sendMessageToClient(bytes, client)
+        }
+    }
+
+    /**
+     * Send message to specific client
+     */
+    fun sendMessageToClient(bytes: ByteArray, client: Client) {
+        responseThreads.execute(sendingTask(bytes, client))
+    }
+
+    private fun sendingTask(bytes: ByteArray, client: Client): Runnable {
+        return Runnable {
+            try {
+                val socket = Socket(client.host, CLIENT_LISTEN_PORT)
+                org.artempopov.common.net.send(bytes, socket)
+            } catch (e: Exception) {
+                LOG.error("Cannot send packet for client: ${client.host}")
+                LOG.error("Error: $e")
+                RegistrationHandler.clientUnregistered(client.id)
+            }
+        }
     }
 }

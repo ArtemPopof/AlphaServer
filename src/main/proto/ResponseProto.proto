@@ -32,5 +32,5 @@ message ShapeInfo {
 }
 
 message UnregisterEvent {
-    repeated int64 clientId = 1;
+    required int64 clientId = 1;
 }

@@ -16,14 +16,6 @@ const val CLIENT_LISTEN_PORT = 27030
 private val LOG = LogManager.getLogger()
 
 /**
- * Request shape info from server for all shapes
- */
-fun getAllShapesFromServer(channel: Channel): List<Shape> {
-    val notifyResponse = channel.sendNotifyRequest()
-    return getShapesFromResponse(notifyResponse)
-}
-
-/**
  * Extract objects from notify response
  */
 fun getShapesFromResponse(response: ResponseProto.NotifyResponse): List<Shape> {

@@ -15,7 +15,7 @@ import javax.swing.WindowConstants
 fun serverMain(args: Array<String>) {
     println("Starting server...")
 
-    Dispatcher(27029)
+    Dispatcher
     WorldNotifier
 
     createStubGUI()

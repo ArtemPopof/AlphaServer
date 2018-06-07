@@ -117,34 +117,6 @@ class Channel(private val host: String, private val port: Int, private val isBot
         return Error(response.errorMessage, response.error)
     }
 
-    /**
-     * Send notify request
-     *
-     * @throws ErrorResponseException when error occurred on server side
-     * @throws IOException sending problem
-     * @throws InvalidResponseException response malformed
-     */
-    fun sendNotifyRequest(): ResponseProto.NotifyResponse {
-        val request = createNotifyRequest()
-        send(request)
-        val response = waitForResponse()
-
-        if (!response.hasNotify()) {
-            throw InvalidResponseException()
-        }
-
-        return response.notify
-    }
-
-    private fun createNotifyRequest(): ByteArray {
-        val request = RequestProto.Request.newBuilder()
-
-        request.type = RequestProto.RequestType.NOTIFY
-        request.requestPacketVersion = PACKET_VERSION
-
-        return request.build().toByteArray()
-    }
-
     private fun send(byteArray: ByteArray) {
         requestSocket = connectToServer()
         send(byteArray, requestSocket)
