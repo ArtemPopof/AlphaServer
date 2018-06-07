@@ -10,10 +10,13 @@ import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.serverFirst.storage.ClientManager
 import java.awt.Point
 import java.net.Socket
+import java.util.concurrent.Executors
 
 private const val UPS = 15L
 private const val SERVER_UPDATE_TICK_PERIOD = 1000 / UPS
-private const val MAX_CONNECT_ATTEMPTS = UPS
+private const val MAX_CONNECT_ATTEMPTS = 3
+
+private const val THREAD_POOL_SIZE = 30
 
 /**
  * World notifier send information about world state
@@ -30,6 +33,7 @@ object WorldNotifier {
      */
     private var activeClients = ArrayList<Client>()
     private val updaterThread = Thread(createUpdaterTask(), "WorldNotifier")
+    private val notifierThreadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE)
 
     init {
         updaterThread.start()
@@ -63,12 +67,14 @@ object WorldNotifier {
     }
 
     private fun updateInfoForClient(client: Client, notifyPacket: ResponseProto.Response) {
-        try {
-            send(notifyPacket.toByteArray(), client)
-        } catch (e: Exception) {
-            LOG.error("Cannot send notify packet for client: ${client.host}")
-            LOG.error("Error: $e")
-            unregisterClientIfReachedMaxAttempts(client)
+        notifierThreadPool.execute{
+            try {
+                send(notifyPacket.toByteArray(), client)
+            } catch (e: Exception) {
+                LOG.error("Cannot send notify packet for client: ${client.host}")
+                LOG.error("Error: $e")
+                unregisterClientIfReachedMaxAttempts(client)
+            }
         }
     }
 
