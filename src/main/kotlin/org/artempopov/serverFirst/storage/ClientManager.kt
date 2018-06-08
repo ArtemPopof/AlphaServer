@@ -1,5 +1,6 @@
 package org.artempopov.serverFirst.storage
 
+import org.apache.logging.log4j.LogManager
 import org.artempopov.serverFirst.dto.Client
 import org.artempopov.serverFirst.handler.NoSuchClientException
 import org.artempopov.serverFirst.handler.RegistrationHandler
@@ -12,6 +13,8 @@ import java.util.*
  */
 object ClientManager {
 
+    private val LOG = LogManager.getLogger()
+
     private val clients = Vector<Client>()
 
     /**
@@ -22,6 +25,8 @@ object ClientManager {
      */
     fun registerClient(client: Client): Long {
         clients.add(client)
+
+        LOG.info("client ${client.id} registered")
 
         return client.id
     }
@@ -50,11 +55,16 @@ object ClientManager {
      */
     fun unregisterClient(client: Client) {
         for (i in 0 until clients.size) {
+            LOG.debug("i = $i")
             if (clients[i].id == client.id) {
-                RegistrationHandler.clientUnregistered(clients[i].id)
+                LOG.debug("CLIENTS SIZE: ${clients.size}")
                 clients.removeAt(i)
+                RegistrationHandler.clientUnregistered(client.id)
+                break
             }
         }
+
+        LOG.info("client ${client.id} unregistered")
     }
 
 }

@@ -194,7 +194,7 @@ object Dispatcher {
                 val socket = Socket(client.host, CLIENT_LISTEN_PORT)
                 org.artempopov.common.net.send(bytes, socket)
             } catch (e: Exception) {
-                LOG.error("Cannot send packet for client: ${client.host}")
+                LOG.error("Cannot send packet for client: ${client.host}, id = ${client.id}")
                 LOG.error("Error: $e")
                 ClientManager.unregisterClient(client)
             }
