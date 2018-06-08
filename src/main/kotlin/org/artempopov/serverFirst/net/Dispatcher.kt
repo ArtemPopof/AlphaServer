@@ -8,6 +8,7 @@ import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.serverFirst.util.createErrorResponse
 import org.artempopov.common.net.readSocketData
 import org.artempopov.serverFirst.dto.Client
+import org.artempopov.serverFirst.storage.ClientManager
 import java.io.BufferedOutputStream
 import java.net.ServerSocket
 import java.net.Socket
@@ -195,7 +196,7 @@ object Dispatcher {
             } catch (e: Exception) {
                 LOG.error("Cannot send packet for client: ${client.host}")
                 LOG.error("Error: $e")
-                RegistrationHandler.clientUnregistered(client.id)
+                ClientManager.unregisterClient(client)
             }
         }
     }
