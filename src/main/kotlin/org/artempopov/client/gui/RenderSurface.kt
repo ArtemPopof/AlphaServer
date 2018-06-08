@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager
 import org.artempopov.client.graphics.Drawable
 import java.awt.Color
 import java.awt.Graphics
+import java.util.*
 import javax.swing.JPanel
 
 /**
@@ -16,7 +17,7 @@ class RenderSurface: JPanel() {
     /**
      * Drawable elements of scene
      */
-    private val drawables = ArrayList<Drawable>()
+    private val drawables = Vector<Drawable>()
 
     override fun paint(g: Graphics) {
         g.color = Color.WHITE
