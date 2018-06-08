@@ -50,6 +50,10 @@ object WorldNotifier {
     }
 
     private fun updateClients() {
+        if (activeClients.isEmpty()) {
+            return
+        }
+        
         val clients = ClientManager.getClients()
         val notifyPacket = createNotifyResponse()
 
