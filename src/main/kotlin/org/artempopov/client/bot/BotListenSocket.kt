@@ -1,8 +1,6 @@
 package org.artempopov.client.bot
 
 import org.artempopov.client.net.CLIENT_LISTEN_PORT
-import org.artempopov.client.net.UpdateListener
-import org.artempopov.serverFirst.proto.ResponseProto
 import java.net.ServerSocket
 
 /**

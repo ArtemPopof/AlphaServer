@@ -49,9 +49,11 @@ class Channel(private val host: String, private val port: Int, private val isBot
     private fun handlePacket(packet: ResponseProto.Response) {
         if (packet.hasNotify()) {
             notifyListeners(packet.notify)
+            return
         }
         if (packet.hasUnregister()) {
             notifyListeners(packet.unregister)
+            return
         }
 
         LOG.error("Invalid packet from server. \n Error: ${packet.errorMessage}, Code: ${packet.error}")
