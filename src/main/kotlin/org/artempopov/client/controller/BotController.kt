@@ -2,6 +2,7 @@ package org.artempopov.client.controller
 
 import org.apache.logging.log4j.LogManager
 import org.artempopov.client.bot.Bot
+import org.artempopov.client.bot.BotListenSocket
 import org.artempopov.client.gui.BotSettingsWindow
 import org.artempopov.client.gui.ChoseAddressFrame
 import org.artempopov.client.net.Channel
@@ -43,6 +44,7 @@ object BotController: Controller {
      * When settings for bot is set
      */
     fun botConfigurationComplete(botCount: Int) {
+        BotListenSocket.listen() // now server will be return responses to this socket, but bots doesn't need it
         val botConnections = openConnections(botCount)
         registerBots(botConnections)
         bots = createBots(botConnections)
