@@ -48,6 +48,7 @@ class RenderSurface: JPanel() {
             drawable = drawables[i]
             if (drawable.id == id) {
                 drawables.remove(drawable)
+                return
             }
         }
     }
