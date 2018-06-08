@@ -28,7 +28,7 @@ object WorldNotifier {
     /**
      * Clients that moved since last tick
      */
-    private var activeClients = ArrayList<Client>()
+    private var activeClients = HashMap<Long, Client>()
     private val updaterThread = Thread(createUpdaterTask(), "WorldNotifier")
 
     init {
@@ -53,7 +53,7 @@ object WorldNotifier {
         if (activeClients.isEmpty()) {
             return
         }
-        
+
         val clients = ClientManager.getClients()
         val notifyPacket = createNotifyResponse()
 
@@ -81,18 +81,18 @@ object WorldNotifier {
     private fun createNotifyResponse(): ResponseProto.Response {
         val response = ResponseProto.Response.newBuilder()
 
-        val shapesInfo = convertToProto(activeClients)
+        val shapesInfo = convertToProto(activeClients.values)
         response.notify = createNotify(shapesInfo)
 
         return response.build()
     }
 
-    private fun convertToProto(clients: List<Client>): List<ResponseProto.ShapeInfo> {
+    private fun convertToProto(clients: Collection<Client>): List<ResponseProto.ShapeInfo> {
         val protoClients = ArrayList<ResponseProto.ShapeInfo>(clients.size)
 
         var client: Client
         for (i in 0 until clients.size) {
-            client = clients[i]
+            client = clients.elementAt(i)
             protoClients.add(convertToProto(client))
         }
 
@@ -131,6 +131,6 @@ object WorldNotifier {
      * Client moved since last tick
      */
     fun markClientActive(clientId: Long) {
-        activeClients.add(ClientManager.getClient(clientId))
+        activeClients.put(clientId, ClientManager.getClient(clientId))
     }
 }

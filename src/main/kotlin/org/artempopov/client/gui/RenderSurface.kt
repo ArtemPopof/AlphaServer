@@ -43,7 +43,7 @@ class RenderSurface: JPanel() {
      */
     fun removeDrawable(id: Long) {
         for (drawable in drawables) {
-            if (drawable.id.equals(id)) {
+            if (drawable.id == id) {
                 drawables.remove(drawable)
             }
         }
