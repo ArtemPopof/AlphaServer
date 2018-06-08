@@ -42,8 +42,8 @@ object EngineMain: JFrame(WINDOW_TITLE) {
     /**
      * Remove drawable from scene
      */
-    fun removeFromScene(name: String) {
-        surface.removeDrawable(name)
+    fun removeFromScene(id: Long) {
+        surface.removeDrawable(id)
     }
 
     /**

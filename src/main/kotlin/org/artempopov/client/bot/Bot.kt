@@ -23,11 +23,10 @@ private const val Y_MAX = 500 - 50
 /**
  * Class for bot simulation
  */
-class Bot(private val channel: Channel): UpdateListener {
+class Bot(private val channel: Channel) {
     private val LOG = LogManager.getLogger()
 
     private var position = Point(0, 0)
-    private var shapes: List<Drawable> = ArrayList()
     private val moverThread = Thread(createMoverTask(), "BotMover$channel")
 
     private var state = BotState.IDLE
@@ -41,10 +40,6 @@ class Bot(private val channel: Channel): UpdateListener {
         idleTime = getIdleDelay()
 
         moverThread.start()
-    }
-
-    override fun onUpdate(notifyResponse: ResponseProto.NotifyResponse) {
-        shapes = getShapesFromResponse(notifyResponse)
     }
 
     private fun getIdleDelay(): Long {

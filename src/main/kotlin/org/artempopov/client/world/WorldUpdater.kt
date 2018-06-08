@@ -17,6 +17,14 @@ class WorldUpdater: UpdateListener {
 
     private val LOG = LogManager.getLogger()
 
+    override fun onUnregisterEvent(unregisterEvent: ResponseProto.UnregisterEvent) {
+        deleteFromScene(unregisterEvent.clientId)
+    }
+
+    private fun deleteFromScene(clientId: Long) {
+        EngineMain.removeFromScene(clientId)
+    }
+
     override fun onUpdate(notifyResponse: ResponseProto.NotifyResponse) {
         val shapes = getShapesFromResponse(notifyResponse)
         updateShapesOnScene(shapes)

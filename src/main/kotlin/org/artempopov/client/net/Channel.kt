@@ -5,7 +5,6 @@ import org.artempopov.serverFirst.proto.RequestProto
 import org.artempopov.serverFirst.proto.ResponseProto
 import org.artempopov.common.net.readSocketData
 import org.artempopov.common.net.send
-import java.io.BufferedOutputStream
 import java.io.IOException
 import java.net.ServerSocket
 import java.net.Socket
@@ -42,26 +41,31 @@ class Channel(private val host: String, private val port: Int, private val isBot
                 val socket = listenSocket!!.accept()
                 val rawData = readSocketData(socket)
                 val notifyResponse = ResponseProto.Response.parseFrom(rawData)
-                val valid = validateNotifyPacket(notifyResponse)
-                if (valid) {
-                    notifyListeners(notifyResponse.notify)
-                }
+                handlePacket(notifyResponse)
             }
         }
     }
 
-    private fun validateNotifyPacket(packet: ResponseProto.Response): Boolean {
-        if (!packet.hasNotify()) {
-            LOG.error("Invalid notify packet. \n Error: ${packet.errorMessage}, Code: ${packet.error}")
-            return false
+    private fun handlePacket(packet: ResponseProto.Response) {
+        if (packet.hasNotify()) {
+            notifyListeners(packet.notify)
+        }
+        if (packet.hasUnregister()) {
+            notifyListeners(packet.unregister)
         }
 
-        return true
+        LOG.error("Invalid packet from server. \n Error: ${packet.errorMessage}, Code: ${packet.error}")
     }
 
     private fun notifyListeners(notifyResponse: ResponseProto.NotifyResponse) {
         for (listener in listeners) {
             listener.onUpdate(notifyResponse)
+        }
+    }
+
+    private fun notifyListeners(unregisterEvent: ResponseProto.UnregisterEvent) {
+        for (listener in listeners) {
+            listener.onUnregisterEvent(unregisterEvent)
         }
     }
 

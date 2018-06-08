@@ -39,11 +39,11 @@ class RenderSurface: JPanel() {
     }
 
     /**
-     * Remove element from scene with specified name
+     * Remove element with specified id from scene
      */
-    fun removeDrawable(name: String) {
+    fun removeDrawable(id: Long) {
         for (drawable in drawables) {
-            if (drawable.id.equals(name)) {
+            if (drawable.id.equals(id)) {
                 drawables.remove(drawable)
             }
         }

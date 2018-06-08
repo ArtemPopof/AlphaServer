@@ -1,13 +1,14 @@
 package org.artempopov.client.bot
 
 import org.artempopov.client.net.CLIENT_LISTEN_PORT
+import org.artempopov.client.net.UpdateListener
+import org.artempopov.serverFirst.proto.ResponseProto
 import java.net.ServerSocket
 
 /**
  * Socket where all response packets and update packets end up
  */
 object BotListenSocket {
-
     private val socket = ServerSocket(CLIENT_LISTEN_PORT)
 
     /**
@@ -26,5 +27,4 @@ object BotListenSocket {
             }
         }
     }
-
 }
